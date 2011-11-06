@@ -1,0 +1,26 @@
+[global_config]
+  title_hide_sizetext = True
+  focus = system
+  enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
+  geometry_hinting = False
+  title_transmit_bg_color = "#007b00"
+  title_inactive_bg_color = "#0076c9"
+[keybindings]
+  paste = <Primary>v
+[profiles]
+  [[default]]
+    scrollbar_position = hidden
+    autoclean_groups = False
+    split_to_group = True
+    cursor_color = "#00aa00"
+    foreground_color = "#00ff00"
+[layouts]
+  [[default]]
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+      profile = default
+    [[[window0]]]
+      type = Window
+      parent = ""
+[plugins]
