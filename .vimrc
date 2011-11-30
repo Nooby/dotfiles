@@ -53,14 +53,14 @@
 " }
 
 " Vim UI {
-    colorscheme wombat
+    colorscheme wombat256
 
     " GUI {
         if has('gui_running')
 	    set guioptions+=LlRrbTm " Workaround because 'guioptions' are buggy.
 	    set guioptions-=LlRrbTm
             set background=dark
-            colorscheme solarized
+            colorscheme wombat
         endif
     " }
 
@@ -143,6 +143,7 @@
 
 " Maping {
     nnoremap <space> za
+    vnoremap <Space> zf
 
     " Movement Bindings {
         map <c-j> <c-w>j

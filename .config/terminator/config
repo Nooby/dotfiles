@@ -6,6 +6,8 @@
   title_transmit_bg_color = "#007b00"
   title_inactive_bg_color = "#0076c9"
 [keybindings]
+  broadcast_all = <Primary>b
+  broadcast_group = <Primary>g
   paste = <Primary>v
 [profiles]
   [[default]]
@@ -23,4 +25,36 @@
     [[[window0]]]
       type = Window
       parent = ""
+  [[Default3]]
+    [[[child0]]]
+      position = 1366:0
+      type = Window
+      order = 0
+      parent = ""
+      size = 1280, 995
+    [[[child1]]]
+      position = 497
+      type = VPaned
+      order = 0
+      parent = child0
+    [[[child3]]]
+      position = 640
+      type = HPaned
+      order = 1
+      parent = child1
+    [[[terminal2]]]
+      profile = default
+      type = Terminal
+      order = 0
+      parent = child1
+    [[[terminal5]]]
+      profile = default
+      type = Terminal
+      order = 1
+      parent = child3
+    [[[terminal4]]]
+      profile = default
+      type = Terminal
+      order = 0
+      parent = child3
 [plugins]
