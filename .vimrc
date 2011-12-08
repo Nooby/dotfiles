@@ -100,7 +100,7 @@
 
     " Html/XHMTL/JavaScript/CSS {
         autocmd FileType html,xhtml,xml,htmldjango,htmljinja,eruby,mako setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
-        autocmd FileType html,xhtml map <silent> <F5> :w<CR>:!firefox "%" &<CR>
+        " autocmd FileType html,xhtml map <silent> <F5> :w<CR>:!firefox "%" &<CR>
         autocmd BufNewFile,BufRead *.rhtml setlocal ft=eruby
         autocmd BufNewFile,BufRead *.mako setlocal ft=mako
         autocmd BufNewFile,BufRead *.tmpl setlocal ft=htmljinja
@@ -144,6 +144,8 @@
 " Maping {
     nnoremap <space> za
     vnoremap <Space> zf
+    nnoremap <silent> <F8> :TlistToggle<CR>
+    nnoremap <silent> <F9> :TaskList<CR>
 
     " Movement Bindings {
         map <c-j> <c-w>j
@@ -174,7 +176,7 @@
 
     " Folding Toggle {
         nnoremap <F12> :call ToggleFolding()<CR>
-        inoremap <F12> <ESC>:call ToggleFolding()<CR>a
+        inoremap <F12> <ESC>:call ToggleFolding()<CR>
         vnoremap <F12> <ESC>:call ToggleFolding()<CR>
     " }
 " }
