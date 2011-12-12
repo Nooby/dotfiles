@@ -1,5 +1,5 @@
 " Debian {
-    "runtime! debian.vim
+    runtime! debian.vim
 " }
 
 " Plugin Configuration {
@@ -53,7 +53,7 @@
 " }
 
 " Vim UI {
-    colorscheme wombat256
+    colorscheme wombat
 
     " GUI {
         if has('gui_running')
@@ -71,7 +71,7 @@
     set shortmess=aOstT
     set showcmd
     set showmatch
-    set sidescrolloff=10
+    set sidescrolloff=5
 " }
 
 " Folding {
@@ -91,6 +91,7 @@
 
 	" pyflakes {
 	    autocmd FileType python let g:pyflakes_use_quickfix = 0
+            autocmd FileType python map <buffer> <F3> :call Pyflakes()<CR> 
 	" }
 
 	" Pep8 {
