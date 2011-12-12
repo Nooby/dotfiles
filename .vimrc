@@ -50,6 +50,7 @@
     set nobackup
     set nowritebackup
     set noswapfile
+    set incsearch
 " }
 
 " Vim UI {
