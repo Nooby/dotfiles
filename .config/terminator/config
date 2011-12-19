@@ -14,9 +14,10 @@
     autoclean_groups = False
     background_darkness = 0.86
     background_type = transparent
-    split_to_group = True
-    foreground_color = "#00ff00"
     cursor_color = "#00aa00"
+    foreground_color = "#00ff00"
+    split_to_group = True
+    show_titlebar = False
 [layouts]
   [[default]]
     [[[child1]]]
