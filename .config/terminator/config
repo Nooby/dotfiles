@@ -1,8 +1,9 @@
 [global_config]
-  geometry_hinting = False
+  handle_size = 0
   enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
-  title_transmit_bg_color = "#007b00"
   focus = system
+  geometry_hinting = False
+  title_transmit_bg_color = "#007b00"
   title_inactive_bg_color = "#0076c9"
 [keybindings]
   broadcast_all = <Primary>b
@@ -18,6 +19,7 @@
     foreground_color = "#00ff00"
     split_to_group = True
     show_titlebar = False
+    copy_on_selection = True
 [layouts]
   [[default]]
     [[[child1]]]
