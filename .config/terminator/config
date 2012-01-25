@@ -11,11 +11,12 @@
 [profiles]
   [[default]]
     scrollbar_position = hidden
-    autoclean_groups = False
+    login_shell = True
     background_darkness = 0.86
     background_type = transparent
     cursor_color = "#00aa00"
     foreground_color = "#00ff00"
+    autoclean_groups = False
     split_to_group = True
     show_titlebar = False
     copy_on_selection = True
