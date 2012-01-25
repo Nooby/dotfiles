@@ -89,6 +89,8 @@
         autocmd FileType python map <F5> :w!<CR>:!python "%"<CR>
         autocmd FileType python set omnifunc=pythoncomplete#Complete
 	autocmd FileType python set nowrap
+        autocmd FileType python set foldmarker={{{,}}}
+        autocmd FileType python set foldmethod=indent
 
 	" pyflakes {
 	    autocmd FileType python let g:pyflakes_use_quickfix = 0
