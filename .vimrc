@@ -26,8 +26,8 @@
     set linebreak
 
     " Formatoptions {
-	set formatoptions-=cqt
-	set formatoptions+=cqt
+        set formatoptions-=cqt
+        set formatoptions+=cqt
     " }
 
     filetype on
@@ -58,8 +58,8 @@
 
     " GUI {
         if has('gui_running')
-	    set guioptions+=LlRrbTm " Workaround because 'guioptions' are buggy.
-	    set guioptions-=LlRrbTm
+            set guioptions+=LlRrbTm " Workaround because 'guioptions' are buggy.
+            set guioptions-=LlRrbTm
             set background=dark
             colorscheme wombat
         endif
@@ -88,16 +88,18 @@
     " Python {
         autocmd FileType python map <F5> :w!<CR>:!python "%"<CR>
         autocmd FileType python set omnifunc=pythoncomplete#Complete
-	autocmd FileType python set nowrap
+        autocmd FileType python compiler pylint
+        let g:pylint_onwrite = 0
+        autocmd FileType python set nowrap
 
-	" pyflakes {
-	    autocmd FileType python let g:pyflakes_use_quickfix = 0
+        " pyflakes {
+            autocmd FileType python let g:pyflakes_use_quickfix = 1
             autocmd FileType python map <buffer> <F3> :call Pyflakes()<CR> 
-	" }
+        " }
 
-	" Pep8 {
-	    autocmd FileType python let g:pep8_map='<C-8>'
-	" }
+        " Pep8 {
+            autocmd FileType python let g:pep8_map='<C-8>'
+        " }
     "}
 
     " Html/XHMTL/JavaScript/CSS {
@@ -151,9 +153,9 @@
 
     " Movement Bindings {
         map <c-j> <c-w>j
-	map <c-k> <c-w>k
-	map <c-l> <c-w>l
-	map <c-h> <c-w>h
+        map <c-k> <c-w>k
+        map <c-l> <c-w>l
+        map <c-h> <c-w>h
     " }
 
     " Autocmd {
