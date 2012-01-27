@@ -12,6 +12,7 @@
   [[default]]
     scrollbar_position = hidden
     login_shell = True
+    show_titlebar = False
     background_type = transparent
     foreground_color = "#00ff00"
     exit_action = hold
