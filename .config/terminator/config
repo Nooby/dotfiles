@@ -42,13 +42,13 @@
       parent = child2
     [[[terminal3]]]
       profile = default
-      command = cd starmeo && runserver
+      command = ""
       type = Terminal
       order = 0
       parent = child2
     [[[terminal5]]]
       profile = default
-      command = cd starmeo && sass -w media/scss
+      command = ""
       type = Terminal
       order = 0
       parent = child4
@@ -60,8 +60,17 @@
       parent = child1
     [[[terminal6]]]
       profile = default
-      command = cd starmeo && ./generate_js_css.sh -w
+      command = ""
       type = Terminal
       order = 1
       parent = child4
 [plugins]
+  [[CustomCommandsMenu]]
+    [[[generate_js_css]]]
+      command = " ./generate_js_css.sh -w"
+      enabled = True
+      name = generate_js_css
+    [[[sass]]]
+      command = sass -w media/scss
+      enabled = True
+      name = sass
