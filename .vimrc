@@ -51,6 +51,7 @@
     set nowritebackup
     set noswapfile
     set incsearch
+    set scrolloff=2
 " }
 
 " Vim UI {
@@ -68,7 +69,6 @@
     set novisualbell
     set number
     set numberwidth=5
-    set scrolloff=10
     set shortmess=aOstT
     set showcmd
     set showmatch
