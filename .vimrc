@@ -89,7 +89,6 @@
         autocmd FileType python map <F5> :w!<CR>:!python "%"<CR>
         autocmd FileType python set omnifunc=pythoncomplete#Complete
         autocmd FileType python compiler pylint
-        let g:pylint_onwrite = 0
         autocmd FileType python set nowrap
         autocmd FileType python set foldmarker={{{,}}}
         autocmd FileType python set foldmethod=indent
@@ -100,7 +99,11 @@
         " }
 
         " Pep8 {
-            autocmd FileType python let g:pep8_map='<C-8>'
+            "autocmd FileType python let g:pep8_map='<C-8>'
+        " }
+        
+        " Pylint {
+            let g:pylint_onwrite = 0
         " }
     "}
 
