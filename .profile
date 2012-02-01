@@ -30,4 +30,5 @@ rmpyc() { find . -type f -name "*.pyc" -delete; }
 g() { grep -rn $1 *; }
 runserver() { ./manage.py runserver; }
 searchdestroy() { find . -name $1 -print0 | xargs -0 sed -i "s/$2/$3/g"; }
+flushmemcached() {(echo "flush_all"; sleep 1; echo "quit" ) | telnet localhost 11211; }
 
