@@ -93,6 +93,11 @@
         autocmd FileType python set foldmarker={{{,}}}
         autocmd FileType python set foldmethod=indent
 
+        " Comment Shortcut {
+        "    autocmd FileType python vnoremap <C-#> :'<,'>s/^/#/<CR>:nohls<CR>
+        "    autocmd FileType python nnoremap <C-#> :s/^/#/<CR>:nohls<CR>
+        " }
+
         " pyflakes {
             autocmd FileType python let g:pyflakes_use_quickfix = 1
             autocmd FileType python map <buffer> <F3> :call Pyflakes()<CR> 
