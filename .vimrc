@@ -22,8 +22,8 @@
         endif
     " }
 
-    set textwidth=79
-    set linebreak
+    " set textwidth=79
+    " set linebreak
 
     " Formatoptions {
         set formatoptions-=cqt
