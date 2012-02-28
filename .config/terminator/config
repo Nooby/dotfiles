@@ -27,44 +27,30 @@
       parent = ""
       size = 1366, 744
     [[[child1]]]
-      position = 372
-      type = VPaned
-      order = 0
-      parent = child0
-    [[[child2]]]
-      position = 971
+      position = 944
       type = HPaned
       order = 0
-      parent = child1
-    [[[child4]]]
-      position = 185
+      parent = child0
+    [[[child3]]]
+      position = 464
       type = VPaned
       order = 1
-      parent = child2
-    [[[terminal3]]]
+      parent = child1
+    [[[terminal2]]]
       profile = default
-      command = ""
       type = Terminal
       order = 0
-      parent = child2
+      parent = child1
     [[[terminal5]]]
       profile = default
-      command = ""
+      type = Terminal
+      order = 1
+      parent = child3
+    [[[terminal4]]]
+      profile = default
       type = Terminal
       order = 0
-      parent = child4
-    [[[terminal7]]]
-      profile = default
-      command = ""
-      type = Terminal
-      order = 1
-      parent = child1
-    [[[terminal6]]]
-      profile = default
-      command = ""
-      type = Terminal
-      order = 1
-      parent = child4
+      parent = child3
 [plugins]
   [[CustomCommandsMenu]]
     [[[generate_js_css]]]
