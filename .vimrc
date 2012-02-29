@@ -55,14 +55,14 @@
 " }
 
 " Vim UI {
-    colorscheme wombat
+    set background=dark
+    colorscheme xoria256
 
     " GUI {
         if has('gui_running')
             set guioptions+=LlRrbTm " Workaround because 'guioptions' are buggy.
             set guioptions-=LlRrbTm
-            set background=dark
-            colorscheme wombat
+            colorscheme solarized
         endif
     " }
 

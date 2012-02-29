@@ -20,10 +20,16 @@ fi
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
+
 # set PATH so it includes the Android SDK Tools if it is installed in /opt/
 if [ -d "/opt/android-sdk/tools" ] ; then
     PATH="/opt/android-sdk/tools:/opt/android-sdk/platform-tools:$PATH"
 fi
+
+# set TERM to a 256 color terminal
+export TERM='xterm-256color'
+
+# set language to English
 export LANGUAGE="en_US:en"
 export LC_MESSAGES="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
