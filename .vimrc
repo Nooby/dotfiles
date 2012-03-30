@@ -7,6 +7,10 @@
         map <C-n> :NERDTreeToggle<CR>
     " }
 
+    " Pathogen {
+        call pathogen#infect()
+    " }
+
     " Tab Completion {
         let g:SuperTabDefaultCompletionType = "context"
         set completeopt=menuone,longest,preview
