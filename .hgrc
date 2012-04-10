@@ -1,6 +1,5 @@
-[ui]
-username = Giuliano Di Pasquale <giuliano.di.pasquale@starmeo.com>
-
+# Contains Local non tracked config
+# UI Section mostly
 %include ~/.hgrc.local
 
 [extensions]
