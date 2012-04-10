@@ -7,6 +7,10 @@
         map <C-n> :NERDTreeToggle<CR>
     " }
 
+    " Pathogen {
+        call pathogen#infect()
+    " }
+
     " Tab Completion {
         let g:SuperTabDefaultCompletionType = "context"
         set completeopt=menuone,longest,preview
@@ -56,6 +60,7 @@
 
 " Vim UI {
     set background=dark
+    set t_Co=256
     colorscheme xoria256
 
     " GUI {
