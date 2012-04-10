@@ -1,0 +1,25 @@
+[ui]
+username = Giuliano Di Pasquale <giuliano.di.pasquale@starmeo.com>
+
+%include ~/.hgrc.local
+
+[extensions]
+hgext.graphlog = 
+hgk=
+color=
+purge=
+hgext.extdiff=
+progress=
+transplant=
+
+[extdiff]
+cmd.vdiff = meld
+
+[diff]
+git = 1
+showfunc = 1
+unified = 8 
+
+[alias]
+exexp = export -o ~/patches/%b_patch%nof%N_%h.patch
+eximp = import --no-commit 
