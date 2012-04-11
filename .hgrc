@@ -20,5 +20,5 @@ showfunc = 1
 unified = 8 
 
 [alias]
-exexp = export -o ~/patches/%b_patch%nof%N_%h.patch
+exexp = export -o ~/patches/%b_patch%nof%N_%h.patch tip
 eximp = import --no-commit 
