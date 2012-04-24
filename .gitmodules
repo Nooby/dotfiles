@@ -10,6 +10,6 @@
 [submodule ".vim/bundle/pythoncomplete"]
 	path = .vim/bundle/pythoncomplete
 	url = git://github.com/vim-scripts/pythoncomplete.git
-[submodule "/home/nooby/.vim/bundle/gundo"]
-	path = /home/nooby/.vim/bundle/gundo
+[submodule ".vim/bundle/gundo"]
+	path = .vim/bundle/gundo
 	url = http://github.com/sjl/gundo.vim.git
