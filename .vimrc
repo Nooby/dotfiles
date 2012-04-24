@@ -15,6 +15,16 @@
         let g:SuperTabDefaultCompletionType = "context"
         set completeopt=menuone,longest,preview
     " }
+    
+    " TagList {
+        let Tlist_GainFocus_On_ToggleOpen = 1 
+        let Tlist_Close_On_Select = 1
+        let Tlist_Show_One_File = 1
+    " }
+    
+    " TagBar {
+        nmap <F6> :TagbarToggle<CR> 
+    " }
 " }
 
 " Basic {
@@ -91,7 +101,7 @@
 
 " Language {
     " Python {
-        autocmd FileType python map <F5> :w!<CR>:!python "%"<CR>
+        "autocmd FileType python map <F5> :w!<CR>:!python "%"<CR>
         autocmd FileType python set omnifunc=pythoncomplete#Complete
         autocmd FileType python compiler pylint
         autocmd FileType python set nowrap
