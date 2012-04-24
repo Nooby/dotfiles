@@ -23,7 +23,11 @@
     " }
     
     " TagBar {
-        nmap <F6> :TagbarToggle<CR> 
+        nmap <F8> :TagbarToggle<CR> 
+    " }
+    
+    " Gundo {
+        nnoremap <F6> :GundoToggle<CR>
     " }
 " }
 
@@ -173,8 +177,8 @@
 " Maping {
     nnoremap <space> za
     vnoremap <Space> zf
-    nnoremap <silent> <F8> :TlistToggle<CR>
-    nnoremap <silent> <F9> :TaskList<CR>
+    "nnoremap <silent> <F8> :TlistToggle<CR>
+    "nnoremap <silent> <F9> :TaskList<CR>
 
     " Movement Bindings {
         map <c-j> <c-w>j
