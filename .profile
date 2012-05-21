@@ -8,14 +8,24 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
-
 # set PATH so it includes the Android SDK Tools if it is installed in /opt/
 if [ -d "/opt/android-sdk/tools" ] ; then
-    PATH="/opt/android-sdk/tools:/opt/android-sdk/platform-tools:$PATH"
+    export PATH="$PATH:/opt/android-sdk/tools:/opt/android-sdk/platform-tools"
+fi
+
+# set PATH so it includes the Go Tools if it is installed
+if [ -d "/usr/local/go" ] ; then
+    export PATH="$PATH:/usr/local/go/bin"
+    export GOROOT="/usr/local/go"
+    if [ -d "$HOME/godev" ] ; then
+        export GOPATH="$HOME/extgo:$HOME/godev"
+        export PATH="$PATH:$HOME/extgo/bin:$HOME/godev/bin"
+    fi
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    export PATH="$HOME/bin:$PATH"
 fi
 
 # set TERM to a 256 color terminal
