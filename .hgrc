@@ -11,6 +11,7 @@ hgext.extdiff=
 progress=
 rebase =
 transplant=
+bookmarks =
 
 [defaults]
 # suppress noisy extdiff header message
@@ -33,3 +34,6 @@ mode = auto
 [alias]
 exexp = export -o ~/patches/%b_patch%nof%N_%h.patch tip
 eximp = import --no-commit 
+
+[bookmarks]
+track.current = True
