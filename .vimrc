@@ -160,6 +160,10 @@
         autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
         autocmd FileType css set omnifunc=csscomplete#CompleteCSS
     " }
+    
+    " Go Lang {
+        autocmd BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
+    " }
 " }
 
 " Functions {
