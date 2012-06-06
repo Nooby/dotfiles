@@ -34,6 +34,7 @@ mode = auto
 [alias]
 exexp = export -o ~/patches/%b_patch%nof%N_%h.patch tip
 eximp = import --no-commit 
+show = log -pr 
 
 [bookmarks]
 track.current = True
