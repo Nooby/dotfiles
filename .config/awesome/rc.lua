@@ -57,16 +57,16 @@ layouts =
 {
     awful.layout.suit.floating,
     awful.layout.suit.tile,
-    awful.layout.suit.tile.left,
-    awful.layout.suit.tile.bottom,
-    awful.layout.suit.tile.top,
-    awful.layout.suit.fair,
-    awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral,
+    --awful.layout.suit.tile.left,
+    --awful.layout.suit.tile.bottom,
+    --awful.layout.suit.tile.top,
+    --awful.layout.suit.fair,
+    --awful.layout.suit.fair.horizontal,
+    --awful.layout.suit.spiral,
     awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max,
-    awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier
+    --awful.layout.suit.max.fullscreen,
+    --awful.layout.suit.magnifier
 }
 -- }}}
 
@@ -75,10 +75,11 @@ layouts =
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
+    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, awful.layout.suit.max)
 end
 -- }}}
 
+-- {{{ Menu
 -- Prepare this with:
 -- ln -sfn ~/.config/awesome/themes/default/ ~/.config/awesome/current_theme
 mythememenu = {}
@@ -107,7 +108,6 @@ end
 -- Generate your table at startup or restart
 theme_menu()
 
--- {{{ Menu
 -- Create a laucher widget and a main menu
 myawesomemenu = {
    { "manual", terminal .. " -e man awesome" },
@@ -119,6 +119,7 @@ myawesomemenu = {
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
                                     { "Debian", debian.menu.Debian_menu.Debian },
+                                    { "nautilus", "nautilus --no-desktop" },
                                     { "open terminal", terminal }
                                   }
                         })
@@ -270,7 +271,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1)         end),
     awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
-
+    
+    awful.key({ modkey,           }, "n", function () awful.util.spawn("nautilus --no-desktop") end),
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
     -- Prompt
@@ -293,12 +295,12 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
     awful.key({ modkey, "Shift"   }, "r",      function (c) c:redraw()                       end),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
-    awful.key({ modkey,           }, "n",
-        function (c)
-            -- The client currently has the input focus, so it cannot be
-            -- minimized, since minimized clients can't have the focus.
-            c.minimized = true
-        end),
+    --awful.key({ modkey,           }, "n",
+    --    function (c)
+    --        -- The client currently has the input focus, so it cannot be
+    --        -- minimized, since minimized clients can't have the focus.
+    --        c.minimized = true
+    --    end),
     awful.key({ modkey,           }, "m",
         function (c)
             c.maximized_horizontal = not c.maximized_horizontal
