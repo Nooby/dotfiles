@@ -7,15 +7,43 @@ require("beautiful")
 -- Notification library
 require("naughty")
 
+-- Load Debian menu entries
+require("debian.menu")
+
+-- {{{ Error handling
+-- Check if awesome encountered an error during startup and fell back to
+-- another config (This code will only ever execute for the fallback config)
+if awesome.startup_errors then
+    naughty.notify({ preset = naughty.config.presets.critical,
+                     title = "Oops, there were errors during startup!",
+                     text = awesome.startup_errors })
+end
+
+-- Handle runtime errors after startup
+do
+    local in_error = false
+    awesome.add_signal("debug::error", function (err)
+        -- Make sure we don't go into an endless error loop
+        if in_error then return end
+        in_error = true
+
+        naughty.notify({ preset = naughty.config.presets.critical,
+                         title = "Oops, an error happened!",
+                         text = err })
+        in_error = false
+    end)
+end
+-- }}}
+
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
-beautiful.init("/usr/share/awesome/themes/default/theme.lua")
+--beautiful.init("/usr/share/awesome/themes/default/theme.lua")
+beautiful.init(awful.util.getdir("config") .. "/current_theme/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
--- terminal = "xterm"
-terminal = "terminal"
-editor = os.getenv("EDITOR") or "gvim"
-editor_cmd = editor .. " "
+terminal = "x-terminal-emulator"
+editor = os.getenv("EDITOR") or "editor"
+editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -51,16 +79,46 @@ for s = 1, screen.count() do
 end
 -- }}}
 
+-- Prepare this with:
+-- ln -sfn ~/.config/awesome/themes/default/ ~/.config/awesome/current_theme
+mythememenu = {}
+
+function theme_load(theme)
+   local cfg_path = awful.util.getdir("config")
+
+   -- Create a symlink from the given theme to /home/user/.config/awesome/current_theme
+   awful.util.spawn("ln -sfn " .. cfg_path .. "/themes/" .. theme .. " " .. cfg_path .. "/current_theme")
+   awesome.restart()
+end
+
+function theme_menu()
+   -- List your theme files and feed the menu table
+   local cmd = "ls -1 " .. awful.util.getdir("config") .. "/themes/"
+   local f = io.popen(cmd)
+
+   for l in f:lines() do
+	  local item = { l, function () theme_load(l) end }
+	  table.insert(mythememenu, item)
+   end
+
+   f:close()
+end
+
+-- Generate your table at startup or restart
+theme_menu()
+
 -- {{{ Menu
 -- Create a laucher widget and a main menu
 myawesomemenu = {
    { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awful.util.getdir("config") .. "/rc.lua" },
+   { "edit config", editor_cmd .. " " .. awesome.conffile },
+   { "themes", mythememenu },
    { "restart", awesome.restart },
    { "quit", awesome.quit }
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
+                                    { "Debian", debian.menu.Debian_menu.Debian },
                                     { "open terminal", terminal }
                                   }
                         })
@@ -70,26 +128,6 @@ mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
 -- }}}
 
 -- {{{ Wibox
-
--- Keyboard map indicator and changer
-kbdcfg = {}
-kbdcfg.cmd = "setxkbmap"
-kbdcfg.layout = { "us", "de", "dvorak" }
-kbdcfg.current = 1  -- us is our default layout
-kbdcfg.widget = widget({ type = "textbox", align = "right" })
-kbdcfg.widget.text = " " .. kbdcfg.layout[kbdcfg.current] .. " "
-kbdcfg.switch = function ()
-   kbdcfg.current = kbdcfg.current % #(kbdcfg.layout) + 1
-   local t = " " .. kbdcfg.layout[kbdcfg.current] .. " "
-   kbdcfg.widget.text = t
-   os.execute( kbdcfg.cmd .. t )
-end
-
--- Mouse bindings
-kbdcfg.widget:buttons(awful.util.table.join(
-    awful.button({ }, 1, function () kbdcfg.switch() end)
-))
-
 -- Create a textclock widget
 mytextclock = awful.widget.textclock({ align = "right" })
 
@@ -168,15 +206,13 @@ for s = 1, screen.count() do
             mylauncher,
             mytaglist[s],
             mypromptbox[s],
-            layout = awful.widget.layout.horizontal.leftright,
-            kbdcfg.widget
+            layout = awful.widget.layout.horizontal.leftright
         },
         mylayoutbox[s],
         mytextclock,
         s == 1 and mysystray or nil,
         mytasklist[s],
-        layout = awful.widget.layout.horizontal.rightleft,
-        kbdcfg.widget
+        layout = awful.widget.layout.horizontal.rightleft
     }
 end
 -- }}}
@@ -320,12 +356,12 @@ root.keys(globalkeys)
 
 -- {{{ Rules
 awful.rules.rules = {
-    -- All clients will match this rule. 
+    -- All clients will match this rule.
     { rule = { },
       properties = { border_width = beautiful.border_width,
                      border_color = beautiful.border_normal,
-		     size_hints_honor = false,
                      focus = true,
+                     size_hints_honor = false,
                      keys = clientkeys,
                      buttons = clientbuttons } },
     { rule = { class = "MPlayer" },
