@@ -9,6 +9,7 @@ require("naughty")
 
 -- Load Debian menu entries
 require("debian.menu")
+require("vicious")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -81,9 +82,10 @@ end
 -- }}}
 
 -- {{{ Menu
--- Prepare this with:
--- ln -sfn ~/.config/awesome/themes/default/ ~/.config/awesome/current_theme
-mythememenu = {}
+-- {{{ Theme Menu
+-- Themes define colours, icons, and wallpapers
+beautiful.init(awful.util.getdir("config") .. "/current_theme/theme.lua")
+mythememenu = {} 
 
 function theme_load(theme)
    local cfg_path = awful.util.getdir("config")
@@ -108,7 +110,9 @@ end
 
 -- Generate your table at startup or restart
 theme_menu()
+-- }}}
 
+-- {{{ Awesome Menu
 -- Create a laucher widget and a main menu
 myawesomemenu = {
    { "manual", terminal .. " -e man awesome" },
@@ -117,15 +121,32 @@ myawesomemenu = {
    { "restart", awesome.restart },
    { "quit", awesome.quit }
 }
+-- }}}
 
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "Debian", debian.menu.Debian_menu.Debian },
-                                    { "nautilus", "nautilus --no-desktop" },
-                                    { "Lock Screen", function () awful.util.spawn("slock") end},
-                                    { "System Settings", function () awful.util.spawn("gnome-control-center") end},
-                                    { "open terminal", terminal }
-                                  }
-                        })
+-- {{{ System Menu
+mysystemmenu = {
+    { "lock screen", function () awful.util.spawn("slock") end},
+    { "system settings", function () awful.util.spawn("gnome-control-center") end},
+    { "open terminal", terminal }
+}
+-- }}}
+
+-- {{{ Apps Menu
+myappsmenu = {
+    { "nautilus", "nautilus --no-desktop"},
+    { "rhythmbox", "rhythmbox"},
+    { "chrome", "google-chrome"}
+}
+-- }}}
+
+mymainmenu = awful.menu({
+    items = {
+        { "awesome", myawesomemenu, beautiful.awesome_icon },
+        { "apps", myappsmenu },
+        { "debian", debian.menu.Debian_menu.Debian },
+        { "system", mysystemmenu }
+    }
+})
 
 mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
                                      menu = mymainmenu })
@@ -182,6 +203,7 @@ mytasklist.buttons = awful.util.table.join(
                                               awful.client.focus.byidx(-1)
                                               if client.focus then client.focus:raise() end
                                           end))
+
 
 for s = 1, screen.count() do
     -- Create a promptbox for each screen
@@ -316,7 +338,7 @@ end),
 
 clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
-    awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end),
+    awful.key({ modkey,           }, "c",      function (c) c:kill()                         end),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
     awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
@@ -438,4 +460,9 @@ end)
 
 client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+-- }}}
+
+-- {{{ Network Widget
+os.execute("nm-applet &")
+os.execute("gnome-sound-applet &")
 -- }}}
