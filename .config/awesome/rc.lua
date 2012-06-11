@@ -43,7 +43,7 @@ beautiful.init(awful.util.getdir("config") .. "/current_theme/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "x-terminal-emulator"
-editor = os.getenv("EDITOR") or "editor"
+editor = os.getenv("EDITOR") or "gvim"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -126,7 +126,8 @@ myawesomemenu = {
 -- {{{ System Menu
 mysystemmenu = {
     { "lock screen", function () awful.util.spawn("slock") end},
-    { "system settings", function () awful.util.spawn("gnome-control-center") end},
+    { "system settings", function () awful.util.spawn("gksu gnome-control-center") end},
+    { "software center", function () awful.util.spawn("gksu software-center") end},
     { "open terminal", terminal }
 }
 -- }}}
@@ -134,6 +135,7 @@ mysystemmenu = {
 -- {{{ Apps Menu
 myappsmenu = {
     { "nautilus", "nautilus --no-desktop"},
+    { "ranger", terminal .. " -e ranger"},
     { "rhythmbox", "rhythmbox"},
     { "chrome", "google-chrome"}
 }
@@ -298,7 +300,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
     
-    awful.key({ modkey,           }, "n", function () awful.util.spawn("nautilus --no-desktop") end),
+    --awful.key({ modkey,           }, "n", function () awful.util.spawn("nautilus --no-desktop") end),
+    awful.key({ modkey,           }, "n", function () awful.util.spawn(terminal .. " -e ranger") end),
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
     -- Prompt
