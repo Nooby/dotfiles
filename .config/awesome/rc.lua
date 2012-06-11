@@ -9,6 +9,7 @@ require("naughty")
 
 -- Load Debian menu entries
 require("debian.menu")
+
 require("vicious")
 
 -- {{{ Error handling
@@ -62,7 +63,7 @@ layouts =
     --awful.layout.suit.tile.left,
     --awful.layout.suit.tile.bottom,
     --awful.layout.suit.tile.top,
-    --awful.layout.suit.fair,
+    awful.layout.suit.fair,
     --awful.layout.suit.fair.horizontal,
     --awful.layout.suit.spiral,
     awful.layout.suit.spiral.dwindle,
@@ -77,7 +78,7 @@ layouts =
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, "Music" }, s, awful.layout.suit.spiral.dwindle)
+    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, awful.layout.suit.spiral.dwindle)
 end
 -- }}}
 
@@ -123,6 +124,16 @@ myawesomemenu = {
 }
 -- }}}
 
+-- {{{ Config Menu
+myconfigmenu = {
+   { "awesome", editor_cmd .. " " .. awesome.conffile },
+   { ".vimrc", editor_cmd .. " .vimrc" },
+   { ".profile", editor_cmd .. " .profile" },
+   { ".bashrc", editor_cmd .. " .bashrc" },
+   { ".hgrc", editor_cmd .. " .hgrc" }
+}
+-- }}}
+
 -- {{{ System Menu
 mysystemmenu = {
     { "lock screen", function () awful.util.spawn("slock") end},
@@ -145,6 +156,7 @@ mymainmenu = awful.menu({
     items = {
         { "awesome", myawesomemenu, beautiful.awesome_icon },
         { "apps", myappsmenu },
+        { "config", myconfigmenu },
         { "debian", debian.menu.Debian_menu.Debian },
         { "system", mysystemmenu }
     }
