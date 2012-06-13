@@ -44,7 +44,7 @@ beautiful.init(awful.util.getdir("config") .. "/current_theme/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "x-terminal-emulator"
-editor = os.getenv("EDITOR") or "gvim"
+editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -139,6 +139,8 @@ mysystemmenu = {
     { "lock screen", function () awful.util.spawn("slock") end},
     { "system settings", function () awful.util.spawn("gksu gnome-control-center") end},
     { "software center", function () awful.util.spawn("gksu software-center") end},
+    { "gtk theme", function () awful.util.spawn("lxappearance") end},
+    { "amdcccle", function () awful.util.spawn("gksu amdcccle") end},
     { "open terminal", terminal }
 }
 -- }}}
