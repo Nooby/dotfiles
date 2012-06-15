@@ -141,6 +141,7 @@ mysystemmenu = {
     { "software center", function () awful.util.spawn("gksu software-center") end},
     { "gtk theme", function () awful.util.spawn("lxappearance") end},
     { "amdcccle", function () awful.util.spawn("gksu amdcccle") end},
+    { "disk util", function () awful.util.spawn("gksu palimpsest") end},
     { "open terminal", terminal }
 }
 -- }}}
