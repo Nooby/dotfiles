@@ -12,6 +12,7 @@ progress=
 rebase =
 transplant=
 bookmarks =
+fetch=
 
 [defaults]
 # suppress noisy extdiff header message

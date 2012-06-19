@@ -42,11 +42,11 @@ export LC_CTYPE="en_US.UTF-8"
 export LC_COLLATE="en_US.UTF-8"
 
 # if running bash
-if [ -n "$BASH_VERSION" ]; then
-    # include .bashrc if it exists
-    if [ -f "$HOME/.bashrc" ]; then
-	. "$HOME/.bashrc"
-    fi
-fi
+#if [ -n "$BASH_VERSION" ]; then
+#    # include .bashrc if it exists
+#    if [ -f "$HOME/.bashrc" ]; then
+#	. "$HOME/.bashrc"
+#    fi
+#fi
 
 
