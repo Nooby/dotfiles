@@ -4,7 +4,7 @@
 
 " Plugin Configuration {
     " NERDTree {
-        map <C-n> :NERDTreeToggle<CR>
+        nnoremap <C-n> :NERDTreeToggle<CR>
     " }
 
     " Pathogen {
@@ -23,7 +23,7 @@
     " }
     
     " TagBar {
-        nmap <F8> :TagbarToggle<CR> 
+        nnoremap <F8> :TagbarToggle<CR> 
         let g:tagbar_autoclose = 1
         let g:tagbar_autofocus = 1
 	let g:tagbar_autoshowtag = 1
@@ -35,16 +35,12 @@
 " }
 
 " Basic {
-    set nocompatible
 
     " Syntax {
         if has("syntax")
             syntax on
         endif
     " }
-
-    " set textwidth=79
-    " set linebreak
 
     " Formatoptions {
         set formatoptions-=cqt
@@ -53,6 +49,7 @@
 
     filetype on
     filetype plugin indent on
+    set nocompatible
     set clipboard+=unnamed
     set hidden
     set mouse=a
@@ -66,7 +63,7 @@
     set expandtab
     set ignorecase 
     set smartcase
-    set hlsearch
+    "set hlsearch
     set nowrap
     set nobackup
     set nowritebackup
@@ -76,9 +73,11 @@
 " }
 
 " Vim UI {
-    set background=dark
-    set t_Co=256
-    colorscheme xoria256
+    " Standard Colorscheme {
+        set background=dark
+        set t_Co=256
+        colorscheme xoria256
+    " }
 
     " GUI {
         if has('gui_running')
@@ -103,7 +102,7 @@
 
     set novisualbell
     set number
-    set numberwidth=5
+    set numberwidth=4
     set shortmess=aOstT
     set showcmd
     set showmatch
@@ -113,20 +112,16 @@
 " Folding {
     set foldenable
     set foldmarker={,}
+    "set foldmarker={{{,}}}
     set foldmethod=marker
     set foldlevel=99
     set foldopen=block,hor,mark,percent,quickfix,tag
-    set foldtext=SimpleFoldText()
+    "set foldtext=SimpleFoldText()
 " }
 
 " Language {
     " Python {
-        "autocmd FileType python map <F5> :w!<CR>:!python "%"<CR>
-        autocmd FileType python set omnifunc=pythoncomplete#Complete
-        autocmd FileType python compiler pylint
-        autocmd FileType python set nowrap
-        autocmd FileType python set foldmarker={{{,}}}
-        autocmd FileType python set foldmethod=indent
+        autocmd FileType python setlocal nowrap omnifunc=pythoncomplete#Complete foldmethod=indent
 
         " Comment Shortcut {
         "    autocmd FileType python vnoremap <C-#> :'<,'>s/^/#/<CR>:nohls<CR>
@@ -139,11 +134,12 @@
         " }
 
         " Pep8 {
-            "autocmd FileType python let g:pep8_map='<C-8>'
+            autocmd FileType python let g:pep8_map='<F11>'
         " }
         
         " Pylint {
-            let g:pylint_onwrite = 0
+            autocmd FileType python let g:pylint_onwrite = 0
+            autocmd FileType python compiler pylint
         " }
     "}
 
@@ -156,21 +152,21 @@
         autocmd BufNewFile,BufRead *.py_tmpl setlocal ft=python
         autocmd BufNewFile,BufRead *.html,*.htm setlocal ft=htmldjango
 
-        autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-        autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-        autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+        autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+        autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
+        autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
     " }
     
     " Go Lang {
-        autocmd BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
+        autocmd BufNewFile,BufRead *.go setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=4
+    " }
+
+    " Make {
+        autocmd FileType make setlocal noexpandtab shiftwidth=8 tabstop=8 softtabstop=8
     " }
 " }
 
 " Functions {
-    function SimpleFoldText() " {
-        return getline(v:foldstart).' '
-    endfunction " }
-
     function! ToggleFolding() " {
         if !exists("b:NoobyFoldingMode")
             let b:NoobyFoldingMode = "CStyle"
@@ -188,27 +184,23 @@
 
         echo b:NoobyFoldingMode
     endfunction " }
-
-    "function! BindingTest() " { Test Function for development only.
-    "    echo 'Binding Works!'
-    "endfunction " }
 " }
 
 " Maping {
     nnoremap <space> za
-    vnoremap <Space> zf
+    vnoremap <space> zf
     "nnoremap <silent> <F8> :TlistToggle<CR>
-    "nnoremap <silent> <F9> :TaskList<CR>
+    nnoremap <silent> <F9> :TaskList<CR>
 
     " Movement Bindings {
-        map <c-j> <c-w>j
-        map <c-k> <c-w>k
-        map <c-l> <c-w>l
-        map <c-h> <c-w>h
+        nmap <C-h> <C-w>h
+        nmap <C-j> <C-w>j
+        nmap <C-k> <C-w>k
+        nmap <C-l> <C-w>l
     " }
 
     " Autocmd {
-        autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h |  endif
+        "autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h |  endif
     " }
 
     " Quick Save {
