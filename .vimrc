@@ -70,6 +70,7 @@
     set noswapfile
     set incsearch
     set scrolloff=2
+    set colorcolumn=80
 " }
 
 " Vim UI {
