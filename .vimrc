@@ -200,23 +200,23 @@
         nmap <C-l> <C-w>l
     " }
 
-    " Autocmd {
-        "autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h |  endif
-    " }
-
     " Quick Save {
         nnoremap <C-s> :w<CR>
         inoremap <C-s> <ESC>:w<CR>
         vnoremap <C-s> <ESC>:w<CR>
     " }
+    
+    " Easy escape {
+        imap ;; <Esc>
+    " }
 
     " Copy/Paste from Clipboard {
         nnoremap <C-v> "+p
-        inoremap <C-v> <ESC>"+p
+        inoremap <C-v> <ESC>"+pi
         vnoremap <C-v> "+p
         
         nnoremap <C-c> "+yy
-        inoremap <C-c> <ESC>"+yy
+        inoremap <C-c> <ESC>"+yyi
         vnoremap <C-c> "+y
     " }
 

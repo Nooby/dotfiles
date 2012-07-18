@@ -4,6 +4,7 @@
 down4me() { wget -qO - "http://www.downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g'; }
 rmpyc() { find . -type f -name "*.pyc" -delete; }
 g() { grep -rn $1 $2; }
+v() { gvim --remote-tab-silent $@; }
 runserver() { ./manage.py runserver; }
 django_shell() { ./manage.py shell; }
 search_and_destroy() { find . -name $1 -print0 | xargs -0 sed -i "s/$2/$3/g"; }
