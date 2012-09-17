@@ -21,3 +21,4 @@ if [ -f "$HOME/.bashrc" ]; then
     . "$HOME/.bashrc"
 fi
 
+source ~/.bash_additions/z/z.sh

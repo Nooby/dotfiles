@@ -16,3 +16,6 @@
 [submodule ".vim/bundle/asyncfinder"]
 	path = .vim/bundle/asyncfinder
 	url = git://github.com/vim-scripts/asyncfinder.vim.git
+[submodule ".bash_additions/z"]
+	path = .bash_additions/z
+	url = git://github.com/rupa/z.git
