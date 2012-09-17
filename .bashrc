@@ -85,3 +85,9 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
+# PATH additions.
+if [ -f ~/.bash_envpath ]; then
+    . ~/.bash_envpath
+fi
+
+
