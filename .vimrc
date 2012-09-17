@@ -32,6 +32,10 @@
     " Gundo {
         nnoremap <F6> :GundoToggle<CR>
     " }
+
+    " AsyncFinder {
+        map <F2> :AsyncFinder<CR>
+    " }
 " }
 
 " Basic {

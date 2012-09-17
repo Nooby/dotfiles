@@ -13,3 +13,6 @@
 [submodule ".vim/bundle/gundo"]
 	path = .vim/bundle/gundo
 	url = http://github.com/sjl/gundo.vim.git
+[submodule ".vim/bundle/asyncfinder"]
+	path = .vim/bundle/asyncfinder
+	url = git://github.com/vim-scripts/asyncfinder.vim.git
