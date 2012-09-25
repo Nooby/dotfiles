@@ -138,10 +138,6 @@
             autocmd FileType python map <buffer> <F3> :call Pyflakes()<CR> 
         " }
 
-        " Pep8 {
-            autocmd FileType python let g:pep8_map='<F11>'
-        " }
-        
         " Pylint {
             autocmd FileType python let g:pylint_onwrite = 0
             autocmd FileType python compiler pylint
