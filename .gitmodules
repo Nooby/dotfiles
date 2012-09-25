@@ -19,3 +19,9 @@
 [submodule ".bash_additions/z"]
 	path = .bash_additions/z
 	url = git://github.com/rupa/z.git
+[submodule ".vim/bundle/TagBar"]
+	path = .vim/bundle/TagBar
+	url = git://github.com/vim-scripts/Tagbar.git
+[submodule ".vim/bundle/TaskList"]
+	path = .vim/bundle/TaskList
+	url = git://github.com/vim-scripts/TaskList.vim.git
