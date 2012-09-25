@@ -140,7 +140,8 @@ mysystemmenu = {
     { "system settings", function () awful.util.spawn("gksu gnome-control-center") end},
     { "software center", function () awful.util.spawn("gksu software-center") end},
     { "gtk theme", function () awful.util.spawn("lxappearance") end},
-    { "amdcccle", function () awful.util.spawn("gksu amdcccle") end},
+    --{ "amdcccle", function () awful.util.spawn("gksu amdcccle") end},
+    { "nvidia settings", function () awful.util.spawn("gksu nvidia-settings") end},
     { "disk util", function () awful.util.spawn("gksu palimpsest") end},
     { "open terminal", terminal }
 }
@@ -483,4 +484,5 @@ client.add_signal("unfocus", function(c) c.border_color = beautiful.border_norma
 -- {{{ Network Widget
 os.execute("nm-applet &")
 os.execute("gnome-sound-applet &")
+os.execute("everpad &")
 -- }}}

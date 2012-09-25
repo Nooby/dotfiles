@@ -12,7 +12,8 @@ export LC_CTYPE="en_US.UTF-8"
 export LC_COLLATE="en_US.UTF-8"
 
 # Virtual Enironment Wrapper Settings
-export PROJECT_HOME="~/dev"
+export PROJECT_HOME="$HOME/dev"
+#export WORKON_HOME="$HOME/dev_projects"
 export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
 source /usr/local/bin/virtualenvwrapper.sh
 
