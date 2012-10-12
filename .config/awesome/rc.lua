@@ -64,11 +64,11 @@ layouts =
     --awful.layout.suit.tile.bottom,
     --awful.layout.suit.tile.top,
     awful.layout.suit.fair,
-    --awful.layout.suit.fair.horizontal,
-    --awful.layout.suit.spiral,
+    awful.layout.suit.fair.horizontal,
+    awful.layout.suit.spiral,
     awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max,
-    --awful.layout.suit.max.fullscreen,
+    awful.layout.suit.max.fullscreen,
     --awful.layout.suit.magnifier
 }
 -- }}}
@@ -136,7 +136,7 @@ myconfigmenu = {
 
 -- {{{ System Menu
 mysystemmenu = {
-    { "lock screen", function () awful.util.spawn("slock") end},
+    { "lock screen", function () awful.util.spawn("gnome-screensaver-command -l") end},
     { "system settings", function () awful.util.spawn("gksu gnome-control-center") end},
     { "software center", function () awful.util.spawn("gksu software-center") end},
     { "gtk theme", function () awful.util.spawn("lxappearance") end},
@@ -150,6 +150,7 @@ mysystemmenu = {
 -- {{{ Apps Menu
 myappsmenu = {
     { "nautilus", "nautilus --no-desktop"},
+    { "thunar", "thunar"},
     { "ranger", terminal .. " -e ranger"},
     { "rhythmbox", "rhythmbox"},
     { "chrome", "google-chrome"}
@@ -271,7 +272,7 @@ root.buttons(awful.util.table.join(
 
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
-    awful.key({ modkey,           }, "l", function () awful.util.spawn_with_shell("slock") end),
+    awful.key({ modkey,           }, "l", function () awful.util.spawn_with_shell("gnome-screensaver -l") end),
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
@@ -317,7 +318,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
     
     --awful.key({ modkey,           }, "n", function () awful.util.spawn("nautilus --no-desktop") end),
-    awful.key({ modkey,           }, "n", function () awful.util.spawn(terminal .. " -e ranger") end),
+    --awful.key({ modkey,           }, "n", function () awful.util.spawn(terminal .. " -e ranger") end),
+    awful.key({ modkey,           }, "n", function () awful.util.spawn("thunar") end),
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
     -- Prompt
@@ -485,4 +487,5 @@ client.add_signal("unfocus", function(c) c.border_color = beautiful.border_norma
 os.execute("nm-applet &")
 os.execute("gnome-sound-applet &")
 os.execute("everpad &")
+os.execute("gnome-screensaver &")
 -- }}}

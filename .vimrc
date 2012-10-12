@@ -207,7 +207,7 @@
     " }
     
     " Easy escape {
-        imap ;; <Esc>
+        imap jj <Esc>
     " }
 
     " Copy/Paste from Clipboard {

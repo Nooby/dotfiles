@@ -1,12 +1,13 @@
 # Defining all my aliases in 1 convinient place.
 # Gets read by ~/.bashrc
 
-alias gvim='gvim -f'
+# alias gvim='gvim -f'
 
 down4me() { wget -qO - "http://www.downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g'; }
 rmpyc() { find . -type f -name "*.pyc" -delete; }
 g() { grep -rn $1 $2; }
-v() { gvim --remote-silent $@; }
+v() { vim --remote-silent "$@"; }
+gv() { (gvim --remote-silent "$@" &); }
 django_runserver() { ./manage.py runserver; }
 django_shell() { ./manage.py shell; }
 django() { ./manage.py $@; }
