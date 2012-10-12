@@ -28,3 +28,6 @@
 [submodule ".vim/bundle/pylint"]
 	path = .vim/bundle/pylint
 	url = git://github.com/vim-scripts/pylint.vim.git
+[submodule ".oh-my-zsh"]
+	path = .oh-my-zsh
+	url = git://github.com/robbyrussell/oh-my-zsh.git
