@@ -317,9 +317,9 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
     
-    --awful.key({ modkey,           }, "n", function () awful.util.spawn("nautilus --no-desktop") end),
+    awful.key({ modkey,           }, "n", function () awful.util.spawn("nautilus --no-desktop") end),
     --awful.key({ modkey,           }, "n", function () awful.util.spawn(terminal .. " -e ranger") end),
-    awful.key({ modkey,           }, "n", function () awful.util.spawn("thunar") end),
+    --awful.key({ modkey,           }, "n", function () awful.util.spawn("thunar") end),
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
     -- Prompt
