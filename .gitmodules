@@ -31,6 +31,3 @@
 [submodule ".oh-my-zsh"]
 	path = .oh-my-zsh
 	url = git://github.com/robbyrussell/oh-my-zsh.git
-[submodule ".vim/bundle/jedi"]
-	path = .vim/bundle/jedi
-	url = git://github.com/davidhalter/jedi-vim.git

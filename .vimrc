@@ -36,6 +36,10 @@
     " AsyncFinder {
         map <F2> :AsyncFinder<CR>
     " }
+    "
+    " Jedi {
+        "let g:jedi#show_function_definition = "0"
+    " }
 " }
 
 " Basic {
