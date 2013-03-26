@@ -486,6 +486,7 @@ client.add_signal("unfocus", function(c) c.border_color = beautiful.border_norma
 -- {{{ Network Widget
 os.execute("nm-applet &")
 os.execute("gnome-sound-applet &")
-os.execute("everpad &")
 os.execute("gnome-screensaver &")
+os.execute("google-musicmanager &")
+os.execute("dropbox start")
 -- }}}
