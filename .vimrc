@@ -55,6 +55,11 @@
         set formatoptions+=cqt
     " }
 
+    " Path Options {
+        set path+=
+        set path+=.
+    " } 
+
     filetype on
     filetype plugin indent on
     set nocompatible

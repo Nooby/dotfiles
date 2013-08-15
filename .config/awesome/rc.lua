@@ -134,6 +134,18 @@ myconfigmenu = {
 }
 -- }}}
 
+--- {{{ Keyboard Layouts 
+function change_layout(layout)
+    os.execute("setxkbmap " .. layout)
+end
+
+mykeyboardlayouts = {
+    { "de", function () change_layout("de") end},
+    { "en(intl)", function () change_layout("en(intl)") end},
+    { "en(altgr-intl)", function () change_layout("en(altgr-intl)") end},
+}
+-- }}}
+
 -- {{{ System Menu
 mysystemmenu = {
     { "lock screen", function () awful.util.spawn("gnome-screensaver-command -l") end},
@@ -143,7 +155,8 @@ mysystemmenu = {
     --{ "amdcccle", function () awful.util.spawn("gksu amdcccle") end},
     { "nvidia settings", function () awful.util.spawn("gksu nvidia-settings") end},
     { "disk util", function () awful.util.spawn("gksu palimpsest") end},
-    { "open terminal", terminal }
+    { "open terminal", terminal },
+    { "Change Keyboard Layout", mykeyboardlayouts }
 }
 -- }}}
 
