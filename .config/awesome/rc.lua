@@ -12,6 +12,16 @@ require("debian.menu")
 
 require("vicious")
 
+-- Override awesome.quit when we're using GNOME
+_awesome_quit = awesome.quit
+awesome.quit = function()
+   if os.getenv("DESKTOP_SESSION") == "awesome-gnome-session" then
+      os.execute("/usr/bin/gnome-session-quit")
+   else
+      _awesome_quit()
+   end
+end
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -268,7 +278,7 @@ for s = 1, screen.count() do
         },
         mylayoutbox[s],
         mytextclock,
-        s == 1 and mysystray or nil,
+        mysystray,
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft
     }
@@ -497,9 +507,9 @@ client.add_signal("unfocus", function(c) c.border_color = beautiful.border_norma
 -- }}}
 
 -- {{{ Network Widget
-os.execute("nm-applet &")
-os.execute("gnome-sound-applet &")
-os.execute("gnome-screensaver &")
-os.execute("google-musicmanager &")
-os.execute("dropbox start")
+-- os.execute("nm-applet &")
+-- os.execute("gnome-sound-applet &")
+-- os.execute("gnome-screensaver &")
+-- os.execute("google-musicmanager &")
+-- os.execute("dropbox start")
 -- }}}
