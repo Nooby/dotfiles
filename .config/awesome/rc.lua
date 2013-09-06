@@ -159,12 +159,12 @@ mykeyboardlayouts = {
 -- {{{ System Menu
 mysystemmenu = {
     { "lock screen", function () awful.util.spawn("gnome-screensaver-command -l") end},
-    { "system settings", function () awful.util.spawn("gksu gnome-control-center") end},
-    { "software center", function () awful.util.spawn("gksu software-center") end},
+    { "system settings", function () awful.util.spawn("gnome-control-center") end},
+    { "software center", function () awful.util.spawn("software-center") end},
     { "gtk theme", function () awful.util.spawn("lxappearance") end},
-    --{ "amdcccle", function () awful.util.spawn("gksu amdcccle") end},
-    { "nvidia settings", function () awful.util.spawn("gksu nvidia-settings") end},
-    { "disk util", function () awful.util.spawn("gksu palimpsest") end},
+    --{ "amdcccle", function () awful.util.spawn("amdcccle") end},
+    { "nvidia settings", function () awful.util.spawn("nvidia-settings") end},
+    { "disk util", function () awful.util.spawn("palimpsest") end},
     { "open terminal", terminal },
     { "Change Keyboard Layout", mykeyboardlayouts }
 }
@@ -295,7 +295,7 @@ root.buttons(awful.util.table.join(
 
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
-    awful.key({ modkey,           }, "l", function () awful.util.spawn_with_shell("gnome-screensaver -l") end),
+    awful.key({ modkey,           }, "l", function () awful.util.spawn_with_shell("gnome-screensaver-command -l") end),
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
