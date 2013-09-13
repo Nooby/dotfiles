@@ -65,7 +65,9 @@
 (setq backup-directory-alist `(("." . "~/.saves")))
 
 (load (expand-file-name "~/quicklisp/slime-helper.el"))
-(setq inferior-lisp-program "sbcl")
+(setq inferior-lisp-program "clisp")
+(make-directory "/tmp/slime-fasls/" t)
+(setq slime-compile-file-options '(:fasl-directory "/tmp/slime-fasls/"))
 
 (add-hook 'nrepl-mode-hook 'paredit-mode)
 
