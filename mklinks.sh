@@ -61,5 +61,6 @@ then
 fi
 
 mkdir -p `echo $PWD/.vim/autoload`
+rm -f `echo $PWD/.vim/autoload`
 ln -s `echo $PWD/misc/vim-pathogen/autoload/pathogen.vim` `echo $PWD/.vim/autoload/pathogen.vim`
 
