@@ -13,10 +13,13 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
+
 alias ls='ls --color=auto'
 alias df='df -h'
 
 PROMPT="[%n@%m %1~]$ "
 
-export LS_COLORS='di=1:fi=00:ex=96'
-export EDITOR=vim
+[[ -f ~/.profile ]] && source ~/.profile
