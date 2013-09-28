@@ -1,25 +1,16 @@
-# Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
-setopt appendhistory extendedglob
-unsetopt autocd beep nomatch
-bindkey -v
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-zstyle :compinstall filename '/home/nooby/.zshrc'
+# Path to your oh-my-zsh configuration.
+ZSH=$HOME/.oh-my-zsh
 
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
+# Set name of the theme to load.
+# Look in ~/.oh-my-zsh/themes/
+# Optionally, if you set this to "random", it'll load a random theme each
+# time that oh-my-zsh is loaded.
+ZSH_THEME="kardan"
 
-autoload -U edit-command-line
-zle -N edit-command-line
-bindkey -M vicmd v edit-command-line
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+plugins=(git git-extra git-flow archlinux lein systemd vagrant extract)
 
-alias ls='ls --color=auto'
-alias df='df -h'
+source $ZSH/oh-my-zsh.sh
 
-PROMPT="[%n@%m %1~]$ "
-
-[[ -f ~/.profile ]] && source ~/.profile
