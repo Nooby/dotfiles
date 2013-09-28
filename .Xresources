@@ -1,0 +1,56 @@
+!look
+URxvt.background: [90]#2d2d2d
+URxvt.foreground: #f0f0f0
+URxvt.scrollBar: false
+!dark blue
+!URxvt.color12: #0072ff
+URxvt.perl-ext-common: vtwheel
+
+!urls
+URxvt.perl-ext: default,url-select
+URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.url-select.launcher: /usr/bin/firefox -new-tab
+URxvt.url-select.underline: true
+
+!remote
+URxvt.termName: rxvt
+
+!xlock
+XLock.mode: blank
+
+*cursorColor:   #cee318
+
+*background:    #1C1C1C
+*foreground:    #c5c5c5
+
+! black
+*color0:        #1C1C1C
+*color8:        #666666
+
+! red
+*color1:        #ff005b
+*color9:        #ff00a0
+
+! green
+*color2:        #cee318
+*color10:       #ccff00
+
+! yellow
+*color3:        #ffe755
+*color11:       #ff9f00
+
+! blue
+*color4:        #048ac7
+*color12:       #48c6ff
+
+! magenta
+*color5:        #833c9f
+*color13:       #be67e1
+
+! cyan 
+*color6:        #0ac1cd
+*color14:       #63e7f0
+
+! white
+*color7:        #e5e5e5
+*color15:       #f3f3f3
