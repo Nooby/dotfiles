@@ -1,4 +1,4 @@
-EXCLUDE='\.git|\.config|mklinks\.sh|README|\.swp$'
+EXCLUDE='\.git|\.config|mklinks\.sh|README|misc|\.swp$'
 fcount=`find . -maxdepth 1 -mindepth 1 | grep -vP $EXCLUDE | wc -l`
 dcount=`find .config -maxdepth 1 -mindepth 1 -type d | wc -l`
 echo -e "\e[1;32mThis script will create the following symlinks:\e[00m"
@@ -15,6 +15,7 @@ do
 	echo -e "~/$curr -> $PWD/$curr"
 done
 
+echo -e "$PWD/misc/vim-pathogen/autoload/pathogen.vim -> $PWD/.vim/autoload/pathogen.vim"
 
 valinput=0
 while [ $valinput -ne 1 ]
@@ -58,4 +59,7 @@ then
 		ln -s `echo $PWD/$curr` `echo ~/$curr`
 	done
 fi
+
+mkdir -p `echo $PWD/.vim/autoload`
+ln -s `echo $PWD/misc/vim-pathogen/autoload/pathogen.vim` `echo $PWD/.vim/autoload/pathogen.vim`
 
