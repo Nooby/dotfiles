@@ -15,7 +15,7 @@ do
 	echo -e "~/$curr -> $PWD/$curr"
 done
 
-echo -e "$PWD/misc/vim-pathogen/autoload/pathogen.vim -> $PWD/.vim/autoload/pathogen.vim"
+echo -e "~/.vim/autoload/pathogen.vim -> $PWD/misc/vim-pathogen/autoload/pathogen.vim"
 
 valinput=0
 while [ $valinput -ne 1 ]
@@ -48,19 +48,16 @@ then
 	for (( i=1; i<=$dcount; i++ ))
 	do
 		curr=`find .config -maxdepth 1 -mindepth 1 -type d | head -n $i | tail -n 1`
-		rm -f `echo ~/$curr`
-		ln -s `echo $PWD/$curr` `echo ~/$curr`
+		ln -fs `echo $PWD/$curr` `echo ~/$curr`
 	done
 
 	for (( i=1; i<=$fcount; i++ ))
 	do
 		curr=`find . -maxdepth 1 -mindepth 1 | grep -vP $EXCLUDE | head -n $i | tail -n 1 | cut -c 3-`
-		rm -f `echo ~/$curr`
-		ln -s `echo $PWD/$curr` `echo ~/$curr`
+		ln -fs `echo $PWD/$curr` `echo ~/$curr`
 	done
+
+	mkdir -p `echo $PWD/.vim/autoload`
+	ln -fs `echo $PWD/misc/vim-pathogen/autoload/pathogen.vim` `echo ~/.vim/autoload/pathogen.vim`
+
 fi
-
-mkdir -p `echo $PWD/.vim/autoload`
-rm -f `echo $PWD/.vim/autoload`
-ln -s `echo $PWD/misc/vim-pathogen/autoload/pathogen.vim` `echo $PWD/.vim/autoload/pathogen.vim`
-

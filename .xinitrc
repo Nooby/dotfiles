@@ -11,10 +11,6 @@ fi
 
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 
-xrandr --newmode "1920x1080" 173.00 1920 2048 2248 2576 1080 1083 1088 1120 -hsync +vsync
-xrandr --addmode VBOX0 1920x1080
-xrandr --output VBOX0 --mode 1920x1080
-
 case $1 in
 awesome|*)
 	xcompmgr &
