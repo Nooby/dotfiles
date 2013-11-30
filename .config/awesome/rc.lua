@@ -96,7 +96,12 @@ myawesomemenu = {
    { "quit", awesome.quit }
 }
 
+myarchmenu = {
+   { "wifi-menu", terminal .. " -e sudo wifi-menu" }
+}
+
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
+				    { "arch", myarchmenu },
                                     { "open terminal", terminal }
                                   }
                         })
