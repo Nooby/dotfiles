@@ -1,0 +1,20 @@
+#!/bin/bash
+
+wallpaper_location=~/.misc/wallpaper
+
+if [ "$#" -eq 1 ]
+then
+	feh -u -r $@ &> /dev/null
+
+	if [ $? -eq 1 ]
+	then
+		[[ ! -d $wallpaper_location ]] && mkdir -p $wallpaper_location
+		rm -f `echo $wallpaper_location/*`
+		feh -U -r $@ 2> /dev/null | xargs -I % cp % $wallpaper_location
+		feh -z --bg-scale $wallpaper_location 2> /dev/null
+	else
+		echo "ERROR: No Valid Image."
+	fi
+else
+	feh -z --bg-scale $wallpaper_location 2> /dev/null
+fi

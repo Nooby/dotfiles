@@ -11,10 +11,15 @@ fi
 
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 
-case $1 in
-awesome|*)
-	xcompmgr &
+session=${1:-awesome}
+
+case $session in
+    kde) exec startkde;;
+    i3) exec i3;;
+    awesome)
+        xcompmgr &
 	wmname LG3D
 	exec awesome
 	;;
+    *) exec $1;;
 esac

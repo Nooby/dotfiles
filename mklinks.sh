@@ -6,16 +6,16 @@ echo -e "\e[1;32mThis script will create the following symlinks:\e[00m"
 for (( i=1; i<=$dcount; i++ ))
 do
 	curr=`find .config -maxdepth 1 -mindepth 1 -type d | head -n $i | tail -n 1`
-	echo -e "~/$curr/ -> $PWD/$curr/"
+	echo -e "$PWD/$curr/ -> ~/$curr/"
 done
 
 for (( i=1; i<=$fcount; i++ ))
 do
 	curr=`find . -maxdepth 1 -mindepth 1 | grep -vP $EXCLUDE | head -n $i | tail -n 1 | cut -c 3-`
-	echo -e "~/$curr -> $PWD/$curr"
+	echo -e "$PWD/$curr -> ~/$curr"
 done
 
-echo -e "~/.vim/autoload/pathogen.vim -> $PWD/misc/vim-pathogen/autoload/pathogen.vim"
+echo -e "$PWD/misc/vim-pathogen/autoload/pathogen.vim -> ~/.vim/autoload/pathogen.vim"
 
 valinput=0
 while [ $valinput -ne 1 ]
