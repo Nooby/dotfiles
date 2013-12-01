@@ -14,3 +14,5 @@ plugins=(git git-extra git-flow archlinux lein systemd vagrant extract)
 
 source $ZSH/oh-my-zsh.sh
 
+export EDITOR=vim
+export PATH=~/bin:$PATH
