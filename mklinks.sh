@@ -48,12 +48,14 @@ then
 	for (( i=1; i<=$dcount; i++ ))
 	do
 		curr=`find .config -maxdepth 1 -mindepth 1 -type d | head -n $i | tail -n 1`
+		rm -f `echo ~/$curr`
 		ln -fs `echo $PWD/$curr` `echo ~/$curr`
 	done
 
 	for (( i=1; i<=$fcount; i++ ))
 	do
 		curr=`find . -maxdepth 1 -mindepth 1 | grep -vP $EXCLUDE | head -n $i | tail -n 1 | cut -c 3-`
+		rm -f `echo ~/$curr`
 		ln -fs `echo $PWD/$curr` `echo ~/$curr`
 	done
 
