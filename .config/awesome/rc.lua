@@ -102,6 +102,7 @@ myawesomemenu = {
 myarchmenu = {
    { "wifi-menu", terminal .. " -e sudo wifi-menu" },
    { "alsamixer", terminal .. " -e alsamixer" },
+   { "nvidia", "nvidia-settings" },
    { "change wallpaper", "wallpaper" }
 }
 
