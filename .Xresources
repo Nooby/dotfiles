@@ -70,6 +70,8 @@
 *color15:                 S_base3
 
 ! URxvt
+URxvt.depth: 32
+URxvt.background: [85]#002b36
 URxvt.scrollBar: false
 URxvt.perl-ext-common: vtwheel
 URxvt.keysym.M-u: perl:url-select:select_next

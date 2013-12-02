@@ -71,12 +71,15 @@ local layouts =
 -- }}}
 
 -- {{{ Wallpaper
-if beautiful.wallpaper then
-    for s = 1, screen.count() do
-        gears.wallpaper.maximized(beautiful.wallpaper, s, true)
-    end
-end
+-- if beautiful.wallpaper then
+--     for s = 1, screen.count() do
+--         gears.wallpaper.maximized(beautiful.wallpaper, s, true)
+--     end
+-- end
+
+os.execute("wallpaper")
 -- }}}
+
 
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
@@ -97,11 +100,20 @@ myawesomemenu = {
 }
 
 myarchmenu = {
-   { "wifi-menu", terminal .. " -e sudo wifi-menu" }
+   { "wifi-menu", terminal .. " -e sudo wifi-menu" },
+   { "alsamixer", terminal .. " -e alsamixer" },
+   { "change wallpaper", "wallpaper" }
+}
+
+myappmenu = {
+   { "ranger", terminal .. " -e ranger" },
+   { "mcomix", "mcomix" },
+   { "chrome", "google-chrome-stable" }
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
 				    { "arch", myarchmenu },
+				    { "apps", myappmenu },
                                     { "open terminal", terminal }
                                   }
                         })
@@ -437,6 +449,4 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
--- {{{ Autostart
-os.execute("dex -a -e Awesome")
--- }}}
+
