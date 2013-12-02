@@ -16,12 +16,17 @@ wallpaper
 session=${1:-awesome}
 
 case $session in
-    kde) exec startkde;;
-    i3) exec i3;;
-    awesome)
+    bspwm)
         xcompmgr &
+	sxhkd &
+	exec bspwm;;
+    kde) exec startkde;;
+    i3)
+        xcompmgr &
+	exec i3;;
+    awesome)
+	xcompmgr &
 	wmname LG3D
-	exec awesome
-	;;
+	exec awesome;;
     *) exec $1;;
 esac
