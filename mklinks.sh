@@ -1,4 +1,4 @@
-EXCLUDE='\.git|\.config|mklinks\.sh|README|misc|\.swp$'
+EXCLUDE='\.git|\.config|mklinks\.sh|README.md|misc|\.swp$'
 fcount=`find . -maxdepth 1 -mindepth 1 | grep -vP $EXCLUDE | wc -l`
 dcount=`find .config -maxdepth 1 -mindepth 1 -type d | wc -l`
 echo -e "\e[1;32mThis script will create the following symlinks:\e[00m"
