@@ -1,0 +1,33 @@
+#!/bin/bash
+
+download_dir=~/Downloads
+incomplete=~/.incomplete_downloads
+
+transmission-daemon
+sleep 1
+
+command=$1
+case "$command" in
+	"list") 
+		transmission-remote -l;;
+	"status") 
+		echo -e "Session Info\n"
+		transmission-remote -si
+		echo -e "\nSession Stats"
+		transmission-remote -st;;
+	"cli") 
+		transmission-remote-cli;;
+	"stop") # $2 = Torrent Id	
+		transmission-remote -t "$2" -S;;
+	"start") # $2 = Torrent Id
+		transmission-remote -t "$2" -s;;
+	"remove") # $2 = Torrent Id
+		transmission-remote -t "$2" --remove;;
+	"info") # $2 = Torrent Id
+		transmission-remote -t "$2" -i;;
+	"files") # $2 = Torrent Id
+		transmission-remote -t "$2" -f;;
+	"add") # $2 = Torrent URL or File 
+		transmission-remote -c `echo -e "$incomplete"` -w `echo -e "$download_dir"` -a "$2";;
+	
+esac
