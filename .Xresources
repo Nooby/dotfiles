@@ -73,7 +73,7 @@
 URxvt.depth: 32
 URxvt.background: [85]#002b36
 URxvt.scrollBar: false
-URxvt.perl-ext-common: vtwheel
+! URxvt.perl-ext-common: vtwheel
 URxvt.keysym.M-u: perl:url-select:select_next
 URxvt.url-select.launcher: /usr/bin/firefox -new-tab
 Urxvt.url-select.underline: true
