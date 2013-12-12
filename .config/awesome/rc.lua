@@ -99,8 +99,10 @@ myawesomemenu = {
 }
 
 myarchmenu = {
-   { "wifi-menu", terminal .. " -e sudo wifi-menu" },
-   { "alsamixer", terminal .. " -e alsamixer" },
+   { "wicd-gtk (Wifi)", "wicd-gtk -n" },
+   { "wicd-curses (Wifi)", terminal .. " -e wicd-curses" },
+   { "GTK Theme", "lxappearance" },
+   { "pavucontrol", terminal .. " -e pavucontrol" },
    { "nvidia", "nvidia-settings" },
    { "change wallpaper", "wallpaper" }
 }
@@ -372,6 +374,8 @@ awful.rules.rules = {
     { rule = { name = "transmission-remote-cli" },
       properties = { floating = true } },
     { rule = { name = "ranger" },
+      properties = { floating = true } },
+    { rule = { name = "Wicd Network Manager" },
       properties = { floating = true } },
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
