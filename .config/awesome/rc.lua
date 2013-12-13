@@ -102,7 +102,7 @@ myarchmenu = {
    { "wicd-gtk (Wifi)", "wicd-gtk -n" },
    { "wicd-curses (Wifi)", terminal .. " -e wicd-curses" },
    { "GTK Theme", "lxappearance" },
-   { "pavucontrol", terminal .. " -e pavucontrol" },
+   { "pavucontrol", "pavucontrol" },
    { "nvidia", "nvidia-settings" },
    { "change wallpaper", "wallpaper" }
 }
@@ -376,6 +376,10 @@ awful.rules.rules = {
     { rule = { name = "ranger" },
       properties = { floating = true } },
     { rule = { name = "Wicd Network Manager" },
+      properties = { floating = true } },
+    { rule = { class = "Pavucontrol" },
+      properties = { floating = true } },
+    { rule = { class = "feh" },
       properties = { floating = true } },
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
