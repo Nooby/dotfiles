@@ -1,11 +1,24 @@
 
-" Sensible Vim {
-	runtime! plugin/sensible.vim
+set nocompatible              " be iMproved
+
+
+" Vundle Options {
+	filetype off                  " required!
+
+	set rtp+=~/.vim/bundle/vundle/
+	call vundle#rc()
+
+	Bundle 'gmarik/vundle'
+
+	" My bundles here:
+	Bundle 'tpope/vim-fugitive'
+	Bundle 'scrooloose/syntastic'
+	Bundle 'ervandew/supertab'
+	Bundle 'altercation/vim-colors-solarized'
+
+	filetype plugin indent on     " required!
 " }
 
-" Pathogen Runtime {
-	execute pathogen#infect()
-" }
 
 " UI Options {
 	set background=dark
@@ -31,7 +44,7 @@
 
 " Copy/Paste from Clipboard {
 	nnoremap <C-v> "+p
-	inoremap <C-v> <ESC>"+pi
+	inoremap <C-v> <ESC>"+p
 	vnoremap <C-v> "+p
 
 	nnoremap <C-c> "+yy

@@ -15,8 +15,6 @@ do
 	echo -e "$PWD/$curr -> ~/$curr"
 done
 
-echo -e "$PWD/misc/vim-pathogen/autoload/pathogen.vim -> ~/.vim/autoload/pathogen.vim"
-
 valinput=0
 while [ $valinput -ne 1 ]
 do
@@ -59,7 +57,6 @@ then
 		ln -fs `echo $PWD/$curr` `echo ~/$curr`
 	done
 
-	mkdir -p `echo $PWD/.vim/autoload`
-	ln -fs `echo $PWD/misc/vim-pathogen/autoload/pathogen.vim` `echo ~/.vim/autoload/pathogen.vim`
 
+	vim +BundleInstall +qall
 fi
