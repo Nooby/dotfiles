@@ -3,9 +3,6 @@
 download_dir=~/Downloads
 incomplete=~/.incomplete_downloads
 
-transmission-daemon
-sleep 1
-
 command=$1
 case "$command" in
 	"list") 
