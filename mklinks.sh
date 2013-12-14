@@ -1,3 +1,5 @@
+#!/bin/bash
+
 EXCLUDE='\.git|\.config|mklinks\.sh|README.md|misc|\.swp$'
 fcount=`find . -maxdepth 1 -mindepth 1 | grep -vP $EXCLUDE | wc -l`
 dcount=`find .config -maxdepth 1 -mindepth 1 -type d | wc -l`
@@ -56,7 +58,4 @@ then
 		rm -f `echo ~/$curr`
 		ln -fs `echo $PWD/$curr` `echo ~/$curr`
 	done
-
-
-	vim +BundleInstall +qall
 fi
