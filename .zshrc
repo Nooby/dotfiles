@@ -10,9 +10,12 @@ ZSH_THEME="kardan"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git git-extra git-flow archlinux lein systemd vagrant extract)
+plugins=(git git-extra git-flow lein vagrant extract debian)
 
 source $ZSH/oh-my-zsh.sh
 
 export EDITOR=vim
-export PATH=~/bin:$PATH
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
