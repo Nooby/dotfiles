@@ -1,0 +1,16 @@
+
+if has("gui_running")
+  colorscheme solarized
+
+  set guioptions+=LlRrbTm
+  set guioptions-=LlRrbTm
+endif
+
+" Copy/Paste from Clipboard {
+  nnoremap <C-v> "+p
+  inoremap <C-v> <ESC>"+p
+  vnoremap <C-v> "+p
+  nnoremap <C-c> "+yy
+  inoremap <C-c> <ESC>"+yyi
+  vnoremap <C-c> "+y
+" }
