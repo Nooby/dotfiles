@@ -98,7 +98,7 @@ myawesomemenu = {
    { "quit", awesome.quit }
 }
 
-myarchmenu = {
+mysysmenu = {
    { "wicd-gtk (Wifi)", "wicd-gtk -n" },
    { "wicd-curses (Wifi)", terminal .. " -e wicd-curses" },
    { "GTK Theme", "lxappearance" },
@@ -116,7 +116,7 @@ myappmenu = {
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
                                     { "debian", debian.menu.Debian_menu.Debian },
-				    				{ "arch", myarchmenu },
+				    				{ "system", mysysmenu },
 				    				{ "apps", myappmenu },
                                     { "open terminal", terminal }
                                   }
