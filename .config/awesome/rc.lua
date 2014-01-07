@@ -69,16 +69,6 @@ layouts =
 }
 -- }}}
 
--- {{{ Wallpaper
--- if beautiful.wallpaper then
---     for s = 1, screen.count() do
---         gears.wallpaper.maximized(beautiful.wallpaper, s, true)
---     end
--- end
-
-os.execute("wallpaper")
--- }}}
-
 
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
@@ -98,26 +88,36 @@ myawesomemenu = {
    { "quit", awesome.quit }
 }
 
-mysysmenu = {
+sysmenu = {
    { "wicd-gtk (Wifi)", "wicd-gtk -n" },
    { "wicd-curses (Wifi)", terminal .. " -e wicd-curses" },
    { "GTK Theme", "lxappearance" },
    { "pavucontrol", "pavucontrol" },
+   { "Baobab (Disk Usage)", "baobab" },
+   { "Empty Trash", "trash-empty" },
    { "nvidia", "nvidia-settings" },
    { "change wallpaper", "wallpaper" }
 }
 
-myappmenu = {
+appmenu = {
    { "ranger", terminal .. " -e ranger" },
    { "torrent", terminal .. " -e transmission-remote-cli" },
    { "mcomix", "mcomix" },
    { "chrome", "google-chrome-stable" }
 }
 
+shuttermenu = {
+  { "selection", "shutter -s" },
+  { "desktop", "shutter --full" },
+  { "window", "shutter --window" },
+  { "open shutter", "shutter" }
+}
+
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
                                     { "debian", debian.menu.Debian_menu.Debian },
-				    				{ "system", mysysmenu },
-				    				{ "apps", myappmenu },
+                                    { "system", sysmenu },
+                                    { "apps", appmenu },
+                                    { "screenshot", shuttermenu },
                                     { "open terminal", terminal }
                                   }
                         })
@@ -417,3 +417,14 @@ end)
 client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+
+-- {{{ Wallpaper
+-- if beautiful.wallpaper then
+--     for s = 1, screen.count() do
+--         gears.wallpaper.maximized(beautiful.wallpaper, s, true)
+--     end
+-- end
+
+-- os.execute("wallpaper")
+-- }}}
+
