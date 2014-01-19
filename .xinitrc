@@ -18,15 +18,15 @@ session=${1:-awesome}
 case $session in
     bspwm)
         xcompmgr &
-	sxhkd &
-	exec bspwm;;
+        sxhkd &
+        exec bspwm;;
     kde) exec startkde;;
     i3)
         xcompmgr &
-	exec i3;;
+        exec i3;;
     awesome)
-	xcompmgr &
-	wmname LG3D
-	exec awesome;;
+        xcompmgr &
+        wmname LG3D
+        exec awesome;;
     *) exec $1;;
 esac
