@@ -78,3 +78,8 @@ URxvt.keysym.M-u: perl:url-select:select_next
 URxvt.url-select.launcher: /usr/bin/firefox -new-tab
 Urxvt.url-select.underline: true
 URxvt.termName: rxvt
+! Install xsel and then a script with the following command:
+! sudo wget https://github.com/muennich/urxvt-perls/raw/master/clipboard -O /usr/lib/urxvt/perl/clipboard
+URxvt.perl-ext-common: default,matcher,clipboard
+URxvt.keysym.Shift-Control-C: perl:clipboard:copy
+URxvt.keysym.Shift-Control-V: perl:clipboard:paste
