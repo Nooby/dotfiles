@@ -101,9 +101,10 @@ sysmenu = {
 
 appmenu = {
    { "ranger", terminal .. " -e ranger" },
-   { "torrent", terminal .. " -e transmission-remote-cli" },
+   { "torrent", "deluge" },
    { "mcomix", "mcomix" },
-   { "chrome", "google-chrome-stable" }
+   { "chrome", "google-chrome-stable" },
+   { "nautilus", "dbus-launch nautilus --no-desktop --browser" }
 }
 
 shuttermenu = {
