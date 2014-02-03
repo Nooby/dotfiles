@@ -11,22 +11,13 @@ fi
 
 [ -f ~/.Xresources ] && xrdb -merge ~/.Xresources
 
-wallpaper 
+xcompmgr &
+dbus-launch
 
 session=${1:-awesome}
 
 case $session in
-    bspwm)
-        xcompmgr &
-        sxhkd &
-        exec bspwm;;
-    kde) exec startkde;;
-    i3)
-        xcompmgr &
-        exec i3;;
-    awesome)
-        xcompmgr &
-        wmname LG3D
-        exec awesome;;
+    i3) exec i3;;
+    awesome) exec awesome;;
     *) exec $1;;
 esac
