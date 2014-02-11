@@ -14,3 +14,8 @@ endif
   inoremap <C-c> <ESC>"+yyi
   vnoremap <C-c> "+y
 " }
+"
+
+" MIR Media Settings {
+  autocmd BufNewFile,BufRead ~/mir_dev/*.py set noexpandtab
+" }
