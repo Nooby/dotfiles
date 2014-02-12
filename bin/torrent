@@ -5,14 +5,14 @@ incomplete=~/.incomplete_downloads
 
 command=$1
 case "$command" in
-	"list") 
+	"list")
 		transmission-remote -l;;
-	"status") 
+	"status")
 		echo -e "Session Info\n"
 		transmission-remote -si
 		echo -e "\nSession Stats"
 		transmission-remote -st;;
-	"cli") 
+	"cli")
 		transmission-remote-cli;;
 	"stop") # $2 = Torrent Id	
 		transmission-remote -t "$2" -S;;
