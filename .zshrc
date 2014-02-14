@@ -42,3 +42,11 @@ fi
 if [ -d "/opt/android/ndk" ] ; then
   export NDKROOT="/opt/android/ndk"
 fi
+
+alias g='grep -rn'
+alias v='vim --remote-silent'
+alias django_runserver='python manage.py runserver'
+alias django_shell='python manage.py shell'
+alias django='python manage.py'
+alias inetp='ping 8.8.8.8'
+alias o='xdg-open'
