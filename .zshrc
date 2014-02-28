@@ -21,6 +21,10 @@ if [ -f "/usr/local/bin/virtualenvwrapper.sh" ] ; then
   if [ ! -d $WORKON_HOME ] ; then
     mkdir -p $WORKON_HOME
   fi
+  export PROJECT_HOME=~/dev
+  if [ ! -d $PROJECT_HOME ] ; then
+    mkdir -p $PROJECT_HOME
+  fi
   source /usr/local/bin/virtualenvwrapper.sh
 fi
 
