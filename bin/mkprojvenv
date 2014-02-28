@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 mkvirtualenv $@
 setvirtualenvproject $VIRTUAL_ENV $(pwd)
