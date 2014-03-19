@@ -11,11 +11,13 @@ fi
 
 [ -f ~/.Xresources ] && xrdb -merge ~/.Xresources
 
+xrandr --output VGA1 --mode 1920x1200 --right-of DP1
+
 xcompmgr &
-dbus-launch
+nm-applet &                  # assuming you're using Network Manager
+eval `gnome-keyring-daemon`  # SSH/GPG agent
 
 session=${1:-awesome}
-
 case $session in
     i3) exec i3;;
     awesome) exec awesome;;

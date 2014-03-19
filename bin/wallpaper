@@ -18,3 +18,4 @@ then
 else
 	feh -z --bg-scale $wallpaper_location 2> /dev/null
 fi
+
