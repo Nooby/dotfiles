@@ -16,11 +16,19 @@ source $ZSH/oh-my-zsh.sh
 
 export EDITOR=vim
 
+#Virtualenv Wrapper Settings
 if [ -f "/usr/local/bin/virtualenvwrapper.sh" ] ; then
+
   export WORKON_HOME=~/.envs
   if [ ! -d $WORKON_HOME ] ; then
     mkdir -p $WORKON_HOME
   fi
+
+  export PROJECT_HOME=~/dev
+  if [ ! -d $PROJECT_HOME ] ; then
+    mkdir -p $PROJECT_HOME
+  fi
+
   source /usr/local/bin/virtualenvwrapper.sh
 fi
 
@@ -45,6 +53,8 @@ fi
 
 alias g='grep -rn'
 alias v='vim --remote-silent'
+alias f='find . -type f | grep'
+alias fd='find . -type d | grep'
 alias django_runserver='python manage.py runserver'
 alias django_shell='python manage.py shell'
 alias django='python manage.py'
