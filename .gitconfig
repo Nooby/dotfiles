@@ -45,3 +45,5 @@
   h = !git --no-pager log --graph -n 15
   a = !git --no-pager la -n 15
 
+[push]
+	default = simple
