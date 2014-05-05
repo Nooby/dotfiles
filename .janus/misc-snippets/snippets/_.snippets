@@ -1,0 +1,17 @@
+# Global snippets
+
+# User Story
+snippet user:story
+	Story: ${1:Title (one line describing the story)}
+
+	As a ${2:role}
+	I want ${3:feature}
+	So that ${4:benefit}.
+
+snippet user:scenario
+	Scenario: ${1:Title}
+	Given ${2:context}
+	  And ${3:some more context}
+	When  ${4:event}
+	Then  ${5:outcome}
+	  And ${6:another outcome}
