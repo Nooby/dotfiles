@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 
 EXCLUDE='\.git|\.config|mklinks\.sh|README.md|misc|\.swp$'
 fcount=`find . -maxdepth 1 -mindepth 1 | grep -vP $EXCLUDE | wc -l`
@@ -23,7 +24,7 @@ do
 	echo -en "\e[1;32mContinue? [y/N]\e[00m "
 	read choice
 	case "$choice" in
-		"y" ) 
+		"y" )
 			valinput=1
 			cont=1;;
 		"Y" )
@@ -35,7 +36,7 @@ do
 		"N" )
 			valinput=1
 			cont=0;;
-		"" ) 
+		"" )
 			valinput=1
 			cont=0;;
 		* )
