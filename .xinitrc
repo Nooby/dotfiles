@@ -11,7 +11,7 @@ fi
 
 [ -f ~/.Xresources ] && xrdb -merge ~/.Xresources
 
-xrandr --output VGA1 --mode 1920x1200 --right-of DP1
+xrandr --output DP1 --right-of VGA1
 
 xcompmgr &
 nm-applet &                  # assuming you're using Network Manager

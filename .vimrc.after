@@ -1,5 +1,6 @@
 
 if has("gui_running")
+  set background=dark
   colorscheme solarized
 
   set guioptions+=LlRrbTm
@@ -15,3 +16,9 @@ endif
   vnoremap <C-c> "+y
 " }
 
+" Folding Shortcuts {
+    nnoremap <space> za
+    vnoremap <space> zf
+" }
+
+autocmd FileType html,xhtml,xml,htmldjango,htmljinja,eruby,mako setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2 foldmethod=indent

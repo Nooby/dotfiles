@@ -53,6 +53,7 @@ fi
 
 alias g='grep -rn'
 alias v='vim --remote-silent'
+alias v='gvim --remote-silent'
 alias f='find . -type f | grep'
 alias fd='find . -type d | grep'
 alias django_runserver='python manage.py runserver'

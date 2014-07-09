@@ -47,3 +47,6 @@
 
 [push]
 	default = simple
+[user]
+	name = Giuliano Di Pasquale
+	email = dipasquale@mir.de

@@ -296,8 +296,8 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
     awful.key({ modkey, "Shift"   }, "r",      function (c) c:redraw()                       end),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
-    awful.key({ modkey,           }, "F1",     function () awful.screen.focus(2) end),
-    awful.key({ modkey,           }, "F2",     function () awful.screen.focus(1) end),
+    awful.key({ modkey,           }, "F1",     function () awful.screen.focus(1) end),
+    awful.key({ modkey,           }, "F2",     function () awful.screen.focus(2) end),
     awful.key({ modkey,           }, "n",
         function (c)
             -- The client currently has the input focus, so it cannot be
