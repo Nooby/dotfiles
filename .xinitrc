@@ -11,8 +11,7 @@ fi
 
 [ -f ~/.Xresources ] && xrdb -merge ~/.Xresources
 
-xcompmgr &
-nm-applet &                  # assuming you're using Network Manager
+unagi &
 eval `gnome-keyring-daemon`  # SSH/GPG agent
 
 session=${1:-awesome}
