@@ -11,8 +11,6 @@ fi
 
 [ -f ~/.Xresources ] && xrdb -merge ~/.Xresources
 
-xrandr --output DP1 --right-of VGA1
-
 xcompmgr &
 nm-applet &                  # assuming you're using Network Manager
 eval `gnome-keyring-daemon`  # SSH/GPG agent
