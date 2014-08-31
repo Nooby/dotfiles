@@ -3,10 +3,7 @@
 	     '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
-(defvar my-packages '(starter-kit
-		      starter-kit-lisp
-		      starter-kit-bindings
-		      starter-kit-eshell
+(defvar my-packages '(better-defaults
 		      clojure-mode
 		      clojure-test-mode
 		      cider))
