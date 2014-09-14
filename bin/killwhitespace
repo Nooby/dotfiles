@@ -1,0 +1,2 @@
+#!/bin/sh
+find . -not \( -name .git -prune -o -name static -prune \) -type f  -print0 | xargs -0 perl -pi -e 's/ +$//'
