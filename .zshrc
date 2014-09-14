@@ -24,7 +24,7 @@ if [ -f "/usr/local/bin/virtualenvwrapper.sh" ] ; then
     mkdir -p $WORKON_HOME
   fi
 
-  export PROJECT_HOME=~/dev
+  export PROJECT_HOME=~/Development
   if [ ! -d $PROJECT_HOME ] ; then
     mkdir -p $PROJECT_HOME
   fi
@@ -53,6 +53,7 @@ fi
 
 alias g='grep -rn'
 alias v='vim --remote-silent'
+alias gv='gvim --remote-silent'
 alias f='find . -type f | grep'
 alias fd='find . -type d | grep'
 alias django_runserver='python manage.py runserver'
