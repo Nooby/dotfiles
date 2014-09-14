@@ -5,11 +5,11 @@
 
 (defvar my-packages '(starter-kit
           starter-kit-lisp
-          starter-kit-bindings
+          ;starter-kit-bindings
           starter-kit-eshell
-          clojure-mode
-          clojure-test-mode
-          cider
+          ;clojure-mode
+          ;clojure-test-mode
+          ;cider
           color-theme-solarized))
 
 (dolist (p my-packages)
