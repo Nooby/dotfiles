@@ -3,15 +3,31 @@
 	     '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
-(defvar my-packages '(better-defaults
-          projectile
-		      clojure-mode
-		      clojure-test-mode
-		      cider))
+(when (not package-archive-contents)
+  (package-refresh-contents))
+
+(defvar my-packages '(starter-kit
+                      starter-kit-lisp
+                      starter-kit-eshell
+                      starter-kit-bindings
+                      clojure-mode
+                      clojure-test-mode
+                      rainbow-delimiters
+                      ac-slime
+                      popup
+                      markdown-mode
+                      cider))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
     (package-install p)))
+
+(global-set-key (kbd "C-c C-j") 'cider-jack-in)
+(global-rainbow-delimiters-mode)
+
+(add-to-list 'load-path "~/.emacs.d")
+(require 'auto-complete-config)
+(ac-config-default)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
