@@ -61,3 +61,16 @@ alias django_shell='python manage.py shell'
 alias django='python manage.py'
 alias inetp='ping 8.8.8.8'
 alias o='xdg-open'
+
+putstate () {
+  declare -x | grep -v '^_=' >~/environment.tmp
+  echo cd "$PWD" >>~/environment.tmp
+}
+
+getstate () {
+  . ~/environment.tmp
+}
+
+cleartempstate () {
+  rm -r ~/environment.tmp
+}
