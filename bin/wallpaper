@@ -1,6 +1,6 @@
 #!/bin/bash
 
-wallpaper_location=~/.misc/wallpaper
+wallpaper_location=~/GoogleDrive/Wallpaper
 
 if [ "$#" -eq 1 ]
 then
