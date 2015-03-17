@@ -2,7 +2,7 @@
   path = ~/.gitconfig.local
 
 [help]
-	autocorrect = 1
+  autocorrect = 1
 
 [alias]
   ds = diff --staged      # git ds - diff your staged changes == review before committing.
@@ -51,4 +51,3 @@
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
-

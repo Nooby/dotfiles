@@ -46,7 +46,6 @@ if [ -d "/opt/android/sdk/platform-tools" ] ; then
     PATH="/opt/android/sdk/platform-tools:$PATH"
 fi
 
-
 if [ -d "/opt/android/ndk" ] ; then
   export NDKROOT="/opt/android/ndk"
 fi
@@ -64,3 +63,27 @@ alias django_shell='python manage.py shell'
 alias django='python manage.py'
 alias inetp='ping 8.8.8.8'
 alias o='xdg-open'
+
+putstate () {
+  declare -x | grep -v '^_=' >~/environment.tmp
+  echo cd "$PWD" >>~/environment.tmp
+}
+
+getstate () {
+  . ~/environment.tmp
+}
+
+cleartempstate () {
+  rm -r ~/environment.tmp
+}
+
+if hash go 2>/dev/null; then
+  # go seems to be installed, we are setting the required vars
+  export GOPATH=$HOME/go
+  if [ ! -d $GOPATH ] ; then
+    mkdir -p $GOPATH
+  fi
+  if [ -d "$GOPATH/bin" ] ; then
+    PATH="$GOPATH/bin:$PATH"
+  fi
+fi
