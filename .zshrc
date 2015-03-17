@@ -77,13 +77,11 @@ cleartempstate () {
   rm -r ~/environment.tmp
 }
 
-if hash go 2>/dev/null; then
-  # go seems to be installed, we are setting the required vars
-  export GOPATH=$HOME/go
-  if [ ! -d $GOPATH ] ; then
-    mkdir -p $GOPATH
-  fi
-  if [ -d "$GOPATH/bin" ] ; then
-    PATH="$GOPATH/bin:$PATH"
-  fi
+export GOPATH=$HOME/go
+if [ ! -d $GOPATH ] ; then
+  mkdir -p $GOPATH
 fi
+if [ -d "$GOPATH/bin" ] ; then
+  PATH="$GOPATH/bin:$PATH"
+fi
+export PATH=$PATH:/usr/local/go/bin
