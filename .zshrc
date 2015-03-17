@@ -51,7 +51,10 @@ if [ -d "/opt/android/ndk" ] ; then
   export NDKROOT="/opt/android/ndk"
 fi
 
-alias g='grep -rn'
+#Set PATH for MacPorts
+export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+
+alias sg='grep -rn'
 alias v='vim --remote-silent'
 alias gv='gvim --remote-silent'
 alias f='find . -type f | grep'
