@@ -21,5 +21,6 @@ session=${1:-awesome}
 case $session in
     i3) exec i3;;
     awesome) exec awesome;;
+    unity) exec unity;;
     *) exec $1;;
 esac
