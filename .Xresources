@@ -73,6 +73,14 @@
 URxvt.depth: 32
 URxvt.background: [85]#002b36
 URxvt.scrollBar: false
+URxvt.borderless: false
+URxvt.internalBorder: 5
+URxvt.externalBorder: 0
+URxvt*font: xft:terminus:size=12
+
+! scrollback buffer lines - 65535 is max (64 is default)
+URxvt*saveLines:        1200
+
 ! URxvt.perl-ext-common: vtwheel
 URxvt.keysym.M-u: perl:url-select:select_next
 URxvt.url-select.launcher: /usr/bin/firefox -new-tab
@@ -83,4 +91,4 @@ URxvt.termName: rxvt
 URxvt.perl-ext-common: default,matcher,clipboard
 URxvt.keysym.Shift-Control-C: perl:clipboard:copy
 URxvt.keysym.Shift-Control-V: perl:clipboard:paste
-URxvt.font: xft:droid sans mono:size=10
+!URxvt.font: xft:droid sans mono:size=10
