@@ -61,7 +61,7 @@ layouts =
     -- awful.layout.suit.tile.top,
     awful.layout.suit.fair,
     -- awful.layout.suit.fair.horizontal,
-    -- awful.layout.suit.spiral,
+    awful.layout.suit.spiral,
     -- awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max,
     -- awful.layout.suit.max.fullscreen,
@@ -81,30 +81,33 @@ end
 
 -- {{{ Menu
 -- Create a laucher widget and a main menu
-myawesomemenu = {
+awesomemenu = {
    { "manual", terminal .. " -e man awesome" },
    { "edit config", editor_cmd .. " " .. awesome.conffile },
    { "restart", awesome.restart },
    { "quit", awesome.quit }
 }
 
-sysmenu = {
-   { "wicd-gtk (Wifi)", "wicd-gtk -n" },
-   { "wicd-curses (Wifi)", terminal .. " -e wicd-curses" },
-   { "GTK Theme", "lxappearance" },
-   { "pavucontrol", "pavucontrol" },
-   { "Baobab (Disk Usage)", "baobab" },
-   { "Empty Trash", "trash-empty" },
-   { "nvidia", "nvidia-settings" },
-   { "change wallpaper", "wallpaper" }
+inputoptions = {
+  {"Touchpad Off", "synclient TouchpadOff=1"},
+  {"Touchpad On", "synclient TouchpadOff=0"},
+  {"Set US Layout", "setxkbmap us"},
+  {"Set DE Layout", "setxkbmap de"}
 }
 
-appmenu = {
-   { "ranger", terminal .. " -e ranger" },
-   { "torrent", "deluge" },
-   { "mcomix", "mcomix" },
-   { "chrome", "google-chrome-stable" },
-   { "nautilus", "dbus-launch nautilus --no-desktop --browser" }
+displaymenu = {
+   { "GTK Theme", "lxappearance" },
+   { "nvidia", "nvidia-settings" },
+}
+
+sysmenu = {
+   { "Awesome", awesomemenu },
+   { "Input Options", inputoptions },
+   { "Display", displaymenu },
+   { "Wifi", terminal .. " -e wicd-curses" },
+   { "Audio Config", "pavucontrol" },
+   { "Disk Usage", "baobab" },
+   { "Empty Trash", "trash-empty" },
 }
 
 shuttermenu = {
@@ -114,11 +117,18 @@ shuttermenu = {
   { "open shutter", "shutter" }
 }
 
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "debian", debian.menu.Debian_menu.Debian },
+appmenu = {
+  { "screenshot", shuttermenu },
+  { "ranger", terminal .. " -e ranger" },
+  { "torrent", "deluge" },
+  { "mcomix", "mcomix" },
+  { "chrome", "google-chrome-stable" },
+  { "nautilus", "dbus-launch nautilus --no-desktop --browser" }
+}
+
+mymainmenu = awful.menu({ items = { { "debian", debian.menu.Debian_menu.Debian },
                                     { "system", sysmenu },
                                     { "apps", appmenu },
-                                    { "screenshot", shuttermenu },
                                     { "open terminal", terminal }
                                   }
                         })
@@ -428,7 +438,5 @@ client.add_signal("unfocus", function(c) c.border_color = beautiful.border_norma
 --         gears.wallpaper.maximized(beautiful.wallpaper, s, true)
 --     end
 -- end
-
-os.execute("wallpaper")
 -- }}}
 
