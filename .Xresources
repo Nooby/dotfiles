@@ -76,7 +76,7 @@ URxvt.scrollBar: false
 URxvt.borderless: false
 URxvt.internalBorder: 5
 URxvt.externalBorder: 0
-URxvt*font: xft:terminus:size=12
+!URxvt*font: xft:terminus:size=12
 
 ! scrollback buffer lines - 65535 is max (64 is default)
 URxvt*saveLines:        1200
@@ -91,4 +91,4 @@ URxvt.termName: rxvt
 URxvt.perl-ext-common: default,matcher,clipboard
 URxvt.keysym.Shift-Control-C: perl:clipboard:copy
 URxvt.keysym.Shift-Control-V: perl:clipboard:paste
-!URxvt.font: xft:droid sans mono:size=10
+URxvt.font: xft:droid sans mono:size=10
