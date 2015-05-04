@@ -108,6 +108,7 @@ sysmenu = {
   { "Audio Config", "pavucontrol" },
   { "Disk Usage", "baobab" },
   { "Empty Trash", "trash-empty" },
+  { "Lock Screen", "lock" },
 }
 
 shuttermenu = {
@@ -240,6 +241,7 @@ root.buttons(awful.util.table.join(
 
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
+    awful.key({ modkey, "Control" }, "l", function () awful.util.spawn("lock") end),
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
