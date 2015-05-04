@@ -82,10 +82,10 @@ end
 -- {{{ Menu
 -- Create a laucher widget and a main menu
 awesomemenu = {
-   { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
-   { "restart", awesome.restart },
-   { "quit", awesome.quit }
+  { "manual", terminal .. " -e man awesome" },
+  { "edit config", editor_cmd .. " " .. awesome.conffile },
+  { "restart", awesome.restart },
+  { "quit", awesome.quit }
 }
 
 inputoptions = {
@@ -96,18 +96,18 @@ inputoptions = {
 }
 
 displaymenu = {
-   { "GTK Theme", "lxappearance" },
-   { "nvidia", "nvidia-settings" },
+  { "GTK Theme", "lxappearance" },
+  { "nvidia", "nvidia-settings" },
 }
 
 sysmenu = {
-   { "Awesome", awesomemenu },
-   { "Input Options", inputoptions },
-   { "Display", displaymenu },
-   { "Wifi", terminal .. " -e wicd-curses" },
-   { "Audio Config", "pavucontrol" },
-   { "Disk Usage", "baobab" },
-   { "Empty Trash", "trash-empty" },
+  { "Awesome", awesomemenu },
+  { "Input Options", inputoptions },
+  { "Display", displaymenu },
+  { "Wifi", terminal .. " -e wicd-curses" },
+  { "Audio Config", "pavucontrol" },
+  { "Disk Usage", "baobab" },
+  { "Empty Trash", "trash-empty" },
 }
 
 shuttermenu = {
@@ -287,7 +287,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
     -- Prompt
-    awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
+    awful.key({ modkey,           }, "r", function () mypromptbox[mouse.screen]:run() end),
 
     awful.key({ modkey }, "x",
               function ()
