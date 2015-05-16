@@ -274,6 +274,7 @@ globalkeys = awful.util.table.join(
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
+    awful.key({ modkey,           }, "n", function () awful.util.spawn(terminal .. " -e ranger") end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
@@ -310,12 +311,12 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
     awful.key({ modkey,           }, "F1",     function () awful.screen.focus(1) end),
     awful.key({ modkey,           }, "F2",     function () awful.screen.focus(2) end),
-    awful.key({ modkey,           }, "n",
-        function (c)
-            -- The client currently has the input focus, so it cannot be
-            -- minimized, since minimized clients can't have the focus.
-            c.minimized = true
-        end),
+    -- awful.key({ modkey,           }, "n",
+    --    function (c)
+    --        -- The client currently has the input focus, so it cannot be
+    --        -- minimized, since minimized clients can't have the focus.
+    --        c.minimized = true
+    --    end),
     awful.key({ modkey,           }, "m",
         function (c)
             c.maximized_horizontal = not c.maximized_horizontal
@@ -389,8 +390,8 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { name = "transmission-remote-cli" },
       properties = { floating = true } },
-    { rule = { name = "ranger" },
-      properties = { floating = true } },
+--    { rule = { name = "ranger" },
+--      properties = { floating = true } },
     { rule = { name = "Wicd Network Manager" },
       properties = { floating = true } },
     { rule = { class = "Pavucontrol" },
