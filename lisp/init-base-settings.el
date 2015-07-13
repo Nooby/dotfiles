@@ -1,3 +1,5 @@
+(require 'cl)
+
 (defvar base-packages '(auto-complete
 			guide-key
 			smartparens))
@@ -48,5 +50,8 @@
 (setq-default ac-dwim nil)
 (setq-default ac-use-menu-map t)
 (define-key ac-menu-map (kbd "<backtab>") 'ac-previous)
+
+(defadvice save-buffers-kill-emacs (around no-query-kill-emacs activate)
+           (flet ((process-list ())) ad-do-it))
 
 (provide 'init-base-settings)
