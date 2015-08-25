@@ -11,6 +11,8 @@
 (add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.js$" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.css$" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.gotmpl$" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.gohtml$" . web-mode))
 
 (defun my-web-mode-hook ()
   "Hooks for Web mode."

@@ -17,7 +17,15 @@
 (show-paren-mode 1)
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq create-lockfiles nil)
-;;(setq initial-major-mode 'lisp-mode)
+
+(setq indent-line-function 'insert-tab)
+(setq indent-tabs-mode nil)
+(setq tab-width 4)
+(setq default-tab-width 4)
+(defvaralias 'c-basic-offset 'tab-width)
+(defvaralias 'cperl-indent-level 'tab-width)
+(setq tab-stop-list (number-sequence 4 120 4))
+(setq tab-always-indent nil)
 
 ;; IDO Mode
 (require 'ido)
