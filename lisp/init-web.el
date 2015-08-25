@@ -21,4 +21,4 @@
 )
 (add-hook 'web-mode-hook  'my-web-mode-hook)
 
-(provide 'init-js)
+(provide 'init-web)

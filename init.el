@@ -11,7 +11,7 @@
 (require 'init-lisp)
 (require 'init-python)
 (require 'init-clojure)
-(require 'init-js)
+(require 'init-web)
 
 
 (custom-set-variables
