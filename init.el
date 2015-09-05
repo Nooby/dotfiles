@@ -8,6 +8,7 @@
 (require 'init-visual)
 (require 'init-evil)
 (require 'init-yas)
+(require 'init-flycheck)
 (require 'init-lisp)
 (require 'init-python)
 (require 'init-clojure)

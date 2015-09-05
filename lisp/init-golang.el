@@ -1,9 +1,7 @@
 (ensure-packages-installed '(go-mode
                              go-autocomplete
-                             go-eldoc
-                             flymake-go))
+                             go-eldoc))
 (require 'go-mode)
-(require 'flymake-go)
 (require 'go-autocomplete)
 (require 'go-eldoc)
 
@@ -13,7 +11,6 @@
 
 (add-hook 'go-mode-hook
           (lambda ()
-            (flymake-mode 1)
             (auto-complete-mode 1)
             (add-to-list 'ac-sources 'ac-source-go)
             (go-eldoc-setup)
