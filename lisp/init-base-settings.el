@@ -1,3 +1,5 @@
+(require 'cl)
+
 (defvar base-packages '(auto-complete
 			guide-key
 			smartparens))
@@ -19,7 +21,15 @@
 (show-paren-mode 1)
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq create-lockfiles nil)
-;;(setq initial-major-mode 'lisp-mode)
+
+(setq indent-line-function 'insert-tab)
+(setq indent-tabs-mode nil)
+(setq tab-width 4)
+(setq default-tab-width 4)
+(defvaralias 'c-basic-offset 'tab-width)
+(defvaralias 'cperl-indent-level 'tab-width)
+(setq tab-stop-list (number-sequence 4 120 4))
+(setq tab-always-indent nil)
 
 ;; IDO Mode
 (require 'ido)
@@ -52,5 +62,18 @@
 (setq-default ac-dwim nil)
 (setq-default ac-use-menu-map t)
 (define-key ac-menu-map (kbd "<backtab>") 'ac-previous)
+
+(defadvice save-buffers-kill-emacs (around no-query-kill-emacs activate)
+           (flet ((process-list ())) ad-do-it))
+
+(defun no-dos-please-were-unixish ()
+  (let ((coding-str (symbol-name buffer-file-coding-system)))
+    (when (string-match "-dos$" coding-str)
+      (setq coding-str
+	    (concat (substring coding-str 0 (match-beginning 0)) "-unix"))
+      (message "CODING: %s" coding-str)
+	       (set-buffer-file-coding-system (intern coding-str)))))
+
+(add-hook 'find-file-hooks 'no-dos-please-were-unixish)
 
 (provide 'init-base-settings)
