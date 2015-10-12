@@ -25,6 +25,7 @@ if [ -f "/usr/local/bin/virtualenvwrapper.sh" ] ; then
   fi
 
   export PROJECT_HOME=~/Development
+
   if [ ! -d $PROJECT_HOME ] ; then
     mkdir -p $PROJECT_HOME
   fi
@@ -85,3 +86,5 @@ if [ -d "$GOPATH/bin" ] ; then
   PATH="$GOPATH/bin:$PATH"
 fi
 export PATH=$PATH:/usr/local/go/bin
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
