@@ -3,6 +3,8 @@
 (ensure-packages-installed '(solarized-theme
 			     powerline
 			     powerline-evil))
+                             
+(load-theme 'solarized-dark t)
 
 (require 'powerline)
 (powerline-default-theme)
