@@ -1,3 +1,7 @@
+;;; init --- Emacs Main Configuration file
+;;; Commentary:
+
+;;; Code:
 (package-initialize)
 
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
@@ -7,6 +11,7 @@
 (require 'init-base-settings)
 (require 'init-visual)
 (require 'init-evil)
+(require 'init-projectile)
 (require 'init-yas)
 (require 'init-flycheck)
 (require 'init-lisp)
@@ -29,3 +34,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(provide 'init)
+;;; init.el ends here
