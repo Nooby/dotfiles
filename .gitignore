@@ -1,3 +1,5 @@
 *.swp
 .emacs.d/*
 !.emacs.d/init.el
+.config/systemd/user/default.target.wants/
+bin/go_appengine/

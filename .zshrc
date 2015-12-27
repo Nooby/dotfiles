@@ -37,6 +37,11 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
+# set PATH for AppEngine
+if [ -d "$HOME/bin/go_appengine" ] ; then
+    PATH="$PATH:$HOME/bin/go_appengine"
+fi
+
 # set PATH for Android Studio
 if [ -d "/opt/android/eclipse" ] ; then
     PATH="/opt/android/eclipse:$PATH"
@@ -55,11 +60,10 @@ alias v='vim --remote-silent'
 alias v='gvim --remote-silent'
 alias f='find . -type f | grep'
 alias fd='find . -type d | grep'
-alias django_runserver='python manage.py runserver'
-alias django_shell='python manage.py shell'
 alias django='python manage.py'
 alias inetp='ping 8.8.8.8'
 alias o='xdg-open'
+alias e='emacsclient -c'
 
 putstate () {
   declare -x | grep -v '^_=' >~/environment.tmp
@@ -74,13 +78,16 @@ cleartempstate () {
   rm -r ~/environment.tmp
 }
 
-export GOPATH=$HOME/go
+GOPATH=$HOME/go
+GO_VENDOR=$GOPATH/.vendor
 if [ ! -d $GOPATH ] ; then
   mkdir -p $GOPATH
+  mkdir -p $GO_VENDOR
 fi
 if [ -d "$GOPATH/bin" ] ; then
-  PATH="$GOPATH/bin:$PATH"
+  PATH="$GO_VENDOR/bin:$GOPATH/bin:$PATH"
 fi
+export GOPATH=$GO_VENDOR:$GOPATH
 export PATH=$PATH:/usr/local/go/bin
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

@@ -14,7 +14,7 @@ dbus-launch
 
 [ -f ~/.Xresources ] && xrdb -merge ~/.Xresources
 
-unagi &
+#unagi &
 eval `gnome-keyring-daemon`  # SSH/GPG agent
 
 session=${1:-awesome}
