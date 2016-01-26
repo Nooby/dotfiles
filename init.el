@@ -15,6 +15,7 @@
 (require 'init-yas)
 (require 'init-flycheck)
 (require 'init-lisp)
+(require 'init-lua)
 (require 'init-python)
 (require 'init-clojure)
 (require 'init-web)
