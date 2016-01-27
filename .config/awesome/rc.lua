@@ -124,6 +124,8 @@ appmenu = {
   { "torrent", "deluge" },
   { "mcomix", "mcomix" },
   { "chrome", "google-chrome-stable" },
+  { "firefox", "firefox" },
+  { "Steam (Primus)", "primusrun steam" },
   { "nautilus", "dbus-launch nautilus --no-desktop --browser" }
 }
 
