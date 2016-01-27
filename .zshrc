@@ -63,7 +63,14 @@ alias fd='find . -type d | grep'
 alias django='python manage.py'
 alias inetp='ping 8.8.8.8'
 alias o='xdg-open'
-alias e='emacsclient -c'
+
+e() {
+	emacsclient -c $@ &;
+}
+
+ve() {
+	emacsclient -t $@ &;
+}
 
 putstate () {
   declare -x | grep -v '^_=' >~/environment.tmp

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-declare -a files=(bin .gitconfig .gitignore .i3 .janus .oh-my-zsh .vimrc.after .vimrc.before .xinitrc .xprofile .Xresources .zshrc .config/awesome .config/bspwm .config/screen-lock.png .config/sxhkd .config/systemd)
+declare -a files=(bin .gitconfig .gitignore .i3 .janus .oh-my-zsh .vimrc.after .vimrc.before .xinitrc .xprofile .Xresources .zshrc .config/awesome .config/herbstluftwm  .config/bspwm .config/screen-lock.png .config/sxhkd .config/systemd)
 echo -e "\e[1;32mThis script will create the following symlinks:\e[00m\n"
 
 for curr in "${files[@]}"
