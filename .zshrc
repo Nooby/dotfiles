@@ -56,43 +56,29 @@ if [ -d "/opt/android/ndk" ] ; then
 fi
 
 alias g='grep -rn'
-alias v='vim --remote-silent'
-alias v='gvim --remote-silent'
+# alias v='vim --remote-silent'
+# alias v='gvim --remote-silent'
 alias f='find . -type f | grep'
 alias fd='find . -type d | grep'
 alias django='python manage.py'
 alias inetp='ping 8.8.8.8'
 alias o='xdg-open'
 
-e() {
-	emacsclient -c $@ &;
-}
-
-ve() {
-	emacsclient -t $@ &;
-}
-
-putstate () {
-  declare -x | grep -v '^_=' >~/environment.tmp
-  echo cd "$PWD" >>~/environment.tmp
-}
-
-getstate () {
-  . ~/environment.tmp
-}
-
-cleartempstate () {
-  rm -r ~/environment.tmp
-}
+v() { emacsclient -c $@ &; }
+e() { emacsclient -t $@; }
 
 GOPATH=$HOME/go
 GO_VENDOR=$GOPATH/.vendor
+PROJECTS=$HOME/Projects
 if [ ! -d $GOPATH ] ; then
   mkdir -p $GOPATH
   mkdir -p $GO_VENDOR
 fi
 if [ -d "$GOPATH/bin" ] ; then
   PATH="$GO_VENDOR/bin:$GOPATH/bin:$PATH"
+fi
+if [ -d "$PROJECTS/bin" ] ; then
+  PATH="$PROJECTS/bin:$PATH"
 fi
 export GOPATH=$GO_VENDOR:$GOPATH
 export PATH=$PATH:/usr/local/go/bin
