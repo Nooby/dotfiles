@@ -1,12 +1,3 @@
 [submodule ".oh-my-zsh"]
-	path = .oh-my-zsh
+	path = zsh/.oh-my-zsh
 	url = https://github.com/robbyrussell/oh-my-zsh.git
-[submodule ".janus/vim-airline"]
-	path = .janus/vim-airline
-	url = https://github.com/bling/vim-airline.git
-[submodule ".janus/vim-colors-solarized"]
-	path = .janus/vim-colors-solarized
-	url = https://github.com/altercation/vim-colors-solarized.git
-[submodule ".janus/auto-pairs"]
-	path = .janus/auto-pairs
-	url = git://github.com/jiangmiao/auto-pairs.git
