@@ -1,20 +1,23 @@
 (ensure-packages-installed '(go-mode
-                             go-autocomplete
-                             go-eldoc))
+			     go-autocomplete
+			     go-eldoc))
+
 (require 'go-mode)
 (require 'go-autocomplete)
 (require 'go-eldoc)
 
+;;(setenv "GOPATH" "/home/nooby/go/.vendor:/home/nooby/go")
+;;(setenv "GOPATH" (getenv "GOPATH"))
+(setenv "GOPATH" "/home/nooby/go/.vendor:/home/nooby/go:/home/nooby/Projects")
+
+(add-hook 'go-mode-hook
+	  (lambda ()
+	    (add-to-list 'ac-sources 'ac-source-go)
+	    (go-eldoc-setup)))
+
 (defun go-run-buffer()
   (interactive)
   (shell-command (concat "go run " (buffer-name))))
-
-(add-hook 'go-mode-hook
-          (lambda ()
-            (auto-complete-mode 1)
-            (add-to-list 'ac-sources 'ac-source-go)
-            (go-eldoc-setup)
-            (call-process "gocode" nil nil nil "-s")))
 
 (define-key go-mode-map (kbd "C-c C-c") 'go-run-buffer)
 (define-key go-mode-map (kbd "C-c C-f") 'gofmt)
