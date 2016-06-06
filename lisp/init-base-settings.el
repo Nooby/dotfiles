@@ -1,9 +1,12 @@
-(require 'cl)
-
+;;; Base_Settings --- Miscalenious settings
+;;; Commentary:
+;;; This File provides some Miscalenious Settings that don't need their own File.
+;;; Code:
 (defvar base-packages '(auto-complete
 						guide-key
 						smartparens
-						helm))
+						helm
+						yafolding))
 
 (ensure-packages-installed base-packages)
 
@@ -26,7 +29,6 @@
 (setq indent-line-function 'insert-tab)
 (setq indent-tabs-mode nil)
 (setq tab-width 4)
-(setq default-tab-width 4)
 (defvaralias 'c-basic-offset 'tab-width)
 (defvaralias 'cperl-indent-level 'tab-width)
 (setq tab-stop-list (number-sequence 4 120 4))
@@ -100,4 +102,8 @@
 
 (add-hook 'find-file-hooks 'no-dos-please-were-unixish)
 
+(add-hook 'prog-mode-hook
+          (lambda () (yafolding-mode)))
+
 (provide 'init-base-settings)
+;;; init-base-settings.el ends here
