@@ -80,7 +80,7 @@ fi
 if [ -d "$PROJECTS/bin" ] ; then
   PATH="$PROJECTS/bin:$PATH"
 fi
-export GOPATH=$GO_VENDOR:$GOPATH
+export GOPATH=$GO_VENDOR:$GOPATH:$PROJECTS
 export PATH=$PATH:/usr/local/go/bin
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
