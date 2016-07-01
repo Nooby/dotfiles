@@ -1,6 +1,0 @@
-
-"if has("gui_running")
-"  let g:airline_powerline_fonts = 1
-"endif
-
-let NERDTreeQuitOnOpen=1

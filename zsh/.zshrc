@@ -63,6 +63,7 @@ alias fd='find . -type d | grep'
 alias django='python manage.py'
 alias inetp='ping 8.8.8.8'
 alias o='xdg-open'
+alias xup="xrdb ~/.Xresources"
 
 v() { emacsclient -c $@ &; }
 e() { emacsclient -t $@; }

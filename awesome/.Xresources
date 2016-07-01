@@ -71,10 +71,10 @@
 
 ! URxvt
 URxvt.depth: 32
-URxvt.background: [85]#002b36
+URxvt.background: [90]#002b36
 URxvt.scrollBar: false
 URxvt.borderless: false
-URxvt.internalBorder: 5
+URxvt.internalBorder: 0
 URxvt.externalBorder: 0
 !URxvt*font: xft:terminus:size=12
 
@@ -82,13 +82,12 @@ URxvt.externalBorder: 0
 URxvt*saveLines:        1200
 
 ! URxvt.perl-ext-common: vtwheel
+URxvt.perl-ext-common: default,matcher,clipboard
 URxvt.keysym.M-u: perl:url-select:select_next
 URxvt.url-select.launcher: /usr/bin/firefox -new-tab
 Urxvt.url-select.underline: true
 URxvt.termName: rxvt
-! Install xsel and then a script with the following command:
-! sudo wget https://github.com/muennich/urxvt-perls/raw/master/clipboard -O /usr/lib/urxvt/perl/clipboard
-URxvt.perl-ext-common: default,matcher,clipboard
 URxvt.keysym.Shift-Control-C: perl:clipboard:copy
 URxvt.keysym.Shift-Control-V: perl:clipboard:paste
-URxvt.font: xft:droid sans mono:size=10
+URxvt.font: xft:source code pro for powerline:medium:size=10:antialias=true
+URxvt.boldFont: xft:source code pro for powerline:bold:size=10:antialias=true
