@@ -3,10 +3,10 @@
 ;;; This File provides some Miscalenious Settings that don't need their own File.
 ;;; Code:
 (defvar base-packages '(auto-complete
-						guide-key
-						smartparens
-						helm
-						yafolding))
+			guide-key
+			smartparens
+			helm
+			yafolding))
 
 (ensure-packages-installed base-packages)
 
@@ -16,8 +16,8 @@
       inhibit-startup-echo-area-message t)
 
 (unless (eq system-type 'darwin) ;; Kill the Menu bar on Non OSX Systems
-    (menu-bar-mode -1)
-)
+  (menu-bar-mode -1)
+  )
 
 (tool-bar-mode -1)
 (when (boundp 'scroll-bar-mode)
@@ -29,8 +29,8 @@
 (setq indent-line-function 'insert-tab)
 (setq indent-tabs-mode nil)
 (setq tab-width 4)
-(defvaralias 'c-basic-offset 'tab-width)
-(defvaralias 'cperl-indent-level 'tab-width)
+(setq c-basic-offset 4)
+(setq cperl-indent-level 4)
 (setq tab-stop-list (number-sequence 4 120 4))
 (setq tab-always-indent nil)
 
@@ -90,7 +90,7 @@
 (define-key ac-menu-map (kbd "<backtab>") 'ac-previous)
 
 (defadvice save-buffers-kill-emacs (around no-query-kill-emacs activate)
-           (flet ((process-list ())) ad-do-it))
+  (flet ((process-list ())) ad-do-it))
 
 (defun no-dos-please-were-unixish ()
   (let ((coding-str (symbol-name buffer-file-coding-system)))
@@ -98,7 +98,7 @@
       (setq coding-str
 	    (concat (substring coding-str 0 (match-beginning 0)) "-unix"))
       (message "CODING: %s" coding-str)
-	       (set-buffer-file-coding-system (intern coding-str)))))
+      (set-buffer-file-coding-system (intern coding-str)))))
 
 (add-hook 'find-file-hooks 'no-dos-please-were-unixish)
 
