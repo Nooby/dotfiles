@@ -125,5 +125,5 @@ runtime! plugin/sensible.vim
 " Airline {
     " Use the Powerline Patched Fonts
     " https://github.com/powerline/fonts
-    let g:airline_powerline_fonts = 1
+    let g:airline_powerline_fonts=1
 " }
