@@ -25,3 +25,6 @@
 [submodule "vim/.vim/bundle/airline-themes"]
 	path = vim/.vim/bundle/airline-themes
 	url = git@github.com:vim-airline/vim-airline-themes.git
+[submodule "vim/.vim/bundle/fugitive"]
+	path = vim/.vim/bundle/fugitive
+	url = git://github.com/tpope/vim-fugitive.git
