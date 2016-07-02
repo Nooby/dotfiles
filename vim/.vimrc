@@ -128,3 +128,10 @@ runtime! plugin/sensible.vim
     " https://github.com/powerline/fonts
     let g:airline_powerline_fonts=1
 " }
+
+" Syntastic {
+    let g:syntastic_check_on_open=1
+    let g:syntastic_go_checkers=['golint', 'govet', 'errcheck']
+    let g:syntastic_auto_loc_list=2
+    autocmd FileType go autocmd BufWritePre <buffer> Fmt
+" }
