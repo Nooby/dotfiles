@@ -57,8 +57,9 @@ runtime! plugin/sensible.vim
 " }
 
 " Backup and Swap {
-    set backupdir^=~/.vim/_backup//    " where to put backup files.
-    set directory^=~/.vim/_temp//      " where to put swap files.
+    set backupdir=~/.vim/backup//      " Backup file location
+    set directory=~/.vim/swap//        " Swap file location
+    set undodir=~/.vim/undo//          " Undo file location
 " }
 
 " Folding {
