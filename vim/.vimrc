@@ -137,3 +137,8 @@ runtime! plugin/sensible.vim
     let g:syntastic_auto_loc_list=2
     autocmd FileType go autocmd BufWritePre <buffer> Fmt
 " }
+
+" YouCompleteMe {
+    let g:ycm_confirm_extra_conf = 1
+    let g:ycm_python_binary_path = '/usr/bin/python3'
+" }
