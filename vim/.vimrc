@@ -70,17 +70,6 @@ runtime! plugin/sensible.vim
     vnoremap <space> zf
 " }
 
-" Syntastic Settings {
-    set statusline+=%#warningmsg#
-    set statusline+=%{SyntasticStatuslineFlag()}
-    set statusline+=%*
-
-    let g:syntastic_always_populate_loc_list = 1
-    let g:syntastic_auto_loc_list = 1
-    let g:syntastic_check_on_open = 1
-    let g:syntastic_check_on_wq = 0
-" }
-
 " Copy/Paste from Clipboard {
     nnoremap <C-v> "+p
     inoremap <C-v> <ESC>"+p
@@ -118,6 +107,21 @@ runtime! plugin/sensible.vim
     autocmd BufReadPost fugitive://* set bufhidden=delete
 " }
 
+" Syntastic Settings {
+    set statusline+=%#warningmsg#
+    set statusline+=%{SyntasticStatuslineFlag()}
+    set statusline+=%*
+
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_auto_loc_list = 1
+    let g:syntastic_check_on_open = 1
+    let g:syntastic_check_on_wq = 0
+
+    let g:syntastic_check_on_open=1
+    let g:syntastic_go_checkers=['golint', 'govet', 'errcheck']
+    let g:syntastic_auto_loc_list=2
+    autocmd FileType go autocmd BufWritePre <buffer> Fmt
+" }
 
 " Nerdtree {
     map <C-n> :NERDTreeToggle<CR>
@@ -130,13 +134,6 @@ runtime! plugin/sensible.vim
     " Use the Powerline Patched Fonts
     " https://github.com/powerline/fonts
     let g:airline_powerline_fonts=1
-" }
-
-" Syntastic {
-    let g:syntastic_check_on_open=1
-    let g:syntastic_go_checkers=['golint', 'govet', 'errcheck']
-    let g:syntastic_auto_loc_list=2
-    autocmd FileType go autocmd BufWritePre <buffer> Fmt
 " }
 
 " YouCompleteMe {
