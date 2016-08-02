@@ -3,7 +3,7 @@
 	url = https://github.com/robbyrussell/oh-my-zsh.git
 [submodule "vim/.vim/bundle/vim-sensible"]
 	path = vim/.vim/bundle/vim-sensible
-	url = git://github.com/tpope/vim-sensible.git
+	url = git@github.com:tpope/vim-sensible.git
 [submodule "vim/.vim/bundle/vim-colors-solarized"]
 	path = vim/.vim/bundle/vim-colors-solarized
 	url = git@github.com:altercation/vim-colors-solarized.git
@@ -27,4 +27,4 @@
 	url = git@github.com:vim-airline/vim-airline-themes.git
 [submodule "vim/.vim/bundle/fugitive"]
 	path = vim/.vim/bundle/fugitive
-	url = git://github.com/tpope/vim-fugitive.git
+	url = git@github.com:tpope/vim-fugitive.git
