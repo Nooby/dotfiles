@@ -4,3 +4,4 @@
 .config/systemd/user/default.target.wants/
 bin/go_appengine/
 bin/*
+vim/.vim/.netrwhist
