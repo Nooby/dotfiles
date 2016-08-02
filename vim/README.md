@@ -25,6 +25,7 @@ Read `:help syntastic-checkers` to choose supported ones.
 #### Python
 
 ```
+sudo apt install python-pip
 pip install flake8
 ```
 
