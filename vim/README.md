@@ -36,5 +36,6 @@ go get -u github.com/golang/lint/golint
 
 ## YouCompleteMe
 ```
+sudo apt install cmake
 ./install.py --clang-completer --gocode-completer
 ```
