@@ -1,6 +1,12 @@
 execute pathogen#infect()
 runtime! plugin/sensible.vim
 
+" Vimrc Reloading {
+    if has("autocmd")
+      autocmd bufwritepost .vimrc source $MYVIMRC
+    endif
+" }
+
 " Basic Options {
     set nocompatible " Be iMproved
     set number " Show line numbers
@@ -103,24 +109,19 @@ runtime! plugin/sensible.vim
 " Autocmd {
     autocmd FileType html,xhtml,xml,htmldjango,htmljinja,eruby,mako setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2 foldmethod=indent
     autocmd FileType go setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=4 foldmethod=syntax nolist
+    autocmd FileType go autocmd BufWritePre <buffer> Fmt
     " http://vimcasts.org/e/34
     autocmd BufReadPost fugitive://* set bufhidden=delete
+    autocmd BufReadPost .vimrc setlocal keywordprg=:help " Open help for word under cursor with K
 " }
 
 " Syntastic Settings {
-    set statusline+=%#warningmsg#
-    set statusline+=%{SyntasticStatuslineFlag()}
-    set statusline+=%*
-
     let g:syntastic_always_populate_loc_list = 1
-    let g:syntastic_auto_loc_list = 1
+    let g:syntastic_auto_loc_list = 2
     let g:syntastic_check_on_open = 1
     let g:syntastic_check_on_wq = 0
-
-    let g:syntastic_check_on_open=1
-    let g:syntastic_go_checkers=['golint', 'govet', 'errcheck']
-    let g:syntastic_auto_loc_list=2
-    autocmd FileType go autocmd BufWritePre <buffer> Fmt
+    let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+    let g:syntastiv_python_python_exec = 'python3'
 " }
 
 " Nerdtree {
