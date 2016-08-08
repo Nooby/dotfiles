@@ -108,7 +108,7 @@ sysmenu = {
   { "Awesome", awesomemenu },
   { "Input Options", inputoptions },
   { "Display", displaymenu },
-  { "Wifi", terminal .. " -e wicd-curses" },
+  { "Wifi", "wicd-gtk" },
   { "Audio Config", "pavucontrol" },
   { "Disk Usage", "baobab" },
   { "Empty Trash", "trash-empty" },
