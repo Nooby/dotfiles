@@ -121,7 +121,8 @@ runtime! plugin/sensible.vim
     let g:syntastic_check_on_open = 1
     let g:syntastic_check_on_wq = 0
     let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-    let g:syntastic_python_python_exec = 'python3'
+    let g:syntastic_python_checkers = ['pylint', 'flake8', 'pyflakes', 'pep8']
+    let g:syntastic_python_python_exec = 'python'
 " }
 
 " Nerdtree {
