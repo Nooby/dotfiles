@@ -9,7 +9,7 @@ then
     PX=0
     PY=0
     # lockscreen image info
-    R=$(file ~/.config/screen-lock.png | grep -o '[0-9]* x [0-9]*')
+    R=$(file -L ~/.config/screen-lock.png | grep -o '[0-9]* x [0-9]*')
     RX=$(echo $R | cut -d' ' -f 1)
     RY=$(echo $R | cut -d' ' -f 3)
 
@@ -21,8 +21,8 @@ then
         SRY=$(echo $RES | cut -d'x' -f 2 | cut -d'+' -f 1)  # y pos
         SROX=$(echo $RES | cut -d'x' -f 2 | cut -d'+' -f 2) # x offset
         SROY=$(echo $RES | cut -d'x' -f 2 | cut -d'+' -f 3) # y offset
-        PX=$(($SROX + $SRX/2 - $RX/2))
-        PY=$(($SROY + $SRY/2 - $RY/2))
+        PX=$(($SROX + $SRX / 2 - $RX / 2))
+        PY=$(($SROY + $SRY / 2 - $RY / 2))
 
         convert /tmp/screen.png $HOME/.config/screen-lock.png -geometry +$PX+$PY -composite -matte  /tmp/screen.png
         echo "done"
