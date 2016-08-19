@@ -34,3 +34,6 @@
 [submodule "vim/.vim/bundle/dockerfile"]
 	path = vim/.vim/bundle/dockerfile
 	url = git@github.com:ekalinin/Dockerfile.vim.git
+[submodule "vim/.vim/bundle/ack.vim"]
+	path = vim/.vim/bundle/ack.vim
+	url = https://github.com/mileszs/ack.vim.git
