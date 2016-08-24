@@ -110,6 +110,7 @@ runtime! plugin/sensible.vim
     autocmd FileType html,xhtml,xml,htmldjango,htmljinja,eruby,mako setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2 foldmethod=indent
     autocmd FileType go setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=4 foldmethod=syntax nolist
     autocmd FileType go autocmd BufWritePre <buffer> Fmt
+    autocmd FileType python setlocal foldmethod=indent
     " http://vimcasts.org/e/34
     autocmd BufReadPost fugitive://* set bufhidden=delete
     autocmd BufReadPost .vimrc setlocal keywordprg=:help " Open help for word under cursor with K

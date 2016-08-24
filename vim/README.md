@@ -8,6 +8,12 @@ git submodule update --init --recursive
 
 Airline, Syntastic, and YouCompleteMe have manual installation steps.
 
+## Ack
+
+```
+sudo apt install ack-grep
+```
+
 ## Airline
 
 Airline needs the Patched Powerline fonts to display correctly. Install the Fonts from the repository below and set one of the Fonts as the Terminal Font and Gvim Font.
@@ -36,6 +42,7 @@ go get -u github.com/golang/lint/golint
 ```
 
 ## YouCompleteMe
+
 ```
 sudo apt install cmake
 ./install.py --clang-completer --gocode-completer
