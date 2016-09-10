@@ -37,9 +37,9 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-# set PATH for AppEngine
-if [ -d "$HOME/bin/go_appengine" ] ; then
-    PATH="$PATH:$HOME/bin/go_appengine"
+# set PATH for Flutter
+if [ -d "/opt/flutter/bin" ] ; then
+    PATH="$PATH:/opt/flutter/bin"
 fi
 
 # set PATH for Android Studio
