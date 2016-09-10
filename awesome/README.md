@@ -6,6 +6,8 @@
 sudo apt install awesome awesome-extra
 sudo apt install rxvt-unicode ranger feh
 sudo apt install suckless-tools
+sudo apt install wicd wpasuplicant
+sudo apt install i3lock scrot
 ```
 
 ## Disable X at Boot
