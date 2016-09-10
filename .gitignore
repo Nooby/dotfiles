@@ -5,3 +5,7 @@
 bin/go_appengine/
 bin/*
 vim/.vim/.netrwhist
+mpd/.mpd/database
+mpd/.mpd/log
+mpd/.mpd/pid
+mpd/.mpd/state
