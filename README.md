@@ -25,3 +25,12 @@ xstow awesome
 ```
 
 Some config Packages have additional Installation Steps.
+
+### Install MPD
+
+```
+sudo apt install mpd ncmpcpp
+systemctl disable mpd
+mkdir ~/.mpd/playlists
+touch ~/.mpd/{state,database,log,pid,state}
+```
