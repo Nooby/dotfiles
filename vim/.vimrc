@@ -17,6 +17,9 @@ runtime! plugin/sensible.vim
     if !has('nvim')
         set encoding=utf-8 " Set default encoding to UTF-8
     endif
+
+    highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+    match OverLength /\%80v.\+/
 " }
 
 " UI Settings {
@@ -122,7 +125,7 @@ runtime! plugin/sensible.vim
     let g:syntastic_check_on_open = 1
     let g:syntastic_check_on_wq = 0
     let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-    let g:syntastic_python_checkers = ['pylint', 'flake8', 'pyflakes', 'pep8']
+    let g:syntastic_python_checkers = ['flake8', 'pylint'] " , 'pyflakes', 'pep8']
     let g:syntastic_python_python_exec = 'python'
 " }
 
@@ -141,5 +144,5 @@ runtime! plugin/sensible.vim
 
 " YouCompleteMe {
     let g:ycm_confirm_extra_conf = 1
-    let g:ycm_python_binary_path = '/usr/bin/python3'
+    let g:ycm_python_binary_path = '/usr/bin/python'
 " }

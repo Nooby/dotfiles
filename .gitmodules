@@ -37,3 +37,6 @@
 [submodule "vim/.vim/bundle/ack.vim"]
 	path = vim/.vim/bundle/ack.vim
 	url = https://github.com/mileszs/ack.vim.git
+[submodule "vim/.vim/bundle/vim-polyglot"]
+	path = vim/.vim/bundle/vim-polyglot
+	url = git@github.com:sheerun/vim-polyglot.git
