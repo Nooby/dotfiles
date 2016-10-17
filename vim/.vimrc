@@ -13,6 +13,9 @@ runtime! plugin/sensible.vim
     set ruler " Show line and column number
     syntax enable " Turn on syntax highlighting allowing local overrides
     set mouse=a
+    set path+=**
+    set wildmenu
+    command! MakeTags !ctags -R .
 
     if !has('nvim')
         set encoding=utf-8 " Set default encoding to UTF-8

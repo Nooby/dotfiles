@@ -16,22 +16,6 @@ source $ZSH/oh-my-zsh.sh
 
 export EDITOR=vim
 
-#Virtualenv Wrapper Settings
-if [ -f "/usr/local/bin/virtualenvwrapper.sh" ] ; then
-
-  export WORKON_HOME=~/.envs
-  if [ ! -d $WORKON_HOME ] ; then
-    mkdir -p $WORKON_HOME
-  fi
-
-  export PROJECT_HOME=~/dev
-  if [ ! -d $PROJECT_HOME ] ; then
-    mkdir -p $PROJECT_HOME
-  fi
-
-  source /usr/local/bin/virtualenvwrapper.sh
-fi
-
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
@@ -40,19 +24,6 @@ fi
 # set PATH for Flutter
 if [ -d "/opt/flutter/bin" ] ; then
     PATH="$PATH:/opt/flutter/bin"
-fi
-
-# set PATH for Android Studio
-if [ -d "/opt/android/eclipse" ] ; then
-    PATH="/opt/android/eclipse:$PATH"
-fi
-
-if [ -d "/opt/android/sdk/platform-tools" ] ; then
-    PATH="/opt/android/sdk/platform-tools:$PATH"
-fi
-
-if [ -d "/opt/android/ndk" ] ; then
-  export NDKROOT="/opt/android/ndk"
 fi
 
 alias g='grep -rn'
@@ -68,20 +39,17 @@ alias xup="xrdb ~/.Xresources"
 v() { emacsclient -c $@ &; }
 e() { emacsclient -t $@; }
 
-GOPATH=$HOME/go
-GO_VENDOR=$GOPATH/.vendor
-PROJECTS=$HOME/Projects
+GOPATH=$HOME/Projects
+#GO_VENDOR=$GOPATH/.vendor
 if [ ! -d $GOPATH ] ; then
   mkdir -p $GOPATH
-  mkdir -p $GO_VENDOR
+#  mkdir -p $GO_VENDOR
 fi
 if [ -d "$GOPATH/bin" ] ; then
-  PATH="$GO_VENDOR/bin:$GOPATH/bin:$PATH"
+  PATH="$GOPATH/bin:$PATH"
+#  PATH="$GO_VENDOR/bin:$GOPATH/bin:$PATH"
 fi
-if [ -d "$PROJECTS/bin" ] ; then
-  PATH="$PROJECTS/bin:$PATH"
-fi
-export GOPATH=$GO_VENDOR:$GOPATH:$PROJECTS
+export GOPATH=$GOPATH
 export PATH=$PATH:/usr/local/go/bin
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
