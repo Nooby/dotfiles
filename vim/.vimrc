@@ -1,12 +1,6 @@
 execute pathogen#infect()
 runtime! plugin/sensible.vim
 
-" Vimrc Reloading {
-    if has("autocmd")
-      autocmd bufwritepost .vimrc source $MYVIMRC
-    endif
-" }
-
 " Basic Options {
     set nocompatible " Be iMproved
     set number " Show line numbers
@@ -115,7 +109,7 @@ runtime! plugin/sensible.vim
 " Autocmd {
     autocmd FileType html,xhtml,xml,htmldjango,htmljinja,eruby,mako setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2 foldmethod=indent
     autocmd FileType go setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=4 foldmethod=syntax nolist
-    autocmd FileType go autocmd BufWritePre <buffer> Fmt
+    " autocmd FileType go autocmd BufWritePre <buffer> Fmt
     autocmd FileType python setlocal foldmethod=indent
     " http://vimcasts.org/e/34
     autocmd BufReadPost fugitive://* set bufhidden=delete
@@ -127,7 +121,9 @@ runtime! plugin/sensible.vim
     let g:syntastic_auto_loc_list = 2
     let g:syntastic_check_on_open = 1
     let g:syntastic_check_on_wq = 0
+
     let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+
     let g:syntastic_python_checkers = ['flake8', 'pylint'] " , 'pyflakes', 'pep8']
     let g:syntastic_python_python_exec = 'python'
 " }
@@ -146,6 +142,6 @@ runtime! plugin/sensible.vim
 " }
 
 " YouCompleteMe {
-    let g:ycm_confirm_extra_conf = 1
-    let g:ycm_python_binary_path = '/usr/bin/python'
+"    let g:ycm_confirm_extra_conf = 1
+"    let g:ycm_python_binary_path = '/usr/bin/python'
 " }
