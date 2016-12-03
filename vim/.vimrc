@@ -107,7 +107,7 @@ runtime! plugin/sensible.vim
 " }
 
 " Autocmd {
-    autocmd FileType html,xhtml,xml,htmldjango,htmljinja,eruby,mako setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2 foldmethod=indent
+    autocmd FileType html,xhtml,xml,htmldjango,htmljinja setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2 foldmethod=indent
     autocmd FileType go setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=4 foldmethod=syntax nolist
     " autocmd FileType go autocmd BufWritePre <buffer> Fmt
     autocmd FileType python setlocal foldmethod=indent
@@ -141,7 +141,10 @@ runtime! plugin/sensible.vim
     let g:airline_powerline_fonts=1
 " }
 
-" YouCompleteMe {
-"    let g:ycm_confirm_extra_conf = 1
-"    let g:ycm_python_binary_path = '/usr/bin/python'
+" Neocomplete {
+    let g:neocomplete#enable_at_startup = 1
+    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 " }

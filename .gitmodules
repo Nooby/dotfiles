@@ -37,3 +37,12 @@
 [submodule "vim/.vim/bundle/vim-polyglot"]
 	path = vim/.vim/bundle/vim-polyglot
 	url = git@github.com:sheerun/vim-polyglot.git
+[submodule "vim/.vim/bundle/vim-go"]
+	path = vim/.vim/bundle/vim-go
+	url = git@github.com:fatih/vim-go.git
+[submodule "vim/.vim/bundle/neocomplete"]
+	path = vim/.vim/bundle/neocomplete
+	url = git@github.com:Shougo/neocomplete.vim
+[submodule "vim/.vim/bundle/python-mode"]
+	path = vim/.vim/bundle/python-mode
+	url = git@github.com:klen/python-mode.git
