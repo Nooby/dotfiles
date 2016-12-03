@@ -21,6 +21,7 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
+export ANDROID_HOME=/opt/android-sdk
 # set PATH for Flutter
 if [ -d "/opt/flutter/bin" ] ; then
     PATH="$PATH:/opt/flutter/bin"
@@ -53,3 +54,6 @@ export GOPATH=$GOPATH
 export PATH=$PATH:/usr/local/go/bin
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
