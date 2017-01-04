@@ -1,40 +1,21 @@
-;;; init --- Emacs Main Configuration file
+;;; package --- Main init file
 ;;; Commentary:
+;;; This is my init file
 
 ;;; Code:
-(package-initialize)
 
-(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+(add-to-list 'load-path (concat user-emacs-directory "lisp"))
 
-(require 'global-functions)
-(require 'init-package-settings)
-(require 'init-base-settings)
-(require 'init-visual)
-(require 'init-evil)
-(require 'init-projectile)
-(require 'init-yas)
-(require 'init-flycheck)
-(require 'init-lisp)
-(require 'init-lua)
-(require 'init-python)
-(require 'init-clojure)
-(require 'init-web)
-(require 'init-golang)
+(require 'base)
+(require 'base-theme)
+(require 'base-extensions)
+(require 'base-functions)
+(require 'base-global-keys)
 
+(require 'lang-python)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes (quote ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default))))
+(require 'lang-go)
 
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+(require 'lang-web)
 
-(provide 'init)
-;;; init.el ends here
+(require 'lang-c)
