@@ -1,6 +1,7 @@
 [roxterm profile]
 font=Droid Sans Mono for Powerline 10
 always_show_tabs=0
-saturation=0,939791
+saturation=1,000000
 hide_menubar=1
 scrollbar_pos=0
+colour_scheme=solatarized-dark
