@@ -13,6 +13,11 @@
 			    (set (make-local-variable 'company-backends) '(company-go))
 			    (company-mode))))
 
+(use-package go-guru
+  :after go-mode
+  :config
+  (add-hook 'go-mode-hook #'go-guru-hl-identifier-mode))
+
 (use-package company-go
   :after go-mode
   :config

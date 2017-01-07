@@ -19,19 +19,32 @@
 	  "eb" 'eval-buffer
 	  "er" 'eval-region
 	  "ed" 'eval-defun
-	  "gs" 'magit-status
-	  "gc" 'magit-commit
-	  "gu" 'magit-pull
-	  "gp" 'magit-push
+	  "ms" 'magit-status
+	  "mc" 'magit-commit
+	  "mu" 'magit-pull
+	  "mp" 'magit-push
 	  "pp" 'counsel-projectile
 	  "pa" 'projectile-ag
 	  "ps" 'projectile-run-eshell)
 
-	(evil-leader/set-key-for-mode 'GO
+	(evil-leader/set-key-for-mode 'go-mode
 	  "i" 'go-import-add
 	  "dj" 'godef-jump
 	  "do" 'godef-jump-other-window
-	  "dd" 'godef-describe))
+	  "dd" 'godef-describe
+	  "gr" 'go-rename
+	  "gd" 'go-guru-describe
+	  "gf" 'go-guru-freevars
+	  "gi" 'go-guru-implements
+	  "gc" 'go-guru-peers  ; c for channel
+	  "gr" 'go-guru-referrers
+	  "gj" 'go-guru-definition ; j for jump
+	  "gp" 'go-guru-pointsto
+	  "gs" 'go-guru-callstack ; s for stack
+	  "ge" 'go-guru-whicherrs ; e for error
+	  "g<" 'go-guru-callers
+	  "g>" 'go-guru-callees
+	  "gx" 'go-guru-expand-region))
 
   (use-package evil-surround
 	:config
