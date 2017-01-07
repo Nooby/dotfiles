@@ -1,3 +1,10 @@
+;;; package --- Base Extension Init
+;;; Commentary:
+;;; Initialise the base/language independent Extensions.
+
+;;; Code:
+
+(use-package try)
 
 (use-package avy
   :bind
@@ -30,7 +37,10 @@
   :bind
   ("C-=" . er/expand-region))
 
-(use-package flycheck)
+(use-package flycheck
+  :config
+  (global-flycheck-mode)
+  (setq-default flycheck-emacs-lisp-load-path 'inherit))
 
 
 (use-package counsel
@@ -165,3 +175,4 @@
   (yas-global-mode 1))
 
 (provide 'base-extensions)
+;;; base-extensions.el ends here
