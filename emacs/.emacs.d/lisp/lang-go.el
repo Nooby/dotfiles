@@ -2,6 +2,7 @@
   :config
   (add-hook 'go-mode-hook 'company-mode)
   ;; Call Gofmt before saving
+  (setq gofmt-command "goimports")
   (add-hook 'before-save-hook 'gofmt-before-save)
   (add-hook 'go-mode-hook 'setup-go-mode-compile)
   (add-hook 'go-mode-hook #'smartparens-mode)
