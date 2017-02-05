@@ -46,7 +46,8 @@
 	  fringes-outside-margins            t
 	  x-select-enable-clipboard          t
 	  use-package-always-ensure          t
-	  default-tab-width                  4)
+	  default-tab-width                  4
+	  tab-width                          4)
 
 ;; Bookmarks
 (setq bookmark-save-flag                 t
