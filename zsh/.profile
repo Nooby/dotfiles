@@ -20,6 +20,8 @@ alias django='python manage.py'
 alias inetp='ping 8.8.8.8'
 alias o='xdg-open'
 alias xup="xrdb ~/.Xresources"
+alias dc='docker-compose'
+alias webserver='python -m SimpleHTTPServer'
 
 alias v='emacsclient -c $@'
 alias e='emacsclient -t'
