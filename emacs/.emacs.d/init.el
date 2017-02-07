@@ -21,5 +21,7 @@
 
 (require 'lang-c)
 
+(require 'lang-markdown)
+
 (provide 'init)
 ;;; init.el ends here
