@@ -89,5 +89,5 @@ Urxvt.url-select.underline: true
 URxvt.termName: rxvt
 URxvt.keysym.Shift-Control-C: perl:clipboard:copy
 URxvt.keysym.Shift-Control-V: perl:clipboard:paste
-URxvt.font: xft:source code pro for powerline:medium:size=10:antialias=true
-URxvt.boldFont: xft:source code pro for powerline:bold:size=10:antialias=true
+URxvt.font: xft:source code pro:medium:size=10:antialias=true
+URxvt.boldFont: xft:source code pro:bold:size=10:antialias=true

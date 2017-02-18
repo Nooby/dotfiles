@@ -49,6 +49,3 @@
 [submodule "vim/.vim/bundle/ultisnips"]
 	path = vim/.vim/bundle/ultisnips
 	url = git@github.com:SirVer/ultisnips.git
-[submodule "awesome/.config/awesome/awesome.battery-widget"]
-	path = awesome/.config/awesome/awesome.battery-widget
-	url = https://github.com/velovix/awesome.battery-widget
