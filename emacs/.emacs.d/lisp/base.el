@@ -47,7 +47,8 @@
 	  x-select-enable-clipboard          t
 	  use-package-always-ensure          t
 	  default-tab-width                  4
-	  tab-width                          4)
+	  tab-width                          4
+	  vc-follow-symlinks                 t)
 
 ;; Bookmarks
 (setq bookmark-save-flag                 t
