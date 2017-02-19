@@ -14,14 +14,11 @@
 (require 'base-evil)
 
 (require 'lang-python)
-
 (require 'lang-go)
-
 (require 'lang-web)
-
 (require 'lang-c)
-
 (require 'lang-markdown)
+(require 'lang-lua)
 
 (provide 'init)
 ;;; init.el ends here

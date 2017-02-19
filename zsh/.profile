@@ -1,4 +1,4 @@
-export EDITOR="emacsclient -t"
+export EDITOR="emacsclient -t -a emacs"
 export VISUAL="emacsclient -c -a emacs"
 
 # if running bash

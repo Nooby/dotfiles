@@ -41,6 +41,17 @@ end
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(awful.util.get_themes_dir() .. "default/theme.lua")
 
+beautiful.wallpaper = function (screen)
+   if screen.index == 1 then
+	  return "/media/DATA/GoogleDrive/Wallpaper/Cyberpunk/089_z2kRUrf.jpg"
+   end
+   if screen.index == 2 then
+	  return "/media/DATA/GoogleDrive/Wallpaper/Cyberpunk/005_ez3WHPg.jpg"
+   end
+
+   return "/media/DATA/GoogleDrive/Wallpaper/DSC_0234.JPG"
+end
+
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvt"
 editor = os.getenv("EDITOR") or "emacsclient -c -a emacs"
