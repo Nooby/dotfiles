@@ -35,15 +35,12 @@ alias webserver='python -m SimpleHTTPServer'
 alias v='emacsclient -c $@'
 alias e='emacsclient -t'
 
-GOPATH=$HOME/Projects
-#GO_VENDOR=$GOPATH/.vendor
+export GOROOT=/usr/local/go
+export PATH=$PATH:/usr/local/go/bin
+export GOPATH=$HOME/Projects
 if [ ! -d $GOPATH ] ; then
   mkdir -p $GOPATH
-#  mkdir -p $GO_VENDOR
 fi
 if [ -d "$GOPATH/bin" ] ; then
   PATH="$GOPATH/bin:$PATH"
-#  PATH="$GO_VENDOR/bin:$GOPATH/bin:$PATH"
 fi
-export GOPATH=$GOPATH
-export PATH=$PATH:/usr/local/go/bin
