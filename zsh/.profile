@@ -32,8 +32,13 @@ alias xup="xrdb ~/.Xresources"
 alias dc='docker-compose'
 alias webserver='python -m SimpleHTTPServer'
 
-alias v='emacsclient -c $@'
-alias e='emacsclient -t'
+function v() {
+	emacsclient -c $@ & disown
+}
+
+function e() {
+	emacsclient -t $@
+}
 
 export GOROOT=/usr/local/go
 export PATH=$PATH:/usr/local/go/bin
