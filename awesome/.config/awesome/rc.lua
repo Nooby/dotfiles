@@ -41,16 +41,8 @@ end
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(awful.util.get_themes_dir() .. "default/theme.lua")
 
-beautiful.wallpaper = function (screen)
-   if screen.index == 1 then
-	  return "/media/DATA/GoogleDrive/Wallpaper/Cyberpunk/089_z2kRUrf.jpg"
-   end
-   if screen.index == 2 then
-	  return "/media/DATA/GoogleDrive/Wallpaper/Cyberpunk/005_ez3WHPg.jpg"
-   end
+beautiful.wallpaper = "/home/giuliano/Pictures/Wallpaper/Cyberpunk/103_SbNm3Sr.jpg"
 
-   return "/media/DATA/GoogleDrive/Wallpaper/DSC_0234.JPG"
-end
 
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvt"
@@ -123,7 +115,7 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- }}}
 
 -- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
+-- mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
@@ -225,7 +217,7 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
+            -- mykeyboardlayout,
             wibox.widget.systray(),
             mytextclock,
             s.mylayoutbox,
