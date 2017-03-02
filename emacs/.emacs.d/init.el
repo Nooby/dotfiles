@@ -19,6 +19,7 @@
 (require 'lang-c)
 (require 'lang-markdown)
 (require 'lang-lua)
+(require 'lang-yaml)
 
 (provide 'init)
 ;;; init.el ends here
