@@ -52,7 +52,7 @@
               exec-path                          (append exec-path '("/usr/local/bin/"))
               indent-tabs-mode                   nil
               tab-width                          4
-              tab-always-indent t)
+              tab-always-indent                  t)
 
 ;; Bookmarks
 (setq-default bookmark-save-flag                 t

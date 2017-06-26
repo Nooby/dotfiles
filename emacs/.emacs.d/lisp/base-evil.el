@@ -44,7 +44,14 @@
       "ge" 'go-guru-whicherrs ; e for error
       "g<" 'go-guru-callers
       "g>" 'go-guru-callees
-      "gx" 'go-guru-expand-region))
+      "gx" 'go-guru-expand-region)
+
+    (evil-leader/set-key-for-mode 'python-mode
+      "gr" 'elpy-refactor
+      "gf" 'elpy-find-file
+      "gh" 'elpy-doc
+      "gd" 'elpy-goto-definition
+      "gi" 'elpy-importmagic-add-import))
 
   (use-package evil-surround
     :config
