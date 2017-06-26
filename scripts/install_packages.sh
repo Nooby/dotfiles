@@ -14,6 +14,8 @@ apt install -y docker.io
 apt install -y nautilus nautilus-scripts-manager nautilus-share
 apt install -y nautilus-open-terminal nautilus-admin/jessie-backports nautilus-actions
 
+apt install -y pavucontrol mate-indicator-applet
+
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 gdebi -n google-chrome-stable_current_amd64.deb
 rm google-chrome-stable_current_amd64.deb
