@@ -59,6 +59,13 @@
 
   (use-package evil-matchit
     :config
-    (global-evil-matchit-mode 1)))
+    (global-evil-matchit-mode 1))
+
+  (use-package evil-magit)
+  (use-package vimish-fold)
+  (use-package evil-vimish-fold
+    :config
+    (evil-vimish-fold-mode 1))
+  )
 
 (provide 'base-evil)
