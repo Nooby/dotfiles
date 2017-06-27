@@ -40,8 +40,13 @@ function e() {
 	emacsclient -t $@
 }
 
+if [ ! -d $HOME/go/ ] ; then
 export GOROOT=/usr/local/go
 export PATH=$PATH:/usr/local/go/bin
+else
+export GOROOT=$HOME/go
+export PATH=$PATH:$HOME/go/bin
+fi
 export GOPATH=$HOME/Projects
 if [ ! -d $GOPATH ] ; then
   mkdir -p $GOPATH
