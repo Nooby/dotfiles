@@ -14,6 +14,16 @@
 			    (set (make-local-variable 'company-backends) '(company-go))
 			    (company-mode))))
 
+(use-package go-rename
+  :ensure t)
+
+(use-package flycheck-gometalinter
+  :ensure t
+  :config
+  (setq flycheck-gometalinter-disable-linters '("gotype"))
+  (progn
+    (flycheck-gometalinter-setup)))
+
 (use-package go-guru
   :after go-mode
   :config

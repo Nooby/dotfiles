@@ -29,10 +29,10 @@
 
     (evil-leader/set-key-for-mode 'go-mode
       "i" 'go-import-add
+      "r" 'go-rename
       "dj" 'godef-jump
       "do" 'godef-jump-other-window
       "dd" 'godef-describe
-      "gr" 'go-rename
       "gd" 'go-guru-describe
       "gf" 'go-guru-freevars
       "gi" 'go-guru-implements
@@ -47,6 +47,7 @@
       "gx" 'go-guru-expand-region)
 
     (evil-leader/set-key-for-mode 'python-mode
+      "r"  'elpy-multiedit-python-symbol-at-point
       "gr" 'elpy-refactor
       "gf" 'elpy-find-file
       "gh" 'elpy-doc
