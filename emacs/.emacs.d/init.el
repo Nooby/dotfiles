@@ -20,6 +20,7 @@
 (require 'lang-markdown)
 (require 'lang-lua)
 (require 'lang-yaml)
+(require 'lang-elisp)
 
 (provide 'init)
 ;;; init.el ends here
