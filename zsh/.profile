@@ -17,7 +17,7 @@ fi
 export ANDROID_HOME=/opt/android-sdk
 # set PATH for Flutter
 if [ -d "/opt/flutter/bin" ] ; then
-    PATH="$PATH:/opt/flutter/bin"
+    PATH="/opt/flutter/bin:$PATH"
 fi
 
 alias g='grep -rn'
@@ -41,12 +41,13 @@ function e() {
 }
 
 if [ ! -d $HOME/go/ ] ; then
-export GOROOT=/usr/local/go
-export PATH=$PATH:/usr/local/go/bin
+    export GOROOT=/usr/local/go
+    export PATH=/usr/local/go/bin:$PATH
 else
-export GOROOT=$HOME/go
-export PATH=$PATH:$HOME/go/bin
+    export GOROOT=$HOME/go
+    export PATH=$HOME/go/bin:$PATH
 fi
+
 export GOPATH=$HOME/Projects
 if [ ! -d $GOPATH ] ; then
   mkdir -p $GOPATH
