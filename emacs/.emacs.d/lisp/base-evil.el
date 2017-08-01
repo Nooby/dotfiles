@@ -1,3 +1,8 @@
+(use-package origami
+  :ensure t
+  :config
+  (global-origami-mode 1))
+
 (use-package evil
   :config
   (evil-mode 1)
@@ -6,6 +11,16 @@
                 evil-want-C-w-in-emacs-state t)
   (evil-define-key 'normal global-map (kbd "<down>")  'evil-next-visual-line)
   (evil-define-key 'normal global-map (kbd "<up>")    'evil-previous-visual-line)
+  (define-key evil-normal-state-map (kbd "<tab>") 'origami-toggle-node)
+  (define-key evil-normal-state-map "za" 'origami-forward-toggle-node)
+  (define-key evil-normal-state-map "zR" 'origami-close-all-nodes)
+  (define-key evil-normal-state-map "zM" 'origami-open-all-nodes)
+  (define-key evil-normal-state-map "zr" 'origami-close-node-recursively)
+  (define-key evil-normal-state-map "zm" 'origami-open-node-recursively)
+  (define-key evil-normal-state-map "zo" 'origami-show-node)
+  (define-key evil-normal-state-map "zc" 'origami-close-node)
+  (define-key evil-normal-state-map "zj" 'origami-forward-fold)
+  (define-key evil-normal-state-map "zk" 'origami-previous-fold)
 
   (use-package evil-leader
     :config
