@@ -71,7 +71,11 @@
 
 ! URxvt
 URxvt.depth: 32
-URxvt.background: [90]#002b36
+! Dark
+! URxvt.background: [90]#002b36
+! Light
+! URxvt.background: [90]#fdf6e3
+URxvt.background: S_base03
 URxvt.scrollBar: false
 URxvt.borderless: false
 URxvt.internalBorder: 0

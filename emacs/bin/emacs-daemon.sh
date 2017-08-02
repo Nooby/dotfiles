@@ -1,3 +1,3 @@
 #!/bin/bash
-. ~/.profile
+source ~/.profile
 emacs --daemon

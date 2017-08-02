@@ -41,10 +41,10 @@ function e() {
 }
 
 if [ ! -d $HOME/go/ ] ; then
-    export GOROOT=/usr/local/go
+export GOROOT=/usr/local/go
     export PATH=/usr/local/go/bin:$PATH
 else
-    export GOROOT=$HOME/go
+export GOROOT=$HOME/go
     export PATH=$HOME/go/bin:$PATH
 fi
 
@@ -53,5 +53,17 @@ if [ ! -d $GOPATH ] ; then
   mkdir -p $GOPATH
 fi
 if [ -d "$GOPATH/bin" ] ; then
-  PATH="$GOPATH/bin:$PATH"
+  PATH=$GOPATH/bin:$PATH
+fi
+
+export PYENV_ROOT=$HOME/.pyenv
+
+if [ -d $PYENV_ROOT ]; then
+    export PATH=$PYENV_ROOT/bin:$PATH
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+fi
+
+if [ -d $HOME/.local/bin ] ; then
+    PATH=$HOME/.local/bin:$PATH
 fi
