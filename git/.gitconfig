@@ -45,5 +45,14 @@
   h = !git --no-pager log --graph -n 15
   a = !git --no-pager la -n 15
 
+  # Prunes all branches removed from Remote
+  branch-prune = !git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -d
+  # List All Branches
+  list-branches = branch -a -vv
+
 [push]
   default = simple
+[merge]
+	tool = meld
+[core]
+	hooksPath = ~/.git-templates
