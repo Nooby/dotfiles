@@ -20,9 +20,10 @@
 (use-package flycheck-gometalinter
   :ensure t
   :config
-  (setq flycheck-gometalinter-disable-linters '("gotype"))
   (progn
-    (flycheck-gometalinter-setup)))
+    (flycheck-gometalinter-setup)
+    (setq flycheck-gometalinter-disable-linters '("gotype"))
+    (setq flycheck-gometalinter-fast t)))
 
 (use-package go-guru
   :after go-mode

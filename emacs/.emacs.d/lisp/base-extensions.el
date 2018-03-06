@@ -140,6 +140,9 @@
 
   (projectile-mode))
 
+(use-package ag
+  :ensure t)
+
 (use-package recentf
   :config
   (setq recentf-save-file (recentf-expand-file-name "~/.emacs.d/private/cache/recentf"))

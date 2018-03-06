@@ -84,5 +84,7 @@
 ;; Delete trailing whitespace before save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+(add-to-list 'auto-mode-alist '("\\.log\\'" . display-ansi-colors))
+
 (provide 'base)
 ;;; base ends here
