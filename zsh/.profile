@@ -9,6 +9,8 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
+PATH="$PATH:/usr/sbin:/sbin"
+
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
@@ -32,13 +34,11 @@ alias xup="xrdb ~/.Xresources"
 alias dc='docker-compose'
 alias webserver='python -m SimpleHTTPServer'
 
-function v() {
-	emacsclient -c $@ & disown
-}
+v() { emacsclient -c $@ & disown; }
 
-function e() {
-	emacsclient -t $@
-}
+e() { emacsclient -t $@; }
+
+dconnect() { docker exec -it $@ /bin/bash; }
 
 if [ ! -d $HOME/go/ ] ; then
 export GOROOT=/usr/local/go
