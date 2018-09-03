@@ -5,6 +5,7 @@
   (add-to-list 'origami-parser-alist '(web-mode . origami-c-style-parser)))
 
 (use-package evil
+  :ensure t
   :config
   (evil-mode 1)
   (setq-default evil-search-mode 'evil-search
@@ -24,6 +25,7 @@
   (define-key evil-normal-state-map "zk" 'origami-previous-fold)
 
   (use-package evil-leader
+    :ensure t
     :config
     (global-evil-leader-mode)
     (setq-default evil-leader/leader "<SPC>")
@@ -31,6 +33,7 @@
       "s" 'swiper
       "=" 'er/expand-region
       ":" 'eval-expression
+      "o" 'project-find-file
       "cc" 'projectile-compile-project
       "es" 'eval-last-sexp
       "eb" 'eval-buffer
@@ -42,7 +45,9 @@
       "mp" 'magit-push
       "pp" 'counsel-projectile
       "pa" 'projectile-ag
-      "ps" 'projectile-run-eshell)
+      "ps" 'projectile-run-eshell
+      "pff" 'projectile-find-file
+      "pfo" 'projectile-find-file-dwim-other-frame)
 
     (evil-leader/set-key-for-mode 'go-mode
       "i" 'go-import-add
@@ -72,13 +77,16 @@
       "gi" 'elpy-importmagic-add-import))
 
   (use-package evil-surround
+    :ensure t
     :config
     (global-evil-surround-mode 1))
 
   (use-package evil-matchit
+    :ensure t
     :config
     (global-evil-matchit-mode 1))
 
-  (use-package evil-magit))
+  (use-package evil-magit
+    :ensure t))
 
 (provide 'base-evil)

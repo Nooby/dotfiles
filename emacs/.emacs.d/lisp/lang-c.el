@@ -1,5 +1,6 @@
 ;; C-IDE based on https://github.com/tuhdo/emacs-c-ide-demo
 (use-package cc-mode
+  :ensure t
   :config
   ;; Available C style:
   ;; "gnu": The default style for GNU projects
@@ -17,6 +18,7 @@
                 gdb-show-main t))
 
 (use-package semantic
+  :ensure t
   :config
   (global-semanticdb-minor-mode 1)
   (global-semantic-idle-scheduler-mode 1)
@@ -24,11 +26,13 @@
   (semantic-mode 1))
 
 (use-package ede
+  :ensure t
   :config
   ;; Enable EDE only in C/C++
   (global-ede-mode))
 
 (use-package ggtags
+  :ensure t
   :config
   (ggtags-mode 1)
   (add-hook 'c-mode-common-hook
@@ -50,10 +54,12 @@
 
 ;; company-c-headers
 (use-package company-c-headers
+  :ensure t
   :init
   (add-to-list 'company-backends 'company-c-headers))
 
 (use-package cc-mode
+  :ensure t
   :init
   (define-key c-mode-map  [(tab)] 'company-complete)
   (define-key c++-mode-map  [(tab)] 'company-complete))

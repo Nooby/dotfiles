@@ -86,5 +86,7 @@
 
 (add-to-list 'auto-mode-alist '("\\.log\\'" . display-ansi-colors))
 
+(setq global-semantic-stickyfunc-mode -1)
+
 (provide 'base)
 ;;; base ends here

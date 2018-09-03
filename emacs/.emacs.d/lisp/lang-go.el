@@ -1,4 +1,5 @@
 (use-package go-mode
+  :ensure t
   :config
   (add-hook 'go-mode-hook 'company-mode)
   ;; Call Gofmt before saving
@@ -26,11 +27,13 @@
     (setq flycheck-gometalinter-fast t)))
 
 (use-package go-guru
+  :ensure t
   :after go-mode
   :config
   (add-hook 'go-mode-hook #'go-guru-hl-identifier-mode))
 
 (use-package company-go
+  :ensure t
   :after go-mode
   :config
   (setq tab-width 4)
@@ -40,6 +43,7 @@
   ("M-." . godef-jump)))
 
 (use-package go-eldoc
+  :ensure t
   :config
   (add-hook 'go-mode-hook 'go-eldoc-setup))
 

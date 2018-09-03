@@ -1,3 +1,4 @@
-(use-package yaml-mode)
+(use-package yaml-mode
+  :ensure t)
 
 (provide 'lang-yaml)

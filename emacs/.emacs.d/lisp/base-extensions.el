@@ -4,14 +4,11 @@
 
 ;;; Code:
 
-(use-package try)
-
-(use-package avy
-  :bind
-  ("C-c SPC" . avy-goto-char))
-
+(use-package try
+  :ensure t)
 
 (use-package company
+  :ensure t
   :config
   (add-hook 'after-init-hook 'global-company-mode))
 
@@ -20,12 +17,14 @@
 ;;   (dashboard-setup-startup-hook))
 
 (use-package ediff
+  :ensure t
   :config
   (setq ediff-window-setup-function 'ediff-setup-windows-plain)
   (setq-default ediff-highlight-all-diffs 'nil)
   (setq ediff-diff-options "-w"))
 
 (use-package exec-path-from-shell
+  :ensure t
   :config
   ;; Add GOPATH to shell
   (when (memq window-system '(mac ns))
@@ -34,16 +33,19 @@
     (exec-path-from-shell-initialize)))
 
 (use-package expand-region
+  :ensure t
   :bind
   ("C-=" . er/expand-region))
 
 (use-package flycheck
+  :ensure t
   :config
   (global-flycheck-mode)
   (setq-default flycheck-emacs-lisp-load-path 'inherit))
 
 
 (use-package counsel
+  :ensure t
   :bind
   ("M-x" . counsel-M-x)
   ("C-x C-m" . counsel-M-x)
@@ -51,6 +53,7 @@
   ("C-x c k" . counsel-yank-pop))
 
 (use-package counsel-projectile
+  :ensure t
   :bind
   ("C-x v" . counsel-projectile)
   ("C-x c p" . counsel-projectile-ag)
@@ -58,6 +61,7 @@
   (counsel-projectile-on))
 
 (use-package ivy
+  :ensure t
   :bind
   ("C-x s" . swiper)
   ("C-x C-r" . ivy-resume)
@@ -72,11 +76,13 @@
 ;;   (hlinum-activate))
 
 (use-package linum
+  :ensure t
   :config
   (setq linum-format " %3d ")
   (global-linum-mode nil))
 
 (use-package magit
+  :ensure t
   :config
 
   (setq magit-completing-read-function 'ivy-completing-read)
@@ -91,47 +97,22 @@
   ("C-x g e" . magit-ediff-resolve)
   ("C-x g r" . magit-rebase-interactive))
 
-(use-package magit-popup)
+(use-package magit-popup
+  :ensure t)
 
 (use-package multiple-cursors
+  :ensure t
   :bind
   ("C-S-c C-S-c" . mc/edit-lines)
   ("C->" . mc/mark-next-like-this)
   ("C-<" . mc/mark-previous-like-this)
   ("C-c C->" . mc/mark-all-like-this))
 
-(use-package neotree
-  :config
-  (setq neo-theme 'arrow
-        neotree-smart-optn t
-        neo-window-fixed-size nil)
-  ;; Disable linum for neotree
-  (add-hook 'neo-after-create-hook 'disable-neotree-hook))
-
-(use-package org
-  :config
-  (setq org-directory "~/org-files"
-        org-default-notes-file (concat org-directory "/todo.org"))
-  :bind
-  ("C-c l" . org-store-link)
-  ("C-c a" . org-agenda))
-
-(use-package org-projectile
-  :config
-  (org-projectile:per-repo)
-  (setq org-projectile:per-repo-filename "todo.org"
-	org-agenda-files (append org-agenda-files (org-projectile:todo-files))))
-
-(use-package org-bullets
-  :config
-  (setq org-hide-leading-stars t)
-  (add-hook 'org-mode-hook
-            (lambda ()
-              (org-bullets-mode t))))
-
-(use-package page-break-lines)
+(use-package page-break-lines
+  :ensure t)
 
 (use-package projectile
+  :ensure t
   :config
   (setq projectile-known-projects-file
         (expand-file-name "projectile-bookmarks.eld" temp-dir))
@@ -144,15 +125,19 @@
   :ensure t)
 
 (use-package recentf
+  :ensure t
   :config
   (setq recentf-save-file (recentf-expand-file-name "~/.emacs.d/private/cache/recentf"))
   (recentf-mode 1))
 
-(use-package smartparens)
+(use-package smartparens
+  :ensure t)
 
-(use-package smex)
+(use-package smex
+  :ensure t)
 
 (use-package undo-tree
+  :ensure t
   :config
   ;; Remember undo history
   (setq
@@ -161,19 +146,23 @@
   (global-undo-tree-mode 1))
 
 (use-package which-key
+  :ensure t
   :config
   (which-key-mode))
 
 (use-package windmove
+  :ensure t
   :bind
   ("C-x <up>" . windmove-up)
   ("C-x <down>" . windmove-down)
   ("C-x <left>" . windmove-left)
   ("C-x <right>" . windmove-right))
 
-(use-package wgrep)
+(use-package wgrep
+  :ensure t)
 
 (use-package yasnippet
+  :ensure t
   :config
   (yas-global-mode 1))
 

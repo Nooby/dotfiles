@@ -1,5 +1,6 @@
+
 (use-package solarized-theme
-  :defer t
+  :ensure t
   :init
   (load-theme 'solarized-dark t))
 

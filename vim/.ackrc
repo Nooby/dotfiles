@@ -1,4 +1,5 @@
 --ignore-file=ext:svg
 --ignore-file=ext:gliffy
+--ignore-file=ext:min.js
 --ignore-dir=.venv
 --ignore-dir=venv

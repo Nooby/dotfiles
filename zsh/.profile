@@ -1,5 +1,5 @@
-export EDITOR="emacsclient -t -a emacs"
-export VISUAL="emacsclient -c -a emacs"
+export EDITOR="emacs -q -nw"
+export VISUAL="emacs"
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
@@ -34,17 +34,16 @@ alias xup="xrdb ~/.Xresources"
 alias dc='docker-compose'
 alias webserver='python -m SimpleHTTPServer'
 
-v() { emacsclient -c $@ & disown; }
+v() { emacs $@ & disown; }
 
-e() { emacsclient -t $@; }
 
 dconnect() { docker exec -it $@ /bin/bash; }
 
 if [ ! -d $HOME/go/ ] ; then
-export GOROOT=/usr/local/go
+    export GOROOT=/usr/local/go
     export PATH=/usr/local/go/bin:$PATH
 else
-export GOROOT=$HOME/go
+    export GOROOT=$HOME/go
     export PATH=$HOME/go/bin:$PATH
 fi
 
