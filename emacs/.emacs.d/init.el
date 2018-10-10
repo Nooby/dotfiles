@@ -13,6 +13,10 @@
 
 (add-to-list 'load-path (concat user-emacs-directory "lisp"))
 
+(unless (and (fboundp 'server-running-p)
+             (server-running-p))
+  (server-start))
+
 (require 'base)
 (require 'base-theme)
 (require 'base-extensions)

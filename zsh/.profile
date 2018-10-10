@@ -1,11 +1,11 @@
-export EDITOR="emacs -q -nw"
-export VISUAL="emacs"
+export EDITOR='emacsclient -t -a ""'
+export VISUAL='emacsclient -c -a ""'
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
     if [ -f "$HOME/.bashrc" ]; then
-	. "$HOME/.bashrc"
+        . "$HOME/.bashrc"
     fi
 fi
 
@@ -27,15 +27,14 @@ alias g='grep -rn'
 # alias v='gvim --remote-silent'
 alias f='find . -type f | grep'
 alias fd='find . -type d | grep'
-alias django='python manage.py'
 alias inetp='ping 8.8.8.8'
 alias o='xdg-open'
 alias xup="xrdb ~/.Xresources"
 alias dc='docker-compose'
 alias webserver='python -m SimpleHTTPServer'
 
-v() { emacs $@ & disown; }
-
+v() { emacsclient -c -a "" $@ & disown; }
+e() { emacsclient -t -a "" $@; }
 
 dconnect() { docker exec -it $@ /bin/bash; }
 

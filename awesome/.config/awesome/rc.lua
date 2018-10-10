@@ -92,7 +92,7 @@ local terminal     = "urxvtc"
 local editor       = os.getenv("EDITOR") or "vim"
 local gui_editor   = "gvim"
 local browser      = "firefox"
-local guieditor    = "emacs"
+local guieditor    = os.getenv("VISUAL") or "gvim"
 local scrlocker    = "slock"
 
 awful.util.terminal = terminal
