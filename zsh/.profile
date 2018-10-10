@@ -47,6 +47,7 @@ else
 fi
 
 export GOPATH=$HOME/Projects
+export GO111MODULE=on
 if [ ! -d $GOPATH ] ; then
   mkdir -p $GOPATH
 fi
