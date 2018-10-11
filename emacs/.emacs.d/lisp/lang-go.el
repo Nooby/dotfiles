@@ -24,7 +24,8 @@
   (progn
     (flycheck-gometalinter-setup)
     (setq flycheck-gometalinter-disable-linters '("gotype"))
-    (setq flycheck-gometalinter-fast t)))
+    ;;(setq flycheck-gometalinter-fast t)
+    ))
 
 (use-package go-guru
   :ensure t

@@ -164,7 +164,11 @@
 (use-package yasnippet
   :ensure t
   :config
-  (yas-global-mode 1))
+  (yas-global-mode 1)
+  (yas-reload-all))
+
+(use-package yasnippet-snippets
+  :ensure t)
 
 (provide 'base-extensions)
 ;;; base-extensions.el ends here
