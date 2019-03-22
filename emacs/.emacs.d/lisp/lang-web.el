@@ -1,24 +1,17 @@
+;;; Commentary:
+;;; Code:
 (use-package web-mode
-  :bind (("C-c ]" . emmet-next-edit-point)
-         ("C-c [" . emmet-prev-edit-point)
-         ("C-c o b" . browse-url-of-file))
-  :mode
-  (("\\.js\\'" . web-mode)
-   ("\\.html?\\'" . web-mode)
-   ("\\.phtml?\\'" . web-mode)
-   ("\\.tpl\\.php\\'" . web-mode)
-   ("\\.[agj]sp\\'" . web-mode)
-   ("\\.as[cp]x\\'" . web-mode)
-   ("\\.erb\\'" . web-mode)
-   ("\\.mustache\\'" . web-mode)
-   ("\\.djhtml\\'" . web-mode)
-   ("\\.jsx$" . web-mode))
+  :init
+  (add-to-list 'auto-mode-alist '(".*\.js\'" . web-mode))
+  (add-to-list 'auto-mode-alist '(".*\.html\'" . web-mode))
+  (add-to-list 'auto-mode-alist '(".*\.jsx\'" . web-mode))
   :config
-  (setq web-mode-markup-indent-offset 2
+  (setq indent-tabs-mode nil
+        js-indent-level 2
+        js2-strict-missing-semi-warning nil
+        web-mode-markup-indent-offset 2
         web-mode-css-indent-offset 2
         web-mode-code-indent-offset 2)
-
-  (add-hook 'web-mode-hook 'jsx-flycheck)
 
   ;; highlight enclosing tags of the element under cursor
   (setq web-mode-enable-current-element-highlight t)
@@ -35,47 +28,42 @@
       (flycheck-select-checker 'jsxhint-checker)
       (flycheck-mode)))
 
-  ;; editing enhancements for web-mode
-  ;; https://github.com/jtkDvlp/web-mode-edit-element
-  (use-package web-mode-edit-element
-    :config (add-hook 'web-mode-hook 'web-mode-edit-element-minor-mode))
-
-  ;; snippets for HTML
-  ;; https://github.com/smihica/emmet-mode
-  (use-package emmet-mode
-    :init (setq emmet-move-cursor-between-quotes t) ;; default nil
-    :diminish (emmet-mode . " e"))
-  (add-hook 'web-mode-hook 'emmet-mode)
-
   (defun my-web-mode-hook ()
     "Hook for `web-mode' config for company-backends."
     (set (make-local-variable 'company-backends)
          '((company-tern company-css company-web-html company-files))))
-  (add-hook 'web-mode-hook 'my-web-mode-hook)
 
   ;; Enable JavaScript completion between <script>...</script> etc.
   (defadvice company-tern (before web-mode-set-up-ac-sources activate)
     "Set `tern-mode' based on current language before running company-tern."
     (message "advice")
     (if (equal major-mode 'web-mode)
-	(let ((web-mode-cur-language
-	       (web-mode-language-at-pos)))
-	  (if (or (string= web-mode-cur-language "javascript")
-		  (string= web-mode-cur-language "jsx"))
-	      (unless tern-mode (tern-mode))
-	    (if tern-mode (tern-mode -1))))))
-  (add-hook 'web-mode-hook 'company-mode)
+        (let ((web-mode-cur-language
+               (web-mode-language-at-pos)))
+          (if (or (string= web-mode-cur-language "javascript")
+                  (string= web-mode-cur-language "jsx"))
+              (unless tern-mode (tern-mode))
+            (if tern-mode (tern-mode -1))))))
 
-  ;; to get completion data for angularJS
-  (use-package ac-html-angular :defer t)
-  ;; to get completion for twitter bootstrap
-  (use-package ac-html-bootstrap :defer t)
-
-  ;; to get completion for HTML stuff
-  ;; https://github.com/osv/company-web
-  (use-package company-web)
-
+  (add-hook 'web-mode-hook 'jsx-flycheck)
+  (add-hook 'web-mode-hook 'my-web-mode-hook)
+  (add-hook 'web-mode-hook 'emmet-mode)
   (add-hook 'web-mode-hook 'company-mode))
+
+;; editing enhancements for web-mode
+;; https://github.com/jtkDvlp/web-mode-edit-element
+(use-package web-mode-edit-element
+  :config (add-hook 'web-mode-hook 'web-mode-edit-element-minor-mode))
+
+;; snippets for HTML
+;; https://github.com/smihica/emmet-mode
+(use-package emmet-mode
+  :init (setq emmet-move-cursor-between-quotes t) ;; default nil
+  :diminish (emmet-mode . " e"))
+
+;; to get completion for HTML stuff
+;; https://github.com/osv/company-web
+(use-package company-web)
 
 ;; configure CSS mode company backends
 (use-package css-mode
@@ -93,3 +81,4 @@
   :commands (impatient-mode))
 
 (provide 'lang-web)
+;;; lang-web ends here
