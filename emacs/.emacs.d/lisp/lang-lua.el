@@ -6,14 +6,11 @@
 ;;; Code:
 
 (use-package lua-mode
-  :ensure t
   :config
 
-  (use-package company-lua
-	:ensure t)
+  (use-package company-lua)
 
-  (use-package flymake-lua
-	:ensure t))
+  (use-package flymake-lua))
 
 (provide 'lang-lua)
 ;;; lang-lua.el ends here

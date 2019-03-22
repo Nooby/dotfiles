@@ -5,13 +5,10 @@
 ;;; Code:
 
 (use-package python
-  :ensure t
   :mode ("\\.py" . python-mode)
   :config
-  (use-package pyenv-mode-auto
-    :ensure t)
+  (use-package pyenv-mode-auto)
   (use-package elpy
-    :ensure t
     :init
     (add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
     :config
@@ -44,7 +41,6 @@
 
 
 (use-package pip-requirements
-  :ensure t
   :config
   (add-hook 'pip-requirements-mode-hook #'pip-requirements-auto-complete-setup))
 

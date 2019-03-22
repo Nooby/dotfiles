@@ -1,7 +1,5 @@
-(use-package package-lint
-  :ensure t)
+(use-package package-lint)
 
-(use-package flycheck-package
-  :ensure t)
+(use-package flycheck-package)
 
 (provide 'lang-elisp)
