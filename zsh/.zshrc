@@ -14,6 +14,3 @@ plugins=(git git-extra vagrant docker docker-compose)
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.profile
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
