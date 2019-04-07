@@ -1,6 +1,8 @@
 execute pathogen#infect()
 runtime! plugin/sensible.vim
 
+helptags ALL
+
 " Basic Options {
     set nocompatible " Be iMproved
     set number " Show line numbers
@@ -38,7 +40,7 @@ runtime! plugin/sensible.vim
     if has("gui_running")
         "set guifont=Droid\ Sans\ Mono\ Slashed\ for\ Powerline\ 10
         "set guifont=Roboto\ Mono\ for\ Powerline\ 10
-        set guifont=Source\ Code\ Pro\ Medium\ 10
+        set guifont=Source\ Code\ Pro\ Medium\ 12
         set guioptions+=LlRrbTm
         set guioptions-=LlRrbTm
     endif
@@ -87,10 +89,10 @@ runtime! plugin/sensible.vim
 " Copy/Paste from Clipboard {
     " nnoremap <C-v> "+p
     inoremap <C-v> <ESC>"+p
-    "vnoremap <C-v> "+p
-    "nnoremap <C-c> "+yy
+    " vnoremap <C-v> "+p
+    " nnoremap <C-c> "+yy
     inoremap <C-c> <ESC>"+yyi
-    "vnoremap <C-c> "+y
+    " vnoremap <C-c> "+y
 " }
 
 
@@ -154,6 +156,17 @@ runtime! plugin/sensible.vim
     let g:syntastic_python_python_exec = 'python'
 " }
 
+" ALE {
+    let g:ale_completion_enabled = 1
+    let g:ale_fix_on_save = 1
+    let g:ale_linters = {'go': ['goimports', 'golangci-lint']}
+    let g:ale_fixers = {'go': ['goimports', 'gofmt']}
+    au FileType go nmap <Leader>gd <Plug>(ale_go_to_definition)
+    au FileType go nmap <Leader>gs <Plug>(ale_go_to_definition_in_split)
+    au FileType go nmap <Leader>gv <Plug>(ale_go_to_definition_in_vsplit)
+    au FileType go nmap <Leader>gd <Plug>(ale_go_to_type_definition)
+" }
+
 " Vim-Go {
     let g:go_highlight_functions = 1
     let g:go_highlight_methods = 1
@@ -176,7 +189,7 @@ runtime! plugin/sensible.vim
     au FileType go nmap <Leader>f <Plug>(go-freevars)
     au FileType go nmap <Leader>p :GoDeclsDir<CR>
 
-    au FileType go setlocal keywordprg=:GoDoc " Open help for word under cursor with K
+   au FileType go setlocal keywordprg=:GoDoc " Open help for word under cursor with K
 " }
 
 " Nerdtree {
