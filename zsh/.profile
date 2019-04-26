@@ -1,5 +1,8 @@
-export EDITOR='emacsclient -t -a ""'
-export VISUAL='emacsclient -c -a ""'
+export EDITOR=vim
+export VISUAL="gvim --nofork"
+
+#export EDITOR='emacsclient -t -a ""'
+#export VISUAL='emacsclient -c -a ""'
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then

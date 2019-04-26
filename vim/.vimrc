@@ -36,9 +36,9 @@ runtime! plugin/sensible.vim
     hi! link SignColumn LineNr
 
     if has("gui_running")
-        set guifont=Droid\ Sans\ Mono\ Slashed\ for\ Powerline\ 10
+        "set guifont=Droid\ Sans\ Mono\ Slashed\ for\ Powerline\ 10
         "set guifont=Roboto\ Mono\ for\ Powerline\ 10
-        "set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 10
+        set guifont=Source\ Code\ Pro\ Medium\ 10
         set guioptions+=LlRrbTm
         set guioptions-=LlRrbTm
     endif
@@ -85,12 +85,12 @@ runtime! plugin/sensible.vim
 " }
 
 " Copy/Paste from Clipboard {
-    nnoremap <C-v> "+p
+    " nnoremap <C-v> "+p
     inoremap <C-v> <ESC>"+p
-    vnoremap <C-v> "+p
-    nnoremap <C-c> "+yy
+    "vnoremap <C-v> "+p
+    "nnoremap <C-c> "+yy
     inoremap <C-c> <ESC>"+yyi
-    vnoremap <C-c> "+y
+    "vnoremap <C-c> "+y
 " }
 
 
@@ -147,8 +147,8 @@ runtime! plugin/sensible.vim
     let g:syntastic_check_on_open = 1
     let g:syntastic_check_on_wq = 0
 
-    let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-    let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+    let g:syntastic_go_checkers = ['golangci-lint', 'golint', 'govet', 'errcheck']
+    let g:syntastic_mode_map = { 'mode': 'active' }  ", 'passive_filetypes': ['go'] }
 
     let g:syntastic_python_checkers = ['flake8'] " , 'pylint', 'pyflakes', 'pep8']
     let g:syntastic_python_python_exec = 'python'
@@ -162,6 +162,7 @@ runtime! plugin/sensible.vim
     let g:go_highlight_operators = 1
     let g:go_highlight_build_constraints = 1
     let g:go_auto_type_info = 0
+    let g:go_fmt_command = "goimports"
     au FileType go nmap <leader>r <Plug>(go-run)
     au FileType go nmap <leader>b <Plug>(go-build)
     au FileType go nmap <Leader>s <Plug>(go-implements)
@@ -194,6 +195,8 @@ runtime! plugin/sensible.vim
 " Neocomplete {
     let g:neocomplete#enable_at_startup = 1
     let g:neocomplete#enable_smart_case = 1
+    let g:neocomplete#enable_auto_close_preview = 1
+    "set completeopt-=preview
     inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
     autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
     autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
@@ -205,4 +208,10 @@ runtime! plugin/sensible.vim
     let g:UltiSnipsExpandTrigger="<tab>"
     let g:UltiSnipsJumpForwardTrigger="<c-b>"
     let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" }
+
+" ack.vim {
+    if executable('ag')
+        let g:ackprg = 'ag --vimgrep'
+    endif
 " }

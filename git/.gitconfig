@@ -53,6 +53,7 @@
 [push]
   default = simple
 [merge]
-	tool = meld
+    tool = meld
 [core]
-	hooksPath = ~/.git-templates
+    hooksPath = ~/.git-templates
+    #editor = "gvim --nofork"
