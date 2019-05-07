@@ -1,5 +1,6 @@
 export EDITOR=vim
-export VISUAL="gvim --nofork"
+export VISUAL="gvim --remote-wait-silent"
+
 
 #export EDITOR='emacsclient -t -a ""'
 #export VISUAL='emacsclient -c -a ""'
@@ -26,18 +27,18 @@ if [ -d "/opt/flutter/bin" ] ; then
 fi
 
 alias g='grep -rn'
-# alias v='vim --remote-silent'
-# alias v='gvim --remote-silent'
+#alias v='vim --remote-silent'
+alias v='gvim --remote-silent'
 alias f='find . -type f | grep'
 alias fd='find . -type d | grep'
 alias inetp='ping 8.8.8.8'
 alias o='xdg-open'
-alias xup="xrdb ~/.Xresources"
+alias xup="xrdb ~/.xresources"
 alias dc='docker-compose'
 alias webserver='python -m SimpleHTTPServer'
 
-v() { emacsclient -c -a "" $@ & disown; }
-e() { emacsclient -t -a "" $@; }
+#v() { emacsclient -c -a "" $@ & disown; }
+#e() { emacsclient -t -a "" $@; }
 
 dconnect() { docker exec -it $@ /bin/bash; }
 
