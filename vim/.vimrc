@@ -1,7 +1,56 @@
 execute pathogen#infect()
-runtime! plugin/sensible.vim
 
-helptags ALL
+" Vim Plug Definitions {
+call plug#begin('~/.vim/plugged')
+
+" vim-sensible
+Plug 'tpope/vim-sensible', {'tag': '*'}
+" ack.vim
+Plug 'mileszs/ack.vim', {'tag': '*'}
+" airline
+Plug 'vim-airline/vim-airline', {'tag': '*'}
+" airline-themes
+Plug 'vim-airline/vim-airline-themes'
+" ctrlp
+Plug 'ctrlpvim/ctrlp.vim', {'tag': '*'}
+" dockerfile
+" fugitive
+Plug 'tpope/vim-fugitive', {'tag': '*'}
+" neocomplete
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
+" nerdtree
+Plug 'scrooloose/nerdtree', {'tag': '*'}
+" python-mode
+Plug 'python-mode/python-mode', {'tag': '*'}
+" syntastic
+Plug 'vim-syntastic/syntastic'
+" ultisnips
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+" vim-colors-solarized
+Plug 'altercation/vim-colors-solarized'
+" vim-go
+Plug 'fatih/vim-go', { 'tag': '*' }
+Plug 'nsf/gocode', { 'tag': '*' }
+" vim-polyglot
+Plug 'sheerun/vim-polyglot'
+" vim-yaml
+Plug 'mrk21/yaml-vim'
+" ALE
+Plug 'w0rp/ale'
+
+call plug#end()
+" }
+
+runtime! plugin/sensible.vim
+silent! helptags ALL
 
 " Basic Options {
     set nocompatible " Be iMproved
@@ -11,6 +60,7 @@ helptags ALL
     set mouse=a
     set path+=**
     set wildmenu
+    set noeb vb t_vb=
 
     command! MakeTags !ctags -R .
 
@@ -141,6 +191,10 @@ helptags ALL
     " http://vimcasts.org/e/34
     autocmd BufReadPost fugitive://* set bufhidden=delete
     autocmd BufReadPost .vimrc setlocal keywordprg=:help " Open help for word under cursor with K
+    autocmd BufReadPost .vimrc setlocal foldmethod=marker
+    " yaml settings
+    au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
+    autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 " }
 
 " Syntastic Settings {
@@ -168,26 +222,28 @@ helptags ALL
 " }
 
 " Vim-Go {
-    let g:go_highlight_functions = 1
-    let g:go_highlight_methods = 1
-    let g:go_highlight_fields = 1
-    let g:go_highlight_types = 1
-    let g:go_highlight_operators = 1
-    let g:go_highlight_build_constraints = 1
-    let g:go_auto_type_info = 0
-    let g:go_fmt_command = "goimports"
-    au FileType go nmap <leader>r <Plug>(go-run)
-    au FileType go nmap <leader>b <Plug>(go-build)
-    au FileType go nmap <Leader>s <Plug>(go-implements)
-    au FileType go nmap <Leader>i <Plug>(go-info)
-    au FileType go nmap <Leader>e <Plug>(go-rename)
-    au FileType go nmap <Leader>dd <Plug>(go-describe)
-    au FileType go nmap <Leader>de <Plug>(go-def)
-    au FileType go nmap <Leader>ds <Plug>(go-def-split)
-    au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
-    au FileType go nmap <Leader>l <Plug>(go-metalinter)
-    au FileType go nmap <Leader>f <Plug>(go-freevars)
-    au FileType go nmap <Leader>p :GoDeclsDir<CR>
+   let g:go_highlight_functions = 1
+   let g:go_highlight_methods = 1
+   let g:go_highlight_fields = 1
+   let g:go_highlight_types = 1
+   let g:go_highlight_operators = 1
+   let g:go_highlight_build_constraints = 1
+   let g:go_auto_type_info = 0
+   let g:go_metalinter_command = "golangci-lint"
+   au FileType go nmap <leader>r <Plug>(go-run)
+   au FileType go nmap <leader>b <Plug>(go-build)
+   au FileType go nmap <Leader>s <Plug>(go-implements)
+   au FileType go nmap <Leader>i <Plug>(go-info)
+   au FileType go nmap <Leader>e <Plug>(go-rename)
+   au FileType go nmap <Leader>dd <Plug>(go-describe)
+   au FileType go nmap <Leader>de <Plug>(go-def)
+   au FileType go nmap <Leader>ds <Plug>(go-def-split)
+   au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+   au FileType go nmap <Leader>l <Plug>(go-metalinter)
+   au FileType go nmap <Leader>f <Plug>(go-freevars)
+   au FileType go nmap <Leader>p :GoDeclsDir<CR>
+   au FileType go nmap <leader>ta <Plug>(go-alternate-vertical)
+   au FileType go nmap <leader>tc <Plug>(go-coverage-toggle)
 
    au FileType go setlocal keywordprg=:GoDoc " Open help for word under cursor with K
 " }
@@ -205,16 +261,15 @@ helptags ALL
     let g:airline_powerline_fonts=1
 " }
 
+" TODO: Change to deoplete
 " Neocomplete {
-    let g:neocomplete#enable_at_startup = 1
-    let g:neocomplete#enable_smart_case = 1
-    let g:neocomplete#enable_auto_close_preview = 1
-    "set completeopt-=preview
-    inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+"    let g:neocomplete#enable_at_startup = 1
+"    let g:neocomplete#enable_smart_case = 1
+"    inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+"    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+"    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+"    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+"    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 " }
 
 " Ultisnips {
