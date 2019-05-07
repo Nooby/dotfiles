@@ -10,7 +10,7 @@ ZSH_THEME="kardan"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git git-extra vagrant docker docker-compose)
+plugins=(git git-extras vagrant docker docker-compose)
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.profile
