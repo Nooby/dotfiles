@@ -80,19 +80,19 @@ silent! helptags ALL
 " }
 
 " UI Settings {
-    set background=dark
-    colorscheme solarized
-    call togglebg#map("F5")
-
-    " Fixes Color of SignColumn
-    hi! link SignColumn LineNr
-
     if has("gui_running")
         "set guifont=Droid\ Sans\ Mono\ Slashed\ for\ Powerline\ 10
         "set guifont=Roboto\ Mono\ for\ Powerline\ 10
-        set guifont=Source\ Code\ Pro\ Medium\ 12
+        "set guifont=Source\ Code\ Pro\ Medium\ for\ Powerline\ 10
+        set guifont=Noto\ Mono\ for\ Powerline\ 10
         set guioptions+=LlRrbTm
         set guioptions-=LlRrbTm
+        set background=dark
+        colorscheme solarized
+        call togglebg#map("F5")
+
+        " Fixes Color of SignColumn
+        hi! link SignColumn LineNr
     endif
 " }
 
