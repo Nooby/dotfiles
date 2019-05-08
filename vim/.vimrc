@@ -17,14 +17,14 @@ Plug 'ctrlpvim/ctrlp.vim', {'tag': '*'}
 " fugitive
 Plug 'tpope/vim-fugitive', {'tag': '*'}
 " neocomplete
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-let g:deoplete#enable_at_startup = 1
+" if has('nvim')
+"   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" else
+"   Plug 'Shougo/deoplete.nvim'
+"   Plug 'roxma/nvim-yarp'
+"   Plug 'roxma/vim-hug-neovim-rpc'
+" endif
+" let g:deoplete#enable_at_startup = 1
 " nerdtree
 Plug 'scrooloose/nerdtree', {'tag': '*'}
 " python-mode
@@ -37,7 +37,7 @@ Plug 'honza/vim-snippets'
 " vim-colors-solarized
 Plug 'altercation/vim-colors-solarized'
 " vim-go
-Plug 'fatih/vim-go', { 'tag': '*' }
+Plug 'fatih/vim-go', { 'tag': '*', 'do': ':GoUpdateBinaries' }
 Plug 'nsf/gocode', { 'tag': '*' }
 " vim-polyglot
 Plug 'sheerun/vim-polyglot'
@@ -215,10 +215,13 @@ silent! helptags ALL
     let g:ale_fix_on_save = 1
     let g:ale_linters = {'go': ['goimports', 'golangci-lint']}
     let g:ale_fixers = {'go': ['goimports', 'gofmt']}
-    au FileType go nmap <Leader>gd <Plug>(ale_go_to_definition)
-    au FileType go nmap <Leader>gs <Plug>(ale_go_to_definition_in_split)
-    au FileType go nmap <Leader>gv <Plug>(ale_go_to_definition_in_vsplit)
-    au FileType go nmap <Leader>gd <Plug>(ale_go_to_type_definition)
+    nmap <Leader>i <Plug>(ale_hover)
+    nmap gd <Plug>(ale_go_to_definition)
+    nmap gs <Plug>(ale_go_to_definition_in_split)
+    nmap gv <Plug>(ale_go_to_definition_in_vsplit)
+    nmap gt <Plug>(ale_go_to_type_definition)
+    imap <C-Space> <Plug>(ale_complete)
+    set keywordprg=<Plug>(ale_documentation) " Open help for word under cursor with K
 " }
 
 " Vim-Go {
