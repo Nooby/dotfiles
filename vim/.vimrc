@@ -320,8 +320,8 @@ imap <c-space> <Plug>(asyncomplete_force_refresh)
         nmap <leader>gs :Gstatus<CR>
         nmap <leader>gc :Gcommit<CR>
         nmap <leader>gm :Gmerge<CR>
-        nmap <leader>gp :Gpull<CR>
-        nmap <leader>gf :Gpush<CR>
+        nmap <leader>gf :Gpull<CR>
+        nmap <leader>gp :Gpush<CR>
         nmap <leader>gl :Gllog<CR>
         nmap <leader>gb :Gblame<CR>
     " }
