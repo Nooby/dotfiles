@@ -1,5 +1,5 @@
 export EDITOR=vim
-export VISUAL="gvim --remote-wait-silent"
+export VISUAL="gvim"
 
 
 #export EDITOR='emacsclient -t -a ""'
