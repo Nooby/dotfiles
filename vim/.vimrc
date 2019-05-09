@@ -16,15 +16,6 @@ Plug 'ctrlpvim/ctrlp.vim', {'tag': '*'}
 " dockerfile
 " fugitive
 Plug 'tpope/vim-fugitive', {'tag': '*'}
-" neocomplete
-" if has('nvim')
-"   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" else
-"   Plug 'Shougo/deoplete.nvim'
-"   Plug 'roxma/nvim-yarp'
-"   Plug 'roxma/vim-hug-neovim-rpc'
-" endif
-" let g:deoplete#enable_at_startup = 1
 " nerdtree
 Plug 'scrooloose/nerdtree', {'tag': '*'}
 " python-mode
@@ -44,7 +35,15 @@ Plug 'sheerun/vim-polyglot'
 " vim-yaml
 Plug 'mrk21/yaml-vim'
 " ALE
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
+" Language Server
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+" python-language-server
+Plug 'ryanolsonx/vim-lsp-python' " pip install python-language-server[all]
+"Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 
 call plug#end()
 " }
@@ -154,34 +153,10 @@ silent! helptags ALL
     noremap <C-j> <C-w>j
     noremap <C-k> <C-w>k
 
-    " format the entire file
-    nnoremap <leader>fef :normal! gg=G``<CR>
-
     " Some helpers to edit mode
     " http://vimcasts.org/e/14
     cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
-    " map <leader>ew :e %%
-    " map <leader>es :sp %%
-    " map <leader>ev :vsp %%
-    " map <leader>et :tabe %%
-" }
 
-" Jumplist {
-    function! GotoJump()
-        jumps
-        let j = input("Please select your jump: ")
-        if j != ''
-            let pattern = '\v\c^\+'
-            if j =~ pattern
-                let j = substitute(j, pattern, '', 'g')
-                execute "normal " . j . "\<c-i>"
-            else
-                execute "normal " . j . "\<c-o>"
-            endif
-        endif
-    endfunction
-
-    nmap <leader>j :call GotoJump()<CR>
 " }
 
 " Autocmd {
@@ -199,32 +174,64 @@ silent! helptags ALL
 
 " Syntastic Settings {
     let g:syntastic_always_populate_loc_list = 1
-    let g:syntastic_auto_loc_list = 2
+    let g:syntastic_auto_loc_list = 0
     let g:syntastic_check_on_open = 1
     let g:syntastic_check_on_wq = 0
+    let g:syntastic_auto_jump = 0
+    let sessionoptions-=blank
 
-    let g:syntastic_go_checkers = ['golangci-lint', 'golint', 'govet', 'errcheck']
+    let g:syntastic_go_checkers = ['golangci_lint', 'golint', 'govet', 'errcheck']
     let g:syntastic_mode_map = { 'mode': 'active' }  ", 'passive_filetypes': ['go'] }
 
-    let g:syntastic_python_checkers = ['flake8'] " , 'pylint', 'pyflakes', 'pep8']
-    let g:syntastic_python_python_exec = 'python'
+    let g:syntastic_python_checkers = ['pylint'] " ['flake8', 'pylint', 'pyflakes', 'pep8']
+    let g:syntastic_python_python_exec = 'python3'
 " }
 
 " ALE {
-    let g:ale_completion_enabled = 1
-    let g:ale_fix_on_save = 1
-    let g:ale_linters = {'go': ['goimports', 'golangci-lint']}
-    let g:ale_fixers = {'go': ['goimports', 'gofmt']}
-    nmap <Leader>i <Plug>(ale_hover)
-    nmap gd <Plug>(ale_go_to_definition)
-    nmap gs <Plug>(ale_go_to_definition_in_split)
-    nmap gv <Plug>(ale_go_to_definition_in_vsplit)
-    nmap gt <Plug>(ale_go_to_type_definition)
-    imap <C-Space> <Plug>(ale_complete)
-    set keywordprg=<Plug>(ale_documentation) " Open help for word under cursor with K
+"    let g:ale_completion_enabled = 1
+"    let g:ale_fix_on_save = 1
+"    let g:ale_linters = {'go': ['goimports', 'golangci-lint']}
+"    let g:ale_fixers = {'go': ['goimports', 'gofmt']}
+"    nmap <Leader>i <Plug>(ale_hover)
+"    nmap gd <Plug>(ale_go_to_definition)
+"    nmap gs <Plug>(ale_go_to_definition_in_split)
+"    nmap gv <Plug>(ale_go_to_definition_in_vsplit)
+"    nmap gt <Plug>(ale_go_to_type_definition)
+"    imap <C-Space> <Plug>(ale_complete)
+"    set keywordprg=<Plug>(ale_documentation) " Open help for word under cursor with K
 " }
 
+" vim-lsp {
+augroup LspGo
+  au!
+  autocmd User lsp_setup call lsp#register_server({
+      \ 'name': 'gopls',
+      \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
+      \ 'whitelist': ['go'],
+      \ })
+  autocmd FileType go setlocal omnifunc=lsp#complete
+augroup END
+if executable('pyls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'whitelist': ['python'],
+        \ 'workspace_config': {'pyls': {'plugins': {'pydocstyle': {'enabled': v:true}}}}
+        \ })
+  autocmd FileType python setlocal omnifunc=lsp#complete
+endif
+" }
+
+" asyncomplete.vim {
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
+imap <c-space> <Plug>(asyncomplete_force_refresh)
+" }
+
+
 " Vim-Go {
+   let g:go_def_mode='gopls'
    let g:go_highlight_functions = 1
    let g:go_highlight_methods = 1
    let g:go_highlight_fields = 1
@@ -233,26 +240,13 @@ silent! helptags ALL
    let g:go_highlight_build_constraints = 1
    let g:go_auto_type_info = 0
    let g:go_metalinter_command = "golangci-lint"
-   au FileType go nmap <leader>r <Plug>(go-run)
-   au FileType go nmap <leader>b <Plug>(go-build)
-   au FileType go nmap <Leader>s <Plug>(go-implements)
-   au FileType go nmap <Leader>i <Plug>(go-info)
-   au FileType go nmap <Leader>e <Plug>(go-rename)
-   au FileType go nmap <Leader>dd <Plug>(go-describe)
-   au FileType go nmap <Leader>de <Plug>(go-def)
-   au FileType go nmap <Leader>ds <Plug>(go-def-split)
-   au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
-   au FileType go nmap <Leader>l <Plug>(go-metalinter)
-   au FileType go nmap <Leader>f <Plug>(go-freevars)
-   au FileType go nmap <Leader>p :GoDeclsDir<CR>
-   au FileType go nmap <leader>ta <Plug>(go-alternate-vertical)
-   au FileType go nmap <leader>tc <Plug>(go-coverage-toggle)
 
    au FileType go setlocal keywordprg=:GoDoc " Open help for word under cursor with K
 " }
 
 " Nerdtree {
-    map <C-n> :NERDTreeToggle<CR>
+    " map <C-n> :NERDTreeToggle<CR>
+    nmap <leader>n :NERDTreeToggle<CR>
     let NERDTreeQuitOnOpen=1
     let NERDTreeHijackNetrw = 0
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -285,4 +279,57 @@ silent! helptags ALL
     if executable('ag')
         let g:ackprg = 'ag --vimgrep'
     endif
+" }
+
+" Jumplist {
+    function! GotoJump()
+        jumps
+        let j = input("Please select your jump: ")
+        if j != ''
+            let pattern = '\v\c^\+'
+            if j =~ pattern
+                let j = substitute(j, pattern, '', 'g')
+                execute "normal " . j . "\<c-i>"
+            else
+                execute "normal " . j . "\<c-o>"
+            endif
+        endif
+    endfunction
+
+    nmap <leader>j :call GotoJump()<CR>
+" }
+
+" Leader {
+    nmap gd <plug>(lsp-definition)
+    nmap <leader>h <plug>(lsp-hover)
+    nmap <leader>s <plug>(lsp-status)
+    nmap <leader>l <plug>(lsp-document-diagnostics)
+    nmap <leader>en :lnext<CR>
+    nmap <leader>ep :lprev<CR>
+    nmap <leader>eo :lopen<CR>
+    " Fugitive Shortcuts {
+        nmap <leader>gs :Gstatus<CR>
+        nmap <leader>gc :Gcommit<CR>
+        nmap <leader>gm :Gmerge<CR>
+        nmap <leader>gf :Gpull<CR>
+        nmap <leader>gp :Gpush<CR>
+        nmap <leader>gl :Gllog<CR>
+        nmap <leader>gb :Gblame<CR>
+    " }
+    " Vim-go shortcuts {
+        " au FileType go nmap <buffer> <leader>r <Plug>(go-run)
+        " au FileType go nmap <buffer> <leader>b <Plug>(go-build)
+        " au FileType go nmap <buffer> <Leader>s <Plug>(go-implements)
+        " au FileType go nmap <buffer> <Leader>i <Plug>(go-info)
+        " au FileType go nmap <buffer> <Leader>e <Plug>(go-rename)
+        " au FileType go nmap <buffer> <Leader>dd <Plug>(go-describe)
+        " au FileType go nmap <buffer> <Leader>de <Plug>(go-def)
+        " au FileType go nmap <buffer> <Leader>ds <Plug>(go-def-split)
+        " au FileType go nmap <buffer> <Leader>dv <Plug>(go-def-vertical)
+        " au FileType go nmap <buffer> <Leader>l <Plug>(go-metalinter)
+        " au FileType go nmap <buffer> <Leader>f <Plug>(go-freevars)
+        " au FileType go nmap <buffer> <Leader>p :GoDeclsDir<CR>
+        " au FileType go nmap <buffer> <leader>ta <Plug>(go-alternate-vertical)
+        " au FileType go nmap <buffer> <leader>tc <Plug>(go-coverage-toggle)
+    " }
 " }
