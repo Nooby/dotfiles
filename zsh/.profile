@@ -1,6 +1,5 @@
 export EDITOR=vim
-export VISUAL="gvim"
-
+export VISUAL="gvim --nofork"
 
 #export EDITOR='emacsclient -t -a ""'
 #export VISUAL='emacsclient -c -a ""'
