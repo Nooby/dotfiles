@@ -57,6 +57,9 @@ fi
 if [ -d "$GOPATH/bin" ] ; then
   PATH=$GOPATH/bin:$PATH
 fi
+if [ -d "$HOME/Projects/bin" ] ; then
+  PATH=$HOME/Projects/bin:$PATH
+fi
 
 export PYENV_ROOT=$HOME/.pyenv
 
