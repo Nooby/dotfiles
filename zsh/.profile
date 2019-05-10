@@ -46,7 +46,7 @@ else
     export PATH=$HOME/go/bin:$PATH
 fi
 
-export GOPATH=$HOME/Projects
+export GOPATH=$HOME/Projects/.go
 export GO111MODULE=on
 if [ ! -d $GOPATH ] ; then
   mkdir -p $GOPATH
