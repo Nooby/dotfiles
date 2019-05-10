@@ -5,6 +5,8 @@ call plug#begin('~/.vim/plugged')
 
 " vim-sensible
 Plug 'tpope/vim-sensible', {'tag': '*'}
+" editorconfig support
+Plug 'editorconfig/editorconfig-vim'
 " ack.vim
 Plug 'mileszs/ack.vim', {'tag': '*'}
 " airline
@@ -44,7 +46,13 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
 " python-language-server
 Plug 'ryanolsonx/vim-lsp-python' " pip install python-language-server[all]
 "Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
-
+" Language support
+Plug 'chr4/nginx.vim'                          " nginx syntax highlighting
+Plug 'digitaltoad/vim-pug'                     " Pug syntax highlighting
+Plug 'kylef/apiblueprint.vim'                  " API Blueprint syntax highlighting
+Plug 'lifepillar/pgsql.vim'                    " PostgreSQL syntax highlighting
+Plug 'pangloss/vim-javascript'                 " JavaScript syntax highlighting
+Plug 'plasticboy/vim-markdown'                 " Markdown syntax highlighting
 call plug#end()
 " }
 
@@ -79,11 +87,14 @@ silent! helptags ALL
 " }
 
 " UI Settings {
+    " Also change setting in .gvimrc. MacVim does not respect this setting if
+    " it is not set in the .gvimrc.
+    "set guifont=Droid\ Sans\ Mono\ Slashed\ for\ Powerline\ 10
+    "set guifont=Roboto\ Mono\ for\ Powerline\ 10
+    "set guifont=Source\ Code\ Pro\ Medium\ for\ Powerline\ 10
+    set guifont=Noto\ Mono\ for\ Powerline\ 10
+
     if has("gui_running")
-        "set guifont=Droid\ Sans\ Mono\ Slashed\ for\ Powerline\ 10
-        "set guifont=Roboto\ Mono\ for\ Powerline\ 10
-        "set guifont=Source\ Code\ Pro\ Medium\ for\ Powerline\ 10
-        set guifont=Noto\ Mono\ for\ Powerline\ 10
         set guioptions+=LlRrbTm
         set guioptions-=LlRrbTm
         set background=dark
@@ -135,118 +146,16 @@ silent! helptags ALL
     " vnoremap <space> zf
 " }
 
-" Copy/Paste from Clipboard {
-    " nnoremap <C-v> "+p
-    inoremap <C-v> <ESC>"+p
-    " vnoremap <C-v> "+p
-    " nnoremap <C-c> "+yy
-    inoremap <C-c> <ESC>"+yyi
-    " vnoremap <C-c> "+y
-" }
-
-
-" Shortcuts {
-    nnoremap Q @q
-    vnoremap Q :norm @q<cr>
-    noremap <C-l> <C-w>l
-    noremap <C-h> <C-w>h
-    noremap <C-j> <C-w>j
-    noremap <C-k> <C-w>k
-
-    " Some helpers to edit mode
-    " http://vimcasts.org/e/14
-    cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
-
-" }
-
-" Autocmd {
-    autocmd FileType html,xhtml,xml,htmldjango,htmljinja setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2 foldmethod=indent
-    autocmd FileType go setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=4 foldmethod=syntax nolist
-    autocmd FileType python setlocal foldmethod=indent
-    " http://vimcasts.org/e/34
-    autocmd BufReadPost fugitive://* set bufhidden=delete
-    autocmd BufReadPost .vimrc setlocal keywordprg=:help " Open help for word under cursor with K
-    autocmd BufReadPost .vimrc setlocal foldmethod=marker
-    " yaml settings
-    au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
-    autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-" }
-
 " Syntastic Settings {
     let g:syntastic_always_populate_loc_list = 1
     let g:syntastic_auto_loc_list = 0
     let g:syntastic_check_on_open = 1
     let g:syntastic_check_on_wq = 0
     let g:syntastic_auto_jump = 0
-    let sessionoptions-=blank
-
-    let g:syntastic_go_checkers = ['golangci_lint', 'golint', 'govet', 'errcheck']
     let g:syntastic_mode_map = { 'mode': 'active' }  ", 'passive_filetypes': ['go'] }
-
-    let g:syntastic_python_checkers = ['pylint'] " ['flake8', 'pylint', 'pyflakes', 'pep8']
-    let g:syntastic_python_python_exec = 'python3'
-" }
-
-" ALE {
-"    let g:ale_completion_enabled = 1
-"    let g:ale_fix_on_save = 1
-"    let g:ale_linters = {'go': ['goimports', 'golangci-lint']}
-"    let g:ale_fixers = {'go': ['goimports', 'gofmt']}
-"    nmap <Leader>i <Plug>(ale_hover)
-"    nmap gd <Plug>(ale_go_to_definition)
-"    nmap gs <Plug>(ale_go_to_definition_in_split)
-"    nmap gv <Plug>(ale_go_to_definition_in_vsplit)
-"    nmap gt <Plug>(ale_go_to_type_definition)
-"    imap <C-Space> <Plug>(ale_complete)
-"    set keywordprg=<Plug>(ale_documentation) " Open help for word under cursor with K
-" }
-
-" vim-lsp {
-augroup LspGo
-  au!
-  autocmd User lsp_setup call lsp#register_server({
-      \ 'name': 'gopls',
-      \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
-      \ 'whitelist': ['go'],
-      \ })
-  autocmd FileType go setlocal omnifunc=lsp#complete
-augroup END
-if executable('pyls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
-        \ 'whitelist': ['python'],
-        \ 'workspace_config': {'pyls': {'plugins': {'pydocstyle': {'enabled': v:true}}}}
-        \ })
-  autocmd FileType python setlocal omnifunc=lsp#complete
-endif
-" }
-
-" asyncomplete.vim {
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
-imap <c-space> <Plug>(asyncomplete_force_refresh)
-" }
-
-
-" Vim-Go {
-   let g:go_def_mode='gopls'
-   let g:go_highlight_functions = 1
-   let g:go_highlight_methods = 1
-   let g:go_highlight_fields = 1
-   let g:go_highlight_types = 1
-   let g:go_highlight_operators = 1
-   let g:go_highlight_build_constraints = 1
-   let g:go_auto_type_info = 0
-   let g:go_metalinter_command = "golangci-lint"
-
-   au FileType go setlocal keywordprg=:GoDoc " Open help for word under cursor with K
 " }
 
 " Nerdtree {
-    " map <C-n> :NERDTreeToggle<CR>
-    nmap <leader>n :NERDTreeToggle<CR>
     let NERDTreeQuitOnOpen=1
     let NERDTreeHijackNetrw = 0
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -299,14 +208,41 @@ imap <c-space> <Plug>(asyncomplete_force_refresh)
     nmap <leader>j :call GotoJump()<CR>
 " }
 
-" Leader {
-    nmap gd <plug>(lsp-definition)
-    nmap <leader>h <plug>(lsp-hover)
-    nmap <leader>s <plug>(lsp-status)
-    nmap <leader>l <plug>(lsp-document-diagnostics)
+" Shortcuts {
+    " nnoremap <C-v> "+p
+    inoremap <C-v> <ESC>"+p
+    " vnoremap <C-v> "+p
+    " nnoremap <C-c> "+yy
+    inoremap <C-c> <ESC>"+yyi
+    " vnoremap <C-c> "+y
+    nnoremap Q @q
+    vnoremap Q :norm @q<cr>
+    noremap <C-l> <C-w>l
+    noremap <C-h> <C-w>h
+    noremap <C-j> <C-w>j
+    noremap <C-k> <C-w>k
+    " Some helpers to edit mode
+    " http://vimcasts.org/e/14
+    cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
+
     nmap <leader>en :lnext<CR>
     nmap <leader>ep :lprev<CR>
     nmap <leader>eo :lopen<CR>
+
+    " map <C-n> :NERDTreeToggle<CR>
+    nmap <leader>n :NERDTreeToggle<CR>
+    " asyncomplete.vim {
+        inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+        inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+        inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
+        imap <c-space> <Plug>(asyncomplete_force_refresh)
+    " }
+    " Language Server Shortcuts {
+        nmap gd <plug>(lsp-definition)
+        nmap <leader>h <plug>(lsp-hover)
+        nmap <leader>s <plug>(lsp-status)
+        nmap <leader>l <plug>(lsp-document-diagnostics)
+    " }
     " Fugitive Shortcuts {
         nmap <leader>gs :Gstatus<CR>
         nmap <leader>gc :Gcommit<CR>
@@ -332,4 +268,155 @@ imap <c-space> <Plug>(asyncomplete_force_refresh)
         " au FileType go nmap <buffer> <leader>ta <Plug>(go-alternate-vertical)
         " au FileType go nmap <buffer> <leader>tc <Plug>(go-coverage-toggle)
     " }
+" }
+
+" Language: GO {
+    let g:go_def_mode='gopls'
+    let g:go_highlight_functions = 1
+    let g:go_highlight_methods = 1
+    let g:go_highlight_fields = 1
+    let g:go_highlight_types = 1
+    let g:go_highlight_operators = 1
+    let g:go_highlight_build_constraints = 1
+    let g:go_highlight_structs = 1
+    let g:go_auto_type_info = 0
+    let g:go_highlight_extra_types = 1
+    let g:go_metalinter_command = "golangci_lint"
+    " Run goimports when running gofmt
+    let g:go_fmt_command = "goimports"
+    " Fix for location list when vim-go is used together with Syntastic
+    let g:go_list_type = "quickfix"
+    " Set whether the JSON tags should be snakecase or camelcase.
+    let g:go_addtags_transform = "snakecase"
+
+    " Add the failing test name to the output of :GoTest
+    let g:go_test_show_name = 1
+
+    " Run goimports when running gofmt
+    let g:go_fmt_command = "goimports"
+
+    let g:syntastic_go_checkers = ['golangci_lint', 'golint', 'govet', 'errcheck']
+
+    augroup LspGo
+      au!
+      autocmd User lsp_setup call lsp#register_server({
+          \ 'name': 'gopls',
+          \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
+          \ 'whitelist': ['go'],
+          \ })
+      autocmd FileType go setlocal omnifunc=lsp#complete
+    augroup END
+
+    au FileType go setlocal keywordprg=:GoDoc " Open help for word under cursor with K
+
+    au FileType go set noexpandtab
+    au FileType go set shiftwidth=4
+    au FileType go set softtabstop=4
+    au FileType go set tabstop=4
+    au FileType go set foldmethod=syntax
+    au FileType go set nolist
+
+" }
+
+" Language: yaml {
+    au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
+    autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+" }
+
+" Language: Bash {
+    au FileType sh set noexpandtab
+    au FileType sh set shiftwidth=2
+    au FileType sh set softtabstop=2
+    au FileType sh set tabstop=2
+" }
+
+" Language: C++ {
+    au FileType cpp set expandtab
+    au FileType cpp set shiftwidth=4
+    au FileType cpp set softtabstop=4
+    au FileType cpp set tabstop=4
+" }
+
+" Language: CSS {
+    au FileType css set expandtab
+    au FileType css set shiftwidth=2
+    au FileType css set softtabstop=2
+    au FileType css set tabstop=2
+" }
+
+" Language: git {
+    autocmd BufReadPost fugitive://* set bufhidden=delete
+    au FileType gitcommit setlocal spell
+    au FileType gitcommit setlocal textwidth=80
+    au FileType gitconfig set noexpandtab
+    au FileType gitconfig set shiftwidth=2
+    au FileType gitconfig set softtabstop=2
+    au FileType gitconfig set tabstop=2
+" }
+
+" Language: HTML {
+    au FileType html,xhtml,xml,htmldjango,htmljinja set expandtab
+    au FileType html,xhtml,xml,htmldjango,htmljinja set shiftwidth=2
+    au FileType html,xhtml,xml,htmldjango,htmljinja set softtabstop=2
+    au FileType html,xhtml,xml,htmldjango,htmljinja set tabstop=2
+    au FileType html,xhtml,xml,htmldjango,htmljinja set foldmethod=indent
+" }
+
+" Language: JavaScript {
+    au FileType javascript set expandtab
+    au FileType javascript set shiftwidth=2
+    au FileType javascript set softtabstop=2
+    au FileType javascript set tabstop=2
+" }
+
+" Language: JSON {
+    au FileType json set expandtab
+    au FileType json set shiftwidth=2
+    au FileType json set softtabstop=2
+    au FileType json set tabstop=2
+" }
+
+" Language: Make {
+    au FileType make set noexpandtab
+    au FileType make set shiftwidth=2
+    au FileType make set softtabstop=2
+    au FileType make set tabstop=2
+" }
+
+" Language: Markdown {
+    au FileType markdown setlocal spell
+    au FileType markdown set expandtab
+    au FileType markdown set shiftwidth=4
+    au FileType markdown set softtabstop=4
+    au FileType markdown set tabstop=4
+    au FileType markdown set syntax=markdown
+" }
+
+" Language: Python {
+    if executable('pyls')
+        au User lsp_setup call lsp#register_server({
+            \ 'name': 'pyls',
+            \ 'cmd': {server_info->['pyls']},
+            \ 'whitelist': ['python'],
+            \ 'workspace_config': {'pyls': {'plugins': {'pydocstyle': {'enabled': v:true}}}}
+            \ })
+      autocmd FileType python setlocal omnifunc=lsp#complete
+    endif
+    let g:syntastic_python_checkers = ['pylint'] " ['flake8', 'pylint', 'pyflakes', 'pep8']
+    let g:syntastic_python_python_exec = 'python3'
+    au FileType python set expandtab
+    au FileType python set shiftwidth=4
+    au FileType python set softtabstop=4
+    au FileType python set tabstop=4
+    autocmd FileType python setlocal foldmethod=indent
+" }
+
+" Language: vimscript {
+    " http://vimcasts.org/e/34
+    autocmd BufReadPost .vimrc setlocal keywordprg=:help " Open help for word under cursor with K
+    autocmd BufReadPost .vimrc setlocal foldmethod=marker
+    au FileType vim set expandtab
+    au FileType vim set shiftwidth=4
+    au FileType vim set softtabstop=4
+    au FileType vim set tabstop=4
 " }
