@@ -1,5 +1,4 @@
 (use-package go-mode
-  :ensure t
   :config
   (add-hook 'go-mode-hook 'company-mode)
   ;; Call Gofmt before saving
@@ -16,11 +15,9 @@
 			    (set (make-local-variable 'company-backends) '(company-go))
 			    (company-mode))))
 
-(use-package go-rename
-  :ensure t)
+(use-package go-rename)
 
 (use-package flycheck-gometalinter
-  :ensure t
   :config
   (progn
     (flycheck-gometalinter-setup)
@@ -29,13 +26,11 @@
     ))
 
 (use-package go-guru
-  :ensure t
   :after go-mode
   :config
   (add-hook 'go-mode-hook #'go-guru-hl-identifier-mode))
 
 (use-package company-go
-  :ensure t
   :after go-mode
   :config
   (setq tab-width 4)
@@ -43,10 +38,9 @@
 
   :bind (:map go-mode-map
   ; Godef jump key binding
-  ("M-." . godef-jump)))
+  '("M-." . godef-jump)))
 
 (use-package go-eldoc
-  :ensure t
   :config
   (add-hook 'go-mode-hook 'go-eldoc-setup))
 
@@ -54,6 +48,6 @@
   ; Customize compile command to run go build
   (if (not (string-match "go" compile-command))
       (set (make-local-variable 'compile-command)
-           "go build -v && go test -v && go vet")))
+           "go build -v && go test -v ./... && go vet")))
 
 (provide 'lang-go)

@@ -1,5 +1,8 @@
-export EDITOR='emacsclient -t -a ""'
-export VISUAL='emacsclient -c -a ""'
+export EDITOR=vim
+export VISUAL="gvim --nofork"
+
+#export EDITOR='emacsclient -t -a ""'
+#export VISUAL='emacsclient -c -a ""'
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
@@ -23,18 +26,18 @@ if [ -d "/opt/flutter/bin" ] ; then
 fi
 
 alias g='grep -rn'
-# alias v='vim --remote-silent'
-# alias v='gvim --remote-silent'
+#alias v='vim --remote-silent'
+alias v='gvim --remote-silent'
 alias f='find . -type f | grep'
 alias fd='find . -type d | grep'
 alias inetp='ping 8.8.8.8'
 alias o='xdg-open'
-alias xup="xrdb ~/.Xresources"
+alias xup="xrdb ~/.xresources"
 alias dc='docker-compose'
 alias webserver='python -m SimpleHTTPServer'
 
-v() { emacsclient -c -a "" $@ & disown; }
-e() { emacsclient -t -a "" $@; }
+#v() { emacsclient -c -a "" $@ & disown; }
+#e() { emacsclient -t -a "" $@; }
 
 dconnect() { docker exec -it $@ /bin/bash; }
 
@@ -62,6 +65,10 @@ if [ -d $PYENV_ROOT ]; then
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
 fi
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 if [ -d $HOME/.local/bin ] ; then
     PATH=$HOME/.local/bin:$PATH

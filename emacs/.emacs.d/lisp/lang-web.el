@@ -1,24 +1,20 @@
 (use-package web-mode
-  :bind (("C-c ]" . emmet-next-edit-point)
-         ("C-c [" . emmet-prev-edit-point)
-         ("C-c o b" . browse-url-of-file))
-  :mode
-  (("\\.js\\'" . web-mode)
-   ("\\.html?\\'" . web-mode)
-   ("\\.phtml?\\'" . web-mode)
-   ("\\.tpl\\.php\\'" . web-mode)
-   ("\\.[agj]sp\\'" . web-mode)
-   ("\\.as[cp]x\\'" . web-mode)
-   ("\\.erb\\'" . web-mode)
-   ("\\.mustache\\'" . web-mode)
-   ("\\.djhtml\\'" . web-mode)
-   ("\\.jsx$" . web-mode))
+  :init
+  (add-to-list 'auto-mode-alist '(".*\.js\'" . web-mode))
+  (add-to-list 'auto-mode-alist '(".*\.html\'" . web-mode))
+  (add-to-list 'auto-mode-alist '(".*\.jsx\'" . web-mode))
   :config
-  (setq web-mode-markup-indent-offset 2
+  (setq indent-tabs-mode nil
+        js-indent-level 2
+        js2-strict-missing-semi-warning nil
+        web-mode-markup-indent-offset 2
         web-mode-css-indent-offset 2
         web-mode-code-indent-offset 2)
 
   (add-hook 'web-mode-hook 'jsx-flycheck)
+  (setq web-mode-enable-engine-detection 1)
+  (setq web-mode-engines-alist
+        '(("django"  . "\\.html?\\'")))
 
   ;; highlight enclosing tags of the element under cursor
   (setq web-mode-enable-current-element-highlight t)
@@ -38,11 +34,13 @@
   ;; editing enhancements for web-mode
   ;; https://github.com/jtkDvlp/web-mode-edit-element
   (use-package web-mode-edit-element
+    :ensure t
     :config (add-hook 'web-mode-hook 'web-mode-edit-element-minor-mode))
 
   ;; snippets for HTML
   ;; https://github.com/smihica/emmet-mode
   (use-package emmet-mode
+    :ensure t
     :init (setq emmet-move-cursor-between-quotes t) ;; default nil
     :diminish (emmet-mode . " e"))
   (add-hook 'web-mode-hook 'emmet-mode)
@@ -73,12 +71,14 @@
 
   ;; to get completion for HTML stuff
   ;; https://github.com/osv/company-web
-  (use-package company-web)
+  (use-package company-web
+    :ensure t)
 
   (add-hook 'web-mode-hook 'company-mode))
 
 ;; configure CSS mode company backends
 (use-package css-mode
+  :ensure t
   :config
   (defun my-css-mode-hook ()
     (set (make-local-variable 'company-backends)
@@ -89,7 +89,9 @@
 ;; impatient mode - Live refresh of web pages
 ;; https://github.com/skeeto/impatient-mode
 (use-package impatient-mode
+  :ensure t
   :diminish (impatient-mode . " i")
   :commands (impatient-mode))
 
 (provide 'lang-web)
+;;; lang-web ends here

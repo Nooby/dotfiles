@@ -15,6 +15,9 @@
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
 
+(require 'use-package)
+(setq use-package-always-ensure t)
+
 (defconst private-dir  (expand-file-name "private" user-emacs-directory))
 (defconst temp-dir (format "%s/cache" private-dir)
   "Hostname-based elisp temp directories.")

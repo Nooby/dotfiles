@@ -1,11 +1,9 @@
 (use-package origami
-  :ensure t
   :config
   (global-origami-mode 1)
   (add-to-list 'origami-parser-alist '(web-mode . origami-c-style-parser)))
 
 (use-package evil
-  :ensure t
   :config
   (evil-mode 1)
   (setq-default evil-search-mode 'evil-search
@@ -14,8 +12,8 @@
   (evil-define-key 'normal global-map (kbd "<down>")  'evil-next-visual-line)
   (evil-define-key 'normal global-map (kbd "<up>")    'evil-previous-visual-line)
   (define-key evil-normal-state-map (kbd "<tab>") 'origami-forward-toggle-node)
-  (define-key evil-normal-state-map "za" 'origami-forward-toggle-node)
   (define-key evil-normal-state-map "zR" 'origami-close-all-nodes)
+  (define-key evil-normal-state-map "za" 'origami-forward-toggle-node)
   (define-key evil-normal-state-map "zM" 'origami-open-all-nodes)
   (define-key evil-normal-state-map "zr" 'origami-close-node-recursively)
   (define-key evil-normal-state-map "zm" 'origami-open-node-recursively)
@@ -25,7 +23,6 @@
   (define-key evil-normal-state-map "zk" 'origami-previous-fold)
 
   (use-package evil-leader
-    :ensure t
     :config
     (global-evil-leader-mode)
     (setq-default evil-leader/leader "<SPC>")
@@ -77,16 +74,13 @@
       "gi" 'elpy-importmagic-add-import))
 
   (use-package evil-surround
-    :ensure t
     :config
     (global-evil-surround-mode 1))
 
   (use-package evil-matchit
-    :ensure t
     :config
     (global-evil-matchit-mode 1))
 
-  (use-package evil-magit
-    :ensure t))
+  (use-package evil-magit))
 
 (provide 'base-evil)

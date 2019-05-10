@@ -56,7 +56,7 @@ local function run_once(cmd_arr)
     end
 end
 
-run_once({ "urxvtd", "setxkbmap us"}) -- entries must be separated by commas
+run_once({ "urxvtd", "setxkbmap us", "lxpolkit"}) -- entries must be separated by commas
 
 -- This function implements the XDG autostart specification
 --[[
@@ -191,7 +191,7 @@ beautiful.init(string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv
 local myawesomemenu = {
     { "hotkeys", function() return false, hotkeys_popup.show_help end },
     { "manual", terminal .. " -e man awesome" },
-    { "edit config", string.format("%s -e %s %s", terminal, editor, awesome.conffile) },
+    { "edit config", string.format("%s -e %s %s", terminal, guieditor, awesome.conffile) },
     { "restart", awesome.restart },
     { "quit", function() awesome.quit() end }
 }

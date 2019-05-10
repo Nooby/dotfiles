@@ -4,11 +4,9 @@
 
 ;;; Code:
 
-(use-package try
-  :ensure t)
+(use-package try)
 
 (use-package company
-  :ensure t
   :config
   (add-hook 'after-init-hook 'global-company-mode))
 
@@ -17,14 +15,12 @@
 ;;   (dashboard-setup-startup-hook))
 
 (use-package ediff
-  :ensure t
   :config
   (setq ediff-window-setup-function 'ediff-setup-windows-plain)
   (setq-default ediff-highlight-all-diffs 'nil)
   (setq ediff-diff-options "-w"))
 
 (use-package exec-path-from-shell
-  :ensure t
   :config
   ;; Add GOPATH to shell
   (when (memq window-system '(mac ns))
@@ -33,19 +29,16 @@
     (exec-path-from-shell-initialize)))
 
 (use-package expand-region
-  :ensure t
   :bind
   ("C-=" . er/expand-region))
 
 (use-package flycheck
-  :ensure t
   :config
   (global-flycheck-mode)
   (setq-default flycheck-emacs-lisp-load-path 'inherit))
 
 
 (use-package counsel
-  :ensure t
   :bind
   ("M-x" . counsel-M-x)
   ("C-x C-m" . counsel-M-x)
@@ -53,7 +46,6 @@
   ("C-x c k" . counsel-yank-pop))
 
 (use-package counsel-projectile
-  :ensure t
   :bind
   ("C-x v" . counsel-projectile)
   ("C-x c p" . counsel-projectile-ag)
@@ -61,7 +53,6 @@
   (counsel-projectile-mode))
 
 (use-package ivy
-  :ensure t
   :bind
   ("C-x s" . swiper)
   ("C-x C-r" . ivy-resume)
@@ -76,13 +67,11 @@
 ;;   (hlinum-activate))
 
 (use-package linum
-  :ensure t
   :config
   (setq linum-format " %3d ")
   (global-linum-mode nil))
 
 (use-package magit
-  :ensure t
   :config
 
   (setq magit-completing-read-function 'ivy-completing-read)
@@ -97,22 +86,18 @@
   ("C-x g e" . magit-ediff-resolve)
   ("C-x g r" . magit-rebase-interactive))
 
-(use-package magit-popup
-  :ensure t)
+(use-package magit-popup)
 
 (use-package multiple-cursors
-  :ensure t
   :bind
   ("C-S-c C-S-c" . mc/edit-lines)
   ("C->" . mc/mark-next-like-this)
   ("C-<" . mc/mark-previous-like-this)
   ("C-c C->" . mc/mark-all-like-this))
 
-(use-package page-break-lines
-  :ensure t)
+(use-package page-break-lines)
 
 (use-package projectile
-  :ensure t
   :config
   (setq projectile-known-projects-file
         (expand-file-name "projectile-bookmarks.eld" temp-dir))
@@ -121,23 +106,18 @@
 
   (projectile-mode))
 
-(use-package ag
-  :ensure t)
+(use-package ag)
 
 (use-package recentf
-  :ensure t
   :config
   (setq recentf-save-file (recentf-expand-file-name "~/.emacs.d/private/cache/recentf"))
   (recentf-mode 1))
 
-(use-package smartparens
-  :ensure t)
+(use-package smartparens)
 
-(use-package smex
-  :ensure t)
+(use-package smex)
 
 (use-package undo-tree
-  :ensure t
   :config
   ;; Remember undo history
   (setq
@@ -146,29 +126,24 @@
   (global-undo-tree-mode 1))
 
 (use-package which-key
-  :ensure t
   :config
   (which-key-mode))
 
 (use-package windmove
-  :ensure t
   :bind
   ("C-x <up>" . windmove-up)
   ("C-x <down>" . windmove-down)
   ("C-x <left>" . windmove-left)
   ("C-x <right>" . windmove-right))
 
-(use-package wgrep
-  :ensure t)
+(use-package wgrep)
 
 (use-package yasnippet
-  :ensure t
   :config
   (yas-global-mode 1)
   (yas-reload-all))
 
-(use-package yasnippet-snippets
-  :ensure t)
+(use-package yasnippet-snippets)
 
 (provide 'base-extensions)
 ;;; base-extensions.el ends here
