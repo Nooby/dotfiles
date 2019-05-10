@@ -4,6 +4,7 @@
   (add-hook 'go-mode-hook 'company-mode)
   ;; Call Gofmt before saving
   (setq gofmt-command "goimports")
+  (setq godef-command "godef-gomod")
   (add-hook 'before-save-hook 'gofmt-before-save)
   (add-hook 'go-mode-hook 'setup-go-mode-compile)
   (add-hook 'go-mode-hook #'smartparens-mode)
@@ -24,7 +25,7 @@
   (progn
     (flycheck-gometalinter-setup)
     (setq flycheck-gometalinter-disable-linters '("gotype"))
-    ;;(setq flycheck-gometalinter-fast t)
+    (setq flycheck-gometalinter-fast t)
     ))
 
 (use-package go-guru
@@ -38,6 +39,7 @@
   :after go-mode
   :config
   (setq tab-width 4)
+  (setq company-go-gocode-command "gocode-gomod")
 
   :bind (:map go-mode-map
   ; Godef jump key binding
