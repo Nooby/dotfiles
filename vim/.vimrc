@@ -281,7 +281,7 @@ silent! helptags ALL
     let g:go_highlight_structs = 1
     let g:go_auto_type_info = 0
     let g:go_highlight_extra_types = 1
-    let g:go_metalinter_command = "golangci_lint"
+    let g:go_metalinter_command = "golangci-lint"
     " Run goimports when running gofmt
     let g:go_fmt_command = "goimports"
     " Fix for location list when vim-go is used together with Syntastic
@@ -295,7 +295,7 @@ silent! helptags ALL
     " Run goimports when running gofmt
     let g:go_fmt_command = "goimports"
 
-    let g:syntastic_go_checkers = ['golangci_lint', 'golint', 'govet', 'errcheck']
+    let g:syntastic_go_checkers = ['golangci-lint', 'golint', 'govet', 'errcheck']
 
     augroup LspGo
       au!
