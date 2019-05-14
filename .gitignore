@@ -2,7 +2,6 @@
 .emacs.d/*
 !.emacs.d/init.el
 .config/systemd/user/default.target.wants/
-bin/go_appengine/
 bin/*
 vim/.vim/.netrwhist
 vim/.vim/swap/*
@@ -13,3 +12,4 @@ mpd/.mpd/pid
 mpd/.mpd/state
 mpd/.mpd/sticker.sql
 mpd/.ncmpcpp/error.log
+*.backup
