@@ -402,7 +402,7 @@ silent! helptags ALL
             \ })
       autocmd FileType python setlocal omnifunc=lsp#complete
     endif
-    let g:syntastic_python_checkers = ['pylint'] " ['flake8', 'pylint', 'pyflakes', 'pep8']
+    let g:syntastic_python_checkers = ['mypy', 'flake8'] " ['flake8', 'pylint', 'pyflakes', 'pep8']
     let g:syntastic_python_python_exec = 'python3'
     au FileType python set expandtab
     au FileType python set shiftwidth=4
