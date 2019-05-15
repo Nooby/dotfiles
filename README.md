@@ -1,6 +1,10 @@
 # Nooby's dotfiles
 
-My current Linux configuration for arch linux and awesome wm. It also includes other Window Managers that I want to try out.
+My current Linux configuration for Debian with AwesomeWM. It also includes other Window Managers that I want to try out. Some config Packages have additional Installation Steps which are documented in additional readmes.
+
+[AwesomeWM Readme](AWESOME_README.md)
+
+[VIM Readme](VIM_README.md)
 
 ## Installation
 
@@ -24,7 +28,6 @@ Activate the Config packages with xstow. Example:
 xstow awesome
 ```
 
-Some config Packages have additional Installation Steps.
 
 ### Install MPD
 
