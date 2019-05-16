@@ -68,8 +68,7 @@ silent! helptags ALL
     set path+=**
     set wildmenu
     set noeb vb t_vb=
-
-    command! MakeTags !ctags -R .
+    set shortmess+=c
 
     if !has('nvim')
         set encoding=utf-8 " Set default encoding to UTF-8
@@ -152,7 +151,13 @@ silent! helptags ALL
     let g:syntastic_check_on_open = 1
     let g:syntastic_check_on_wq = 0
     let g:syntastic_auto_jump = 0
-    let g:syntastic_mode_map = { 'mode': 'active' }  ", 'passive_filetypes': ['go'] }
+    let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go', 'python'] }
+" }
+
+" Vim-LSP {
+    let g:lsp_diagnostics_anabled = 1
+    let g:lsp_signs_enabled = 1
+    let g:lsp_diagnostics_echo_cursor = 1
 " }
 
 " Nerdtree {
@@ -242,6 +247,7 @@ silent! helptags ALL
         nmap <leader>h <plug>(lsp-hover)
         nmap <leader>s <plug>(lsp-status)
         nmap <leader>l <plug>(lsp-document-diagnostics)
+        nmap <leader>r <plug>(lsp-rename)
     " }
     " Fugitive Shortcuts {
         nmap <leader>gs :Gstatus<CR>
@@ -404,6 +410,13 @@ silent! helptags ALL
     endif
     let g:syntastic_python_checkers = ['mypy', 'flake8'] " ['flake8', 'pylint', 'pyflakes', 'pep8']
     let g:syntastic_python_python_exec = 'python3'
+    let g:pymode_python = 'python3'
+    let g:pymode_syntax_all = 1
+    let g:pymode_syntax_print_as_function = 1
+    let g:pymode_lint = 0
+    let g:pymode_rope_completion = 0
+    let g:pymode_run = 0
+    let g:pymode_breakpoint = 0
     au FileType python set expandtab
     au FileType python set shiftwidth=4
     au FileType python set softtabstop=4
