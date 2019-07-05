@@ -53,6 +53,7 @@ Plug 'kylef/apiblueprint.vim'                  " API Blueprint syntax highlighti
 Plug 'lifepillar/pgsql.vim'                    " PostgreSQL syntax highlighting
 Plug 'pangloss/vim-javascript'                 " JavaScript syntax highlighting
 Plug 'plasticboy/vim-markdown'                 " Markdown syntax highlighting
+Plug 'JamshedVesuna/vim-markdown-preview'
 call plug#end()
 " }
 
@@ -263,7 +264,7 @@ silent! helptags ALL
         " au FileType go nmap <buffer> <leader>b <Plug>(go-build)
         " au FileType go nmap <buffer> <Leader>s <Plug>(go-implements)
         " au FileType go nmap <buffer> <Leader>i <Plug>(go-info)
-        " au FileType go nmap <buffer> <Leader>e <Plug>(go-rename)
+        au FileType go nmap <buffer> <Leader>r <Plug>(go-rename)
         " au FileType go nmap <buffer> <Leader>dd <Plug>(go-describe)
         " au FileType go nmap <buffer> <Leader>de <Plug>(go-def)
         " au FileType go nmap <buffer> <Leader>ds <Plug>(go-def-split)
@@ -403,10 +404,12 @@ silent! helptags ALL
 " Language: Markdown {
     au FileType markdown setlocal spell
     au FileType markdown set expandtab
-    au FileType markdown set shiftwidth=4
-    au FileType markdown set softtabstop=4
-    au FileType markdown set tabstop=4
+    au FileType markdown set shiftwidth=2
+    au FileType markdown set softtabstop=2
+    au FileType markdown set tabstop=2
     au FileType markdown set syntax=markdown
+    let vim_markdown_preview_hotkey='<C-m>'
+    let vim_markdown_preview_perl=1
 " }
 
 " Language: Python {
