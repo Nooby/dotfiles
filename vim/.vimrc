@@ -22,6 +22,7 @@ Plug 'tpope/vim-fugitive', {'tag': '*'}
 Plug 'scrooloose/nerdtree', {'tag': '*'}
 " python-mode
 Plug 'python-mode/python-mode', {'tag': '*'}
+Plug 'davidhalter/jedi-vim'
 " syntastic
 Plug 'vim-syntastic/syntastic'
 " ultisnips
@@ -44,7 +45,7 @@ Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 " python-language-server
-Plug 'ryanolsonx/vim-lsp-python' " pip install python-language-server[all]
+" Plug 'ryanolsonx/vim-lsp-python' " pip install python-language-server[all]
 "Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 " Language support
 Plug 'chr4/nginx.vim'                          " nginx syntax highlighting
@@ -152,7 +153,7 @@ silent! helptags ALL
     let g:syntastic_check_on_open = 1
     let g:syntastic_check_on_wq = 0
     let g:syntastic_auto_jump = 0
-    let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go', 'python'] }
+    let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 " }
 
 " Vim-LSP {
@@ -413,15 +414,20 @@ silent! helptags ALL
 " }
 
 " Language: Python {
-    if executable('pyls')
-        au User lsp_setup call lsp#register_server({
-            \ 'name': 'pyls',
-            \ 'cmd': {server_info->['pyls']},
-            \ 'whitelist': ['python'],
-            \ 'workspace_config': {'pyls': {'plugins': {'pydocstyle': {'enabled': v:true}}}}
-            \ })
-      autocmd FileType python setlocal omnifunc=lsp#complete
-    endif
+"    if executable('pyls')
+"        au User lsp_setup call lsp#register_server({
+"            \ 'name': 'pyls',
+"            \ 'cmd': {server_info->['pyls']},
+"            \ 'whitelist': ['python'],
+"            \ 'workspace_config': {'pyls': {'plugins': {'pydocstyle': {'enabled': v:true}}}}
+"            \ })
+"      autocmd FileType python setlocal omnifunc=lsp#complete
+"    endif
+    let g:jedi#usages_command = "<leader>c"
+    let g:jedi#goto_command = "gd"
+    let g:jedi#goto_assignments_command = "<leader>jg"
+    let g:jedi#goto_definitions_command = "<leader>jd"
+    let g:jedi#rename_command = "<leader>jr"
     let g:syntastic_python_checkers = ['mypy', 'flake8'] " ['flake8', 'pylint', 'pyflakes', 'pep8']
     let g:syntastic_python_python_exec = 'python3'
     let g:pymode_python = 'python3'
