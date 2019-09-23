@@ -428,7 +428,7 @@ silent! helptags ALL
     let g:jedi#goto_assignments_command = "<leader>jg"
     let g:jedi#goto_definitions_command = "<leader>jd"
     let g:jedi#rename_command = "<leader>jr"
-    let g:syntastic_python_checkers = ['mypy', 'flake8'] " ['flake8', 'pylint', 'pyflakes', 'pep8']
+    let g:syntastic_python_checkers = ['mypy', 'flake8', 'pylint'] " ['flake8', 'pylint', 'pyflakes', 'pep8']
     let g:syntastic_python_python_exec = 'python3'
     let g:pymode_python = 'python3'
     let g:pymode_syntax_all = 1
