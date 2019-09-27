@@ -56,7 +56,23 @@ local function run_once(cmd_arr)
     end
 end
 
-run_once({ "urxvtd", "setxkbmap us", "lxpolkit"}) -- entries must be separated by commas
+run_once({
+    "urxvtd",
+    "setxkbmap us",
+    "lxpolkit",
+    "blueman-applet",
+    "light-locker",
+    "msm_notifier",
+    "nm-applet",
+    "pamac-tray",
+    "system-config-printer-applet",
+    "start-pulseaudio-x11",
+    "/bin/snap userd --autostart",
+    "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1",
+    "xfce4-power-manager",
+    "xfsettingsd",
+}) -- entries must be separated by commas
+--run_once({ "dex -e xfce -a" })
 
 -- This function implements the XDG autostart specification
 --[[
@@ -93,7 +109,7 @@ local editor       = os.getenv("EDITOR") or "vim"
 local gui_editor   = "gvim"
 local browser      = "firefox"
 local guieditor    = os.getenv("VISUAL") or "gvim"
-local scrlocker    = "slock"
+local scrlocker    = "xflock4"
 
 awful.util.terminal = terminal
 awful.util.tagnames = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }
@@ -238,7 +254,7 @@ root.buttons(my_table.join(
 globalkeys = my_table.join(
     -- Take a screenshot
     -- https://github.com/lcpz/dots/blob/master/bin/screenshot
-    awful.key({ altkey }, "p", function() os.execute("screenshot") end,
+    awful.key({ altkey }, "p", function() os.execute("xfce4-screenshooter") end,
               {description = "take a screenshot", group = "hotkeys"}),
 
     -- X screen locker
@@ -486,8 +502,8 @@ globalkeys = my_table.join(
               {description = "copy gtk to terminal", group = "hotkeys"}),
 
     -- User programs
-    awful.key({ modkey }, "q", function () awful.spawn(browser) end,
-              {description = "run browser", group = "launcher"}),
+    -- awful.key({ modkey }, "q", function () awful.spawn(browser) end,
+    --          {description = "run browser", group = "launcher"}),
     awful.key({ modkey }, "a", function () awful.spawn(guieditor) end,
               {description = "run gui editor", group = "launcher"}),
 
@@ -506,6 +522,9 @@ globalkeys = my_table.join(
     -- Prompt
     awful.key({ modkey }, "r", function () awful.screen.focused().mypromptbox:run() end,
               {description = "run prompt", group = "launcher"}),
+    awful.key({ modkey }, "q", function () awful.spawn("xfce4-appfinder") end,
+              {description = "run gui launcher", group = "launcher"}),
+
 
     awful.key({ modkey }, "x",
               function ()
@@ -643,7 +662,10 @@ awful.rules.rules = {
                      buttons = clientbuttons,
                      screen = awful.screen.preferred,
                      placement = awful.placement.no_overlap+awful.placement.no_offscreen,
-                     size_hints_honor = false
+                     size_hints_honor = false,
+                     maximized_vertical = false,
+                     maximized_horizontal = false
+
      }
     },
 
@@ -652,11 +674,14 @@ awful.rules.rules = {
       properties = { titlebars_enabled = false } },
 
     -- Set Firefox to always map on the first tag on screen 1.
-    { rule = { class = "Firefox" },
-      properties = { screen = 1, tag = awful.util.tagnames[1] } },
+    -- { rule = { class = "Firefox" },
+    --   properties = { screen = 1, tag = awful.util.tagnames[1] } },
+
+    { rule = { class = "xfce4-appfinder" },
+      properties = { size_hints_honor = true, floating = true } },
 
     { rule = { class = "Gimp", role = "gimp-image-window" },
-          properties = { maximized = true } },
+      properties = { maximized = true } },
 }
 -- }}}
 
