@@ -15,6 +15,8 @@ Plug 'vim-airline/vim-airline', {'tag': '*'}
 Plug 'vim-airline/vim-airline-themes'
 " ctrlp
 Plug 'ctrlpvim/ctrlp.vim', {'tag': '*'}
+" tComment
+Plug 'tomtom/tcomment_vim'
 " dockerfile
 " fugitive
 Plug 'tpope/vim-fugitive', {'tag': '*'}
@@ -431,7 +433,7 @@ silent! helptags ALL
     let g:jedi#goto_assignments_command = "<leader>jg"
     let g:jedi#goto_definitions_command = "<leader>jd"
     let g:jedi#rename_command = "<leader>jr"
-    let g:syntastic_python_checkers = ['pylint', 'flake8'] " ['flake8', 'pylint', 'pyflakes', 'pep8', 'mypy']
+    let g:syntastic_python_checkers = ['mypy', 'flake8', 'pylint'] " ['flake8', 'pylint', 'pyflakes', 'pep8']
     let g:syntastic_python_python_exec = 'python3'
     let g:pymode_python = 'python3'
     let g:pymode_syntax_all = 1
@@ -440,7 +442,6 @@ silent! helptags ALL
     let g:pymode_rope_completion = 0
     let g:pymode_run = 0
     let g:pymode_breakpoint = 0
-    let g:poetv_auto_activate = 1
     au FileType python set expandtab
     au FileType python set shiftwidth=4
     au FileType python set softtabstop=4
