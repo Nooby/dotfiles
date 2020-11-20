@@ -1,0 +1,19 @@
+# test function/method
+snippet test
+def test_${1:description}(${2:`indent('.') ? 'self' : ''`}):
+	# Arrange
+	# Act
+	${0}
+	# Assert
+endsnippet
+
+# test case
+snippet testcase
+class ${1:ExampleCase}(unittest.TestCase):
+
+	def test_${2:description}(self):
+		# Arrange
+		# Act
+		${0}
+		# Assert
+endsnippet

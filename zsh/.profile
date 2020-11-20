@@ -1,3 +1,4 @@
+export LANG="en_US.UTF-8"
 export EDITOR=vim
 export VISUAL="gvim --nofork"
 
@@ -35,6 +36,7 @@ alias o='xdg-open'
 alias xup="xrdb ~/.xresources"
 alias dc='docker-compose'
 alias webserver='python -m SimpleHTTPServer'
+alias dsdie='find . -name ".DS_Store" -delete'
 
 #v() { emacsclient -c -a "" $@ & disown; }
 #e() { emacsclient -t -a "" $@; }
@@ -66,7 +68,7 @@ export PYENV_ROOT=$HOME/.pyenv
 if [ -d $PYENV_ROOT ]; then
     export PATH=$PYENV_ROOT/bin:$PATH
     eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
+    # eval "$(pyenv virtualenv-init -)"
 fi
 
 export NVM_DIR="$HOME/.nvm"
@@ -76,3 +78,6 @@ export NVM_DIR="$HOME/.nvm"
 if [ -d $HOME/.local/bin ] ; then
     PATH=$HOME/.local/bin:$PATH
 fi
+
+export PATH="$HOME/.poetry/bin:$PATH"
+

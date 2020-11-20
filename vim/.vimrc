@@ -23,6 +23,15 @@ Plug 'scrooloose/nerdtree', {'tag': '*'}
 " python-mode
 Plug 'python-mode/python-mode', {'tag': '*'}
 Plug 'davidhalter/jedi-vim'
+Plug 'psf/black', { 'branch': 'stable' }
+Plug 'fisadev/vim-isort'
+" Terraform Completion and FMT
+Plug 'hashivim/vim-terraform'
+
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+endif
+
 " syntastic
 Plug 'vim-syntastic/syntastic'
 " ultisnips
@@ -77,7 +86,7 @@ silent! helptags ALL
     endif
 
     highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-    match OverLength /\%80v.\+/
+    match OverLength /\%100v.\+/
 " }
 
 " Mapleader {
@@ -156,6 +165,10 @@ silent! helptags ALL
     let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 " }
 
+" Deoplete {
+    let g:deoplete#enable_at_startup = 1
+" }
+
 " Vim-LSP {
     let g:lsp_diagnostics_anabled = 1
     let g:lsp_signs_enabled = 1
@@ -174,21 +187,11 @@ silent! helptags ALL
     let g:airline_powerline_fonts=1
 " }
 
-" TODO: Change to deoplete
-" Neocomplete {
-"    let g:neocomplete#enable_at_startup = 1
-"    let g:neocomplete#enable_smart_case = 1
-"    inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-"    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-"    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-"    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-"    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-" }
-
 " Ultisnips {
     let g:UltiSnipsExpandTrigger="<tab>"
     let g:UltiSnipsJumpForwardTrigger="<c-b>"
     let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+    let g:UltiSnipsEditSplit="vertical"
 " }
 
 " ack.vim {
@@ -410,7 +413,7 @@ silent! helptags ALL
     au FileType markdown set tabstop=2
     au FileType markdown set syntax=markdown
     let vim_markdown_preview_hotkey='<C-m>'
-    let vim_markdown_preview_perl=1
+    let vim_markdown_preview_github=1
 " }
 
 " Language: Python {
@@ -428,7 +431,7 @@ silent! helptags ALL
     let g:jedi#goto_assignments_command = "<leader>jg"
     let g:jedi#goto_definitions_command = "<leader>jd"
     let g:jedi#rename_command = "<leader>jr"
-    let g:syntastic_python_checkers = ['mypy', 'flake8', 'pylint'] " ['flake8', 'pylint', 'pyflakes', 'pep8']
+    let g:syntastic_python_checkers = ['pylint', 'flake8'] " ['flake8', 'pylint', 'pyflakes', 'pep8', 'mypy']
     let g:syntastic_python_python_exec = 'python3'
     let g:pymode_python = 'python3'
     let g:pymode_syntax_all = 1
@@ -437,11 +440,19 @@ silent! helptags ALL
     let g:pymode_rope_completion = 0
     let g:pymode_run = 0
     let g:pymode_breakpoint = 0
+    let g:poetv_auto_activate = 1
     au FileType python set expandtab
     au FileType python set shiftwidth=4
     au FileType python set softtabstop=4
     au FileType python set tabstop=4
     autocmd FileType python setlocal foldmethod=indent
+    autocmd BufWritePre *.py silent! execute ':Black'
+    autocmd BufWritePre *.py silent! execute ':Isort'
+" }
+
+" Language: Terraform {
+    let g:terraform_align=1
+    let g:terraform_fmt_on_save=1
 " }
 
 " Language: vimscript {

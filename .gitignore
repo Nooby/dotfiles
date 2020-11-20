@@ -6,6 +6,7 @@ bin/*
 vim/.vim/.netrwhist
 vim/.vim/swap/*
 vim/.vim/plugged/*
+vim/.vim/black/*
 mpd/.mpd/database
 mpd/.mpd/log
 mpd/.mpd/pid
@@ -13,3 +14,4 @@ mpd/.mpd/state
 mpd/.mpd/sticker.sql
 mpd/.ncmpcpp/error.log
 *.backup
+.DS_Store
