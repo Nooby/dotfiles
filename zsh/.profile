@@ -13,6 +13,10 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
+if [ -f "$HOME/.profile_secret" ]; then
+    . "$HOME/.profile_secret"
+fi
+
 PATH="$PATH:/usr/sbin:/sbin"
 
 # set PATH so it includes user's private bin if it exists
