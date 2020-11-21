@@ -48,8 +48,8 @@ alias dsdie='find . -name ".DS_Store" -delete'
 dconnect() { docker exec -it $@ /bin/bash; }
 
 if [ ! -d $HOME/go/ ] ; then
-    export GOROOT=/usr/local/go
-    export PATH=/usr/local/go/bin:$PATH
+		export GOROOT="$(brew --prefix golang)"
+    export PATH="$PATH:${GOROOT}/bin"
 else
     export GOROOT=$HOME/go
     export PATH=$HOME/go/bin:$PATH
