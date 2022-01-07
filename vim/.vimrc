@@ -104,7 +104,7 @@ silent! helptags ALL
     "set guifont=Droid\ Sans\ Mono\ Slashed\ for\ Powerline\ 10
     "set guifont=Roboto\ Mono\ for\ Powerline\ 10
     "set guifont=Source\ Code\ Pro\ Medium\ for\ Powerline\ 10
-    set guifont=Noto\ Mono\ for\ Powerline\ 10
+    set guifont=Noto\ Mono\ for\ Powerline\ 14
 
     if has("gui_running")
         set guioptions+=LlRrbTm
@@ -257,7 +257,7 @@ silent! helptags ALL
         nmap <leader>r <plug>(lsp-rename)
     " }
     " Fugitive Shortcuts {
-        nmap <leader>gs :Gstatus<CR>
+        nmap <leader>gs :Git<CR>
         nmap <leader>gc :Gcommit<CR>
         nmap <leader>gm :Gmerge<CR>
         nmap <leader>gf :Gpull<CR>
@@ -269,7 +269,7 @@ silent! helptags ALL
         " au FileType go nmap <buffer> <leader>r <Plug>(go-run)
         " au FileType go nmap <buffer> <leader>b <Plug>(go-build)
         " au FileType go nmap <buffer> <Leader>s <Plug>(go-implements)
-        " au FileType go nmap <buffer> <Leader>i <Plug>(go-info)
+        au FileType go nmap <buffer> <Leader>i <Plug>(go-info)
         au FileType go nmap <buffer> <Leader>r <Plug>(go-rename)
         " au FileType go nmap <buffer> <Leader>dd <Plug>(go-describe)
         " au FileType go nmap <buffer> <Leader>de <Plug>(go-def)
@@ -278,8 +278,8 @@ silent! helptags ALL
         " au FileType go nmap <buffer> <Leader>l <Plug>(go-metalinter)
         " au FileType go nmap <buffer> <Leader>f <Plug>(go-freevars)
         " au FileType go nmap <buffer> <Leader>p :GoDeclsDir<CR>
-        " au FileType go nmap <buffer> <leader>ta <Plug>(go-alternate-vertical)
-        " au FileType go nmap <buffer> <leader>tc <Plug>(go-coverage-toggle)
+        au FileType go nmap <buffer> <leader>ta <Plug>(go-alternate-vertical)
+        au FileType go nmap <buffer> <leader>tc <Plug>(go-coverage-toggle)
     " }
 " }
 
@@ -310,15 +310,15 @@ silent! helptags ALL
 
     let g:syntastic_go_checkers = ['golangci-lint', 'golint', 'govet', 'errcheck']
 
-    augroup LspGo
-      au!
-      autocmd User lsp_setup call lsp#register_server({
-          \ 'name': 'gopls',
-          \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
-          \ 'whitelist': ['go'],
-          \ })
-      autocmd FileType go setlocal omnifunc=lsp#complete
-    augroup END
+    " augroup LspGo
+    "   au!
+    "   autocmd User lsp_setup call lsp#register_server({
+    "       \ 'name': 'gopls',
+    "       \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
+    "       \ 'whitelist': ['go'],
+    "       \ })
+    "   autocmd FileType go setlocal omnifunc=lsp#complete
+    " augroup END
 
     au FileType go setlocal keywordprg=:GoDoc " Open help for word under cursor with K
 

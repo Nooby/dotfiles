@@ -47,26 +47,27 @@ alias dsdie='find . -name ".DS_Store" -delete'
 
 dconnect() { docker exec -it $@ /bin/bash; }
 
-if [ ! -d $HOME/go/ ] ; then
-		export GOROOT="$(brew --prefix golang)"
-    export PATH="$PATH:${GOROOT}/bin"
-else
-    export GOROOT=$HOME/go
-    export PATH=$HOME/go/bin:$PATH
-fi
+# if [ ! -d $HOME/go/ ] ; then
 
-export GOPATH=$HOME/Projects/.go
-export GO111MODULE=on
-if [ ! -d $GOPATH ] ; then
-  mkdir -p $GOPATH
-fi
-if [ -d "$GOPATH/bin" ] ; then
-  PATH=$GOPATH/bin:$PATH
-fi
-if [ -d "$HOME/Projects/bin" ] ; then
-  PATH=$HOME/Projects/bin:$PATH
-fi
-
+export GOROOT="$(brew --prefix golang)/libexec"
+export PATH="$PATH:${GOROOT}/bin"
+# else
+#     export GOROOT=$HOME/go
+#     export PATH=$HOME/go/bin:$PATH
+# fi
+#
+# export GOPATH=$HOME/Projects/.go
+# export GO111MODULE=on
+# if [ ! -d $GOPATH ] ; then
+#   mkdir -p $GOPATH
+# fi
+# if [ -d "$GOPATH/bin" ] ; then
+#   PATH=$GOPATH/bin:$PATH
+# fi
+# if [ -d "$HOME/Projects/bin" ] ; then
+#   PATH=$HOME/Projects/bin:$PATH
+# fi
+#
 export PYENV_ROOT=$HOME/.pyenv
 
 if [ -d $PYENV_ROOT ]; then
@@ -83,5 +84,7 @@ if [ -d $HOME/.local/bin ] ; then
     PATH=$HOME/.local/bin:$PATH
 fi
 
-export PATH="$HOME/.poetry/bin:$PATH"
+[[ -s "/Users/giulianodipasquale/.gvm/scripts/gvm" ]] && source "/Users/giulianodipasquale/.gvm/scripts/gvm"
 
+export WISENT_DOCKER_GIT_CREDENTIALS="$(cat ~/.wisent.git-credentials)"
+export GITLAB_ACCESS_TOKEN="$(cat ~/.gitlab_token)"

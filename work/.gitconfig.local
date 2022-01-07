@@ -1,3 +1,5 @@
 [user]
-  email = giuliano.dipasquale@sennder.com
+  email = Giuliano.DiPasquale@bsdex.de
   name = Giuliano Di Pasquale
+[url "git@gitlab.bsdevops.io:"]
+	insteadOf = https://gitlab.bsdevops.io/
