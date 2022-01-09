@@ -32,6 +32,10 @@ Plug 'hashivim/vim-terraform'
 " Deoplete for NeoVim
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
 " syntastic
@@ -61,7 +65,7 @@ Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 " python-language-server
 " Plug 'ryanolsonx/vim-lsp-python' " pip install python-language-server[all]
-"Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+" Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 " Language support
 Plug 'chr4/nginx.vim'                          " nginx syntax highlighting
 Plug 'digitaltoad/vim-pug'                     " Pug syntax highlighting
@@ -211,7 +215,7 @@ silent! helptags ALL
 " }
 
 " Ultisnips {
-    let g:UltiSnipsExpandTrigger="<tab>"
+    " let g:UltiSnipsExpandTrigger="<tab>"
     let g:UltiSnipsJumpForwardTrigger="<c-b>"
     let g:UltiSnipsJumpBackwardTrigger="<c-z>"
     let g:UltiSnipsEditSplit="vertical"
@@ -265,10 +269,10 @@ silent! helptags ALL
     " map <C-n> :NERDTreeToggle<CR>
     nmap <leader>n :NERDTreeToggle<CR>
     " asyncomplete.vim {
-        inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-        inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-        inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
-        imap <c-space> <Plug>(asyncomplete_force_refresh)
+        " inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+        " inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+        " inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
+        " imap <c-space> <Plug>(asyncomplete_force_refresh)
     " }
     " Language Server Shortcuts {
         nmap gd <plug>(lsp-definition)
@@ -279,9 +283,9 @@ silent! helptags ALL
     " }
     " Fugitive Shortcuts {
         nmap <leader>gs :Git<CR>
-        nmap <leader>gc :Gcommit<CR>
-        nmap <leader>gm :Gmerge<CR>
-        nmap <leader>gf :Gpull<CR>
+        nmap <leader>gc :Git commit<CR>
+        nmap <leader>gm :Git merge<CR>
+        nmap <leader>gf :Git pull<CR>
         nmap <leader>gp :Gpush<CR>
         nmap <leader>gl :Gllog<CR>
         nmap <leader>gb :Gblame<CR>
@@ -352,6 +356,7 @@ silent! helptags ALL
           \ })
       autocmd FileType go setlocal omnifunc=lsp#complete
     augroup END
+    " au filetype go inoremap <buffer> . .<C-x><C-o>
 " }
 
 " Language: yaml {
