@@ -1,0 +1,23 @@
+# test function
+snippet test "func TestXYZ(t *testing.T) { ... }"
+func Test_${1:Function}(t *testing.T) {
+	t.Parallel()
+	// Arrange
+	${0:${VISUAL}}
+	// Act
+	// Assert
+}
+endsnippet
+
+# test E2E function
+snippet e2e "func TestXYZ(t *testing.T) { ... }"
+func Test_E2E_${1:Function}(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping E2E test")
+	}
+	// Arrange
+	${0:${VISUAL}}
+	// Act
+	// Assert
+}
+endsnippet

@@ -1,0 +1,7 @@
+{
+	"list.normalMappings": {
+		"t": "action:tabe",
+		"v": "action:vsplit",
+		"s": "action:split"
+	}
+}

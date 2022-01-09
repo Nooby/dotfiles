@@ -21,6 +21,8 @@ Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-fugitive', {'tag': '*'}
 " nerdtree
 Plug 'scrooloose/nerdtree', {'tag': '*'}
+" Filetype Icons for Nerdtree and others.
+Plug 'ryanoasis/vim-devicons'
 " python-mode
 Plug 'python-mode/python-mode', {'tag': '*'}
 Plug 'davidhalter/jedi-vim'
@@ -30,13 +32,16 @@ Plug 'fisadev/vim-isort'
 Plug 'hashivim/vim-terraform'
 
 " Deoplete for NeoVim
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
+" if has('nvim')
+"   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" else
+"   Plug 'Shougo/deoplete.nvim'
+"   Plug 'roxma/nvim-yarp'
+"   Plug 'roxma/vim-hug-neovim-rpc'
+" endif
+
+" Intelisense/Completion
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " syntastic
 Plug 'vim-syntastic/syntastic'
@@ -59,10 +64,10 @@ Plug 'mrk21/yaml-vim'
 " ALE
 " Plug 'w0rp/ale'
 " Language Server
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
+" Plug 'prabirshrestha/asyncomplete.vim'
+" Plug 'prabirshrestha/async.vim'
+" Plug 'prabirshrestha/vim-lsp'
+" Plug 'prabirshrestha/asyncomplete-lsp.vim'
 " python-language-server
 " Plug 'ryanolsonx/vim-lsp-python' " pip install python-language-server[all]
 " Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
@@ -82,6 +87,7 @@ Plug 'vim-scripts/argtextobj.vim'
 Plug 'michaeljsmith/vim-indent-object'
 " Register Preview for " and <CTRL-r>
 Plug 'junegunn/vim-peekaboo'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 call plug#end()
 " }
 
@@ -192,8 +198,73 @@ silent! helptags ALL
     let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 " }
 
+" coc.nvim {
+    let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-go', 'coc-snippets', 'coc-vimlsp', 'coc-swagger', 'coc-lightbulb', 'coc-fzf-preview']
+    " Use tab for trigger completion with characters ahead and navigate.
+    " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+    inoremap <silent><expr> <TAB>
+          \ pumvisible() ? "\<C-n>" :
+          \ <SID>check_back_space() ? "\<TAB>" :
+          \ coc#refresh()
+    inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+    function! s:check_back_space() abort
+      let col = col('.') - 1
+      return !col || getline('.')[col - 1]  =~# '\s'
+    endfunction
+
+    " Use <c-space> to trigger completion.
+    inoremap <silent><expr> <c-space> coc#refresh()
+
+    " Use `[c` and `]c` to navigate diagnostics
+    nmap <silent> [c <Plug>(coc-diagnostic-prev)
+    nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+    " Remap keys for gotos
+    nmap <silent> gd <Plug>(coc-definition)
+    let g:go_def_mapping_enabled = 0 " deactivate gd of vim-go in favour of coc's gd
+    nmap <silent> gy <Plug>(coc-type-definition)
+    nmap <silent> gi <Plug>(coc-implementation)
+    nmap <silent> gr <Plug>(coc-references)
+
+    " Use U to show documentation in preview window
+    nnoremap <silent> U :call <SID>show_documentation()<CR>
+
+    function! s:show_documentation()
+      if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+      else
+        call CocAction('doHover')
+      endif
+    endfunction
+
+    " Highlight symbol under cursor on CursorHold
+    autocmd CursorHold * silent call CocActionAsync('highlight')
+
+    " Remap for rename current word
+    nmap <leader>r <Plug>(coc-rename)
+
+    " Using CocList
+    " Show all diagnostics
+    nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+    " Manage extensions
+    nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+    " Show commands
+    nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+    " Find symbol of current document
+    nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+    " Search workspace symbols
+    nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+    " Do default action for next item.
+    nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+    " Do default action for previous item.
+    nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+    " Resume latest coc list
+    nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+" }
+
 " Deoplete {
-    let g:deoplete#enable_at_startup = 1
+    " let g:deoplete#enable_at_startup = 1
 " }
 
 " Vim-LSP {
@@ -275,11 +346,11 @@ silent! helptags ALL
         " imap <c-space> <Plug>(asyncomplete_force_refresh)
     " }
     " Language Server Shortcuts {
-        nmap gd <plug>(lsp-definition)
-        nmap <leader>h <plug>(lsp-hover)
-        nmap <leader>s <plug>(lsp-status)
-        nmap <leader>l <plug>(lsp-document-diagnostics)
-        nmap <leader>r <plug>(lsp-rename)
+        " nmap gd <plug>(lsp-definition)
+        " nmap <leader>h <plug>(lsp-hover)
+        " nmap <leader>s <plug>(lsp-status)
+        " nmap <leader>l <plug>(lsp-document-diagnostics)
+        " nmap <leader>r <plug>(lsp-rename)
     " }
     " Fugitive Shortcuts {
         nmap <leader>gs :Git<CR>
@@ -294,15 +365,15 @@ silent! helptags ALL
         " au FileType go nmap <buffer> <leader>r <Plug>(go-run)
         " au FileType go nmap <buffer> <leader>b <Plug>(go-build)
         " au FileType go nmap <buffer> <Leader>s <Plug>(go-implements)
-        au FileType go nmap <buffer> <Leader>i <Plug>(go-info)
-        au FileType go nmap <buffer> <Leader>r <Plug>(go-rename)
+        " au FileType go nmap <buffer> <Leader>i <Plug>(go-info)
+        " au FileType go nmap <buffer> <Leader>r <Plug>(go-rename)
         " au FileType go nmap <buffer> <Leader>dd <Plug>(go-describe)
         " au FileType go nmap <buffer> <Leader>de <Plug>(go-def)
         " au FileType go nmap <buffer> <Leader>ds <Plug>(go-def-split)
         " au FileType go nmap <buffer> <Leader>dv <Plug>(go-def-vertical)
         " au FileType go nmap <buffer> <Leader>l <Plug>(go-metalinter)
         " au FileType go nmap <buffer> <Leader>f <Plug>(go-freevars)
-        " au FileType go nmap <buffer> <Leader>p :GoDeclsDir<CR>
+        au FileType go nmap <buffer> <Leader>p :GoDeclsDir<CR>
         au FileType go nmap <buffer> <leader>ta <Plug>(go-alternate-vertical)
         au FileType go nmap <buffer> <leader>tc <Plug>(go-coverage-toggle)
     " }
@@ -317,9 +388,7 @@ silent! helptags ALL
     au FileType go set tabstop=4
     au FileType go set foldmethod=syntax
     au FileType go set nolist
-    au FileType go nmap <buffer> <Leader>r <Plug>(go-rename)
-    au FileType go nmap <buffer> <leader>a <Plug>(go-alternate-vertical)
-    au FileType go nmap <buffer> <leader>c <Plug>(go-coverage-toggle)
+
 
     let g:go_def_mode='gopls'
     let g:go_highlight_functions = 1
@@ -347,15 +416,15 @@ silent! helptags ALL
 
     let g:syntastic_go_checkers = ['golangci-lint', 'golint', 'govet', 'errcheck']
 
-    augroup LspGo
-      au!
-      autocmd User lsp_setup call lsp#register_server({
-          \ 'name': 'gopls',
-          \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
-          \ 'whitelist': ['go'],
-          \ })
-      autocmd FileType go setlocal omnifunc=lsp#complete
-    augroup END
+    " augroup LspGo
+    "   au!
+    "   autocmd User lsp_setup call lsp#register_server({
+    "       \ 'name': 'gopls',
+    "       \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
+    "       \ 'whitelist': ['go'],
+    "       \ })
+    "   autocmd FileType go setlocal omnifunc=lsp#complete
+    " augroup END
     " au filetype go inoremap <buffer> . .<C-x><C-o>
 " }
 
@@ -373,16 +442,16 @@ silent! helptags ALL
 
 " Language: C++, C {
     " Register ccls C++ lanuage server.
-    if executable('ccls')
-       au User lsp_setup call lsp#register_server({
-          \ 'name': 'ccls',
-          \ 'cmd': {server_info->['ccls']},
-          \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
-          \ 'initialization_options': {'cache': {'directory': '/tmp/ccls/cache' }},
-          \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
-          \ })
-       autocmd FileType cpp,c,cc setlocal omnifunc=lsp#complete
-    endif
+    " if executable('ccls')
+    "    au User lsp_setup call lsp#register_server({
+    "       \ 'name': 'ccls',
+    "       \ 'cmd': {server_info->['ccls']},
+    "       \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+    "       \ 'initialization_options': {'cache': {'directory': '/tmp/ccls/cache' }},
+    "       \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
+    "       \ })
+    "    autocmd FileType cpp,c,cc setlocal omnifunc=lsp#complete
+    " endif
     au FileType cpp,c,cc set expandtab
     au FileType cpp,c,cc set shiftwidth=4
     au FileType cpp,c,cc set softtabstop=4
