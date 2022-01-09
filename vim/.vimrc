@@ -17,7 +17,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'ctrlpvim/ctrlp.vim', {'tag': '*'}
 " tComment
 Plug 'tomtom/tcomment_vim'
-" dockerfile
 " fugitive
 Plug 'tpope/vim-fugitive', {'tag': '*'}
 " nerdtree
@@ -30,6 +29,7 @@ Plug 'fisadev/vim-isort'
 " Terraform Completion and FMT
 Plug 'hashivim/vim-terraform'
 
+" Deoplete for NeoVim
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 endif
@@ -39,8 +39,12 @@ Plug 'vim-syntastic/syntastic'
 " ultisnips
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-" vim-colors-solarized
+" Colors Themes
 Plug 'altercation/vim-colors-solarized'
+Plug 'arcticicestudio/nord-vim'
+Plug 'rainglow/vim'
+" Plug 'rakr/vim-colors-rakr'
+Plug 'liuchengxu/space-vim-dark'
 " vim-go
 Plug 'fatih/vim-go', { 'tag': '*', 'do': ':GoUpdateBinaries' }
 Plug 'nsf/gocode', { 'tag': '*' }
@@ -65,7 +69,15 @@ Plug 'kylef/apiblueprint.vim'                  " API Blueprint syntax highlighti
 Plug 'lifepillar/pgsql.vim'                    " PostgreSQL syntax highlighting
 Plug 'pangloss/vim-javascript'                 " JavaScript syntax highlighting
 Plug 'plasticboy/vim-markdown'                 " Markdown syntax highlighting
-Plug 'JamshedVesuna/vim-markdown-preview'
+Plug 'JamshedVesuna/vim-markdown-preview'      " Markdown preview
+Plug 'hashivim/vim-terraform'                  " Terraform Completion and FMT
+Plug 'mrk21/yaml-vim'                          " yaml
+" Text Objects
+Plug 'tpope/vim-surround'
+Plug 'vim-scripts/argtextobj.vim'
+Plug 'michaeljsmith/vim-indent-object'
+" Register Preview for " and <CTRL-r>
+Plug 'junegunn/vim-peekaboo'
 call plug#end()
 " }
 
@@ -91,6 +103,16 @@ silent! helptags ALL
     match OverLength /\%100v.\+/
 " }
 
+" Hybrid Relative Line Number Mode {
+    set number relativenumber
+
+    augroup numbertoggle
+      autocmd!
+      autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+      autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+    augroup END
+" }
+
 " Mapleader {
     set showcmd " Show feedback on leader Key press.
     set timeoutlen=2000 " Increase the timeout for the Leader Key Combinations from 1 second to 2.
@@ -101,17 +123,16 @@ silent! helptags ALL
 " UI Settings {
     " Also change setting in .gvimrc. MacVim does not respect this setting if
     " it is not set in the .gvimrc.
-    "set guifont=Droid\ Sans\ Mono\ Slashed\ for\ Powerline\ 10
-    "set guifont=Roboto\ Mono\ for\ Powerline\ 10
-    "set guifont=Source\ Code\ Pro\ Medium\ for\ Powerline\ 10
-    set guifont=Noto\ Mono\ for\ Powerline\ 14
+    set guifont=NotoMonoForPowerline:h15
+    " set linespace=3
 
     if has("gui_running")
         set guioptions+=LlRrbTm
         set guioptions-=LlRrbTm
         set background=dark
-        colorscheme solarized
-        call togglebg#map("F5")
+        "colorscheme solarized
+        colorscheme nord
+        " call togglebg#map("F5")
 
         " Fixes Color of SignColumn
         hi! link SignColumn LineNr
@@ -284,6 +305,18 @@ silent! helptags ALL
 " }
 
 " Language: GO {
+    au FileType go setlocal keywordprg=:GoDoc " Open help for word under cursor with K
+
+    au FileType go set noexpandtab
+    au FileType go set shiftwidth=4
+    au FileType go set softtabstop=4
+    au FileType go set tabstop=4
+    au FileType go set foldmethod=syntax
+    au FileType go set nolist
+    au FileType go nmap <buffer> <Leader>r <Plug>(go-rename)
+    au FileType go nmap <buffer> <leader>a <Plug>(go-alternate-vertical)
+    au FileType go nmap <buffer> <leader>c <Plug>(go-coverage-toggle)
+
     let g:go_def_mode='gopls'
     let g:go_highlight_functions = 1
     let g:go_highlight_methods = 1
@@ -310,25 +343,15 @@ silent! helptags ALL
 
     let g:syntastic_go_checkers = ['golangci-lint', 'golint', 'govet', 'errcheck']
 
-    " augroup LspGo
-    "   au!
-    "   autocmd User lsp_setup call lsp#register_server({
-    "       \ 'name': 'gopls',
-    "       \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
-    "       \ 'whitelist': ['go'],
-    "       \ })
-    "   autocmd FileType go setlocal omnifunc=lsp#complete
-    " augroup END
-
-    au FileType go setlocal keywordprg=:GoDoc " Open help for word under cursor with K
-
-    au FileType go set noexpandtab
-    au FileType go set shiftwidth=4
-    au FileType go set softtabstop=4
-    au FileType go set tabstop=4
-    au FileType go set foldmethod=syntax
-    au FileType go set nolist
-
+    augroup LspGo
+      au!
+      autocmd User lsp_setup call lsp#register_server({
+          \ 'name': 'gopls',
+          \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
+          \ 'whitelist': ['go'],
+          \ })
+      autocmd FileType go setlocal omnifunc=lsp#complete
+    augroup END
 " }
 
 " Language: yaml {
@@ -432,16 +455,19 @@ silent! helptags ALL
     let g:jedi#goto_command = "gd"
     let g:jedi#goto_assignments_command = "<leader>jg"
     let g:jedi#goto_definitions_command = "<leader>jd"
-    let g:jedi#rename_command = "<leader>jr"
+    let g:jedi#rename_command = "<leader>r"
     let g:syntastic_python_checkers = ['mypy', 'flake8', 'pylint'] " ['flake8', 'pylint', 'pyflakes', 'pep8']
     let g:syntastic_python_python_exec = 'python3'
+    let g:pymode_indent = 1
+    let g:pymode_motion = 1
     let g:pymode_python = 'python3'
     let g:pymode_syntax_all = 1
     let g:pymode_syntax_print_as_function = 1
     let g:pymode_lint = 0
-    let g:pymode_rope_completion = 0
+    let g:pymode_rope_completion = 1
     let g:pymode_run = 0
-    let g:pymode_breakpoint = 0
+    let g:pymode_breakpoint = 1
+    let g:pymode_breakpoint_bind = "<leader>b"
     au FileType python set expandtab
     au FileType python set shiftwidth=4
     au FileType python set softtabstop=4

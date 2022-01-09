@@ -101,7 +101,7 @@ let s:nvim = has('nvim-0.2') || (has('nvim') && exists('*jobwait') && !s:is_win)
 let s:vim8 = has('patch-8.0.0039') && exists('*job_start')
 if s:is_win && &shellslash
   set noshellslash
-  let s:me = resolve(expand('<sfile>:p'))
+let s:me = resolve(expand('<sfile>:p'))
   set shellslash
 else
   let s:me = resolve(expand('<sfile>:p'))
@@ -242,8 +242,6 @@ function! plug#begin(...)
     let home = s:path(s:plug_fnamemodify(s:plug_expand(a:1), ':p'))
   elseif exists('g:plug_home')
     let home = s:path(g:plug_home)
-  elseif has('nvim')
-    let home = stdpath('data') . '/plugged'
   elseif !empty(&rtp)
     let home = s:path(split(&rtp, ',')[0]) . '/plugged'
   else
@@ -407,7 +405,7 @@ function! plug#end()
 
   for [map, names] in items(lod.map)
     for [mode, map_prefix, key_prefix] in
-          \ [['i', '<C-\><C-O>', ''], ['n', '', ''], ['v', '', 'gv'], ['o', '', '']]
+          \ [['i', '<C-O>', ''], ['n', '', ''], ['v', '', 'gv'], ['o', '', '']]
       execute printf(
       \ '%snoremap <silent> %s %s:<C-U>call <SID>lod_map(%s, %s, %s, "%s")<CR>',
       \ mode, map, map_prefix, string(map), string(names), mode != 'i', key_prefix)
@@ -472,9 +470,9 @@ function! s:progress_opt(base)
         \ s:git_version_requirement(1, 7, 1) ? '--progress' : ''
 endfunction
 
-function! s:rtp(spec)
-  return s:path(a:spec.dir . get(a:spec, 'rtp', ''))
-endfunction
+  function! s:rtp(spec)
+    return s:path(a:spec.dir . get(a:spec, 'rtp', ''))
+  endfunction
 
 if s:is_win
   function! s:path(path)
@@ -1210,8 +1208,7 @@ function! s:update_impl(pull, force, args) abort
   normal! 2G
   silent! redraw
 
-  " Set remote name, overriding a possible user git config's clone.defaultRemoteName
-  let s:clone_opt = ['--origin', 'origin']
+  let s:clone_opt = []
   if get(g:, 'plug_shallow', 1)
     call extend(s:clone_opt, ['--depth', '1'])
     if s:git_version_requirement(1, 7, 10)
@@ -2282,7 +2279,7 @@ function! s:system(cmd, ...)
       " Assume that the command does not rely on the shell.
       if has('nvim') && a:0 == 0
         return system(a:cmd)
-      endif
+    endif
       let cmd = join(map(copy(a:cmd), 'plug#shellescape(v:val, {"shell": &shell, "script": 0})'))
       if s:is_powershell(&shell)
         let cmd = '& ' . cmd
@@ -2469,8 +2466,8 @@ function! s:delete(range, force)
         let err = s:rm_rf(line[2:])
         setlocal modifiable
         if empty(err)
-          call setline(l1, '~'.line[1:])
-          let s:clean_count += 1
+        call setline(l1, '~'.line[1:])
+        let s:clean_count += 1
         else
           delete _
           call append(l1 - 1, s:format_message('x', line[1:], err))
@@ -2698,15 +2695,15 @@ function! s:diff()
           call add(cmd, '--no-show-signature')
         endif
         call extend(cmd, ['--pretty=format:%x01%h%x01%d%x01%s%x01%cr', range])
-        if has_key(v, 'rtp')
+      if has_key(v, 'rtp')
           call extend(cmd, ['--', v.rtp])
-        endif
-        let diff = s:system_chomp(cmd, v.dir)
-        if !empty(diff)
-          let ref = has_key(v, 'tag') ? (' (tag: '.v.tag.')') : has_key(v, 'commit') ? (' '.v.commit) : ''
-          call append(5, extend(['', '- '.k.':'.ref], map(s:lines(diff), 's:format_git_log(v:val)')))
-          let cnts[origin] += 1
-        endif
+      endif
+      let diff = s:system_chomp(cmd, v.dir)
+      if !empty(diff)
+        let ref = has_key(v, 'tag') ? (' (tag: '.v.tag.')') : has_key(v, 'commit') ? (' '.v.commit) : ''
+        call append(5, extend(['', '- '.k.':'.ref], map(s:lines(diff), 's:format_git_log(v:val)')))
+        let cnts[origin] += 1
+      endif
       endif
       let bar .= '='
       call s:progress_bar(2, bar, len(total))

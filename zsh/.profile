@@ -38,9 +38,11 @@ alias fd='find . -type d | grep'
 alias inetp='ping 8.8.8.8'
 alias o='xdg-open'
 alias xup="xrdb ~/.xresources"
-alias dc='docker-compose'
+alias dc='docker compose'
+alias dm='docker-machine'
 alias webserver='python -m SimpleHTTPServer'
 alias dsdie='find . -name ".DS_Store" -delete'
+alias dclean='docker rm $(docker ps -a -f status=exited -q)'
 
 #v() { emacsclient -c -a "" $@ & disown; }
 #e() { emacsclient -t -a "" $@; }
@@ -86,5 +88,10 @@ fi
 
 [[ -s "/Users/giulianodipasquale/.gvm/scripts/gvm" ]] && source "/Users/giulianodipasquale/.gvm/scripts/gvm"
 
-export WISENT_DOCKER_GIT_CREDENTIALS="$(cat ~/.wisent.git-credentials)"
-export GITLAB_ACCESS_TOKEN="$(cat ~/.gitlab_token)"
+if [ -f ~/.wisent.git-credentials ]; then
+    export WISENT_DOCKER_GIT_CREDENTIALS="$(cat ~/.wisent.git-credentials)"
+fi
+
+if [ -f ~/.gitlab_token ]; then
+    export GITLAB_ACCESS_TOKEN="$(cat ~/.gitlab_token)"
+fi

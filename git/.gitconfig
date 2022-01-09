@@ -14,6 +14,7 @@
   tool = meld
 
 [core]
+	excludesfile = /Users/giulianodipasquale/.gitignore_global
   #hooksPath = ~/.git-templates
   #editor = "gvim --nofork"
 
@@ -62,3 +63,6 @@
   branch-prune = !git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -d
   # List All Branches
   list-branches = branch -a -vv
+
+[init]
+	defaultBranch = main
