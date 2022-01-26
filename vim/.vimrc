@@ -14,15 +14,13 @@ Plug 'vim-airline/vim-airline', {'tag': '*'}
 " airline-themes
 Plug 'vim-airline/vim-airline-themes'
 " ctrlp
-Plug 'ctrlpvim/ctrlp.vim', {'tag': '*'}
+"Plug 'ctrlpvim/ctrlp.vim', {'tag': '*'}
 " tComment
 Plug 'tomtom/tcomment_vim'
 " fugitive
 Plug 'tpope/vim-fugitive', {'tag': '*'}
 " nerdtree
 Plug 'scrooloose/nerdtree', {'tag': '*'}
-" Filetype Icons for Nerdtree and others.
-Plug 'ryanoasis/vim-devicons'
 " python-mode
 Plug 'python-mode/python-mode', {'tag': '*'}
 Plug 'davidhalter/jedi-vim'
@@ -81,12 +79,15 @@ Plug 'plasticboy/vim-markdown'                 " Markdown syntax highlighting
 Plug 'JamshedVesuna/vim-markdown-preview'      " Markdown preview
 Plug 'hashivim/vim-terraform'                  " Terraform Completion and FMT
 Plug 'mrk21/yaml-vim'                          " yaml
+Plug 'tpope/vim-cucumber'
+Plug 'dhruvasagar/vim-table-mode'
 " Text Objects
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/argtextobj.vim'
 Plug 'michaeljsmith/vim-indent-object'
 " Register Preview for " and <CTRL-r>
 Plug 'junegunn/vim-peekaboo'
+Plug 'liuchengxu/vim-which-key'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 call plug#end()
 " }
@@ -125,15 +126,25 @@ silent! helptags ALL
 
 " Mapleader {
     set showcmd " Show feedback on leader Key press.
-    set timeoutlen=2000 " Increase the timeout for the Leader Key Combinations from 1 second to 2.
+    set timeoutlen=500 " Set the timeout for the Leader Key Combinations to half a second.
     nnoremap <SPACE> <Nop>
     map <SPACE> <leader>
+    let g:mapleader = "\<Space>"
+    let g:maplocalleader = ','
+    nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
+    nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
 " }
 
 " UI Settings {
     " Also change setting in .gvimrc. MacVim does not respect this setting if
     " it is not set in the .gvimrc.
-    set guifont=NotoMonoForPowerline:h15
+    if has('nvim')
+        set guifont=Noto\ Mono\ for\ Powerline:h15
+        colorscheme nord
+    endif
+    if !has('nvim')
+        set guifont=NotoMonoForPowerline:h15
+    endif
     " set linespace=3
 
     if has("gui_running")
@@ -244,23 +255,29 @@ silent! helptags ALL
     " Remap for rename current word
     nmap <leader>r <Plug>(coc-rename)
 
+    nnoremap <silent> <C-p> :<C-u>CocCommand fzf-preview.ProjectFiles<cr>
+    nnoremap <silent> <leader>b :<C-u>CocCommand fzf-preview.Buffers<cr>
+
     " Using CocList
     " Show all diagnostics
-    nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+    "nnoremap <silent> <leader>a  :<C-u>CocList diagnostics<cr>
+    nnoremap <silent> <leader>a  :<C-u>CocCommand fzf-preview.CocDiagnostics<cr>
+    nnoremap <silent> <leader>cr  :<C-u>CocCommand fzf-preview.CocReferences<cr>
     " Manage extensions
-    nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+    "nnoremap <silent> <leader>e  :<C-u>CocList extensions<cr>
     " Show commands
-    nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+    "nnoremap <silent> <leader>c  :<C-u>CocList commands<cr>
     " Find symbol of current document
-    nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+    nnoremap <silent> <leader>o  :<C-u>CocList outline<cr>
+    nnoremap <silent> <leader>co  :<C-u>CocCommand fzf-preview.CocOutline<cr>
     " Search workspace symbols
-    nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+    nnoremap <silent> <leader>s  :<C-u>CocList -I symbols<cr>
     " Do default action for next item.
-    nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+    nnoremap <silent> <leader>j  :<C-u>CocNext<CR>
     " Do default action for previous item.
-    nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+    nnoremap <silent> <leader>k  :<C-u>CocPrev<CR>
     " Resume latest coc list
-    nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+    "nnoremap <silent> <leader>p  :<C-u>CocListResume<CR>
 " }
 
 " Deoplete {
@@ -373,9 +390,6 @@ silent! helptags ALL
         " au FileType go nmap <buffer> <Leader>dv <Plug>(go-def-vertical)
         " au FileType go nmap <buffer> <Leader>l <Plug>(go-metalinter)
         " au FileType go nmap <buffer> <Leader>f <Plug>(go-freevars)
-        au FileType go nmap <buffer> <Leader>p :GoDeclsDir<CR>
-        au FileType go nmap <buffer> <leader>ta <Plug>(go-alternate-vertical)
-        au FileType go nmap <buffer> <leader>tc <Plug>(go-coverage-toggle)
     " }
 " }
 
@@ -389,6 +403,9 @@ silent! helptags ALL
     au FileType go set foldmethod=syntax
     au FileType go set nolist
 
+    au FileType go nmap <buffer> <Leader>p :GoDeclsDir<CR>
+    au FileType go nmap <buffer> <leader>ta <Plug>(go-alternate-vertical)
+    au FileType go nmap <buffer> <leader>tc <Plug>(go-coverage-toggle)
 
     let g:go_def_mode='gopls'
     let g:go_highlight_functions = 1
@@ -416,16 +433,26 @@ silent! helptags ALL
 
     let g:syntastic_go_checkers = ['golangci-lint', 'golint', 'govet', 'errcheck']
 
-    " augroup LspGo
-    "   au!
-    "   autocmd User lsp_setup call lsp#register_server({
-    "       \ 'name': 'gopls',
-    "       \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
-    "       \ 'whitelist': ['go'],
-    "       \ })
-    "   autocmd FileType go setlocal omnifunc=lsp#complete
-    " augroup END
-    " au filetype go inoremap <buffer> . .<C-x><C-o>
+    au FileType go nmap <buffer> <leader>db :GoDebugBreakpoint<CR>
+    au FileType go nmap <buffer> <leader>dn :GoDebugStep<CR>
+    au FileType go nmap <buffer> <leader>dsi :GoDebugStep<CR>
+    au FileType go nmap <buffer> <leader>dso :GoDebugStepOut<CR>
+    au FileType go nmap <buffer> <leader>dp :GoDebugPrint 
+    au FileType go nmap <buffer> <leader>da :AttachDLV<CR>
+
+    function! s:attach_dlv(line)
+        let s = split(a:line)
+        exec "GoDebugAttach".s[1]
+        return s
+    endfunction
+
+    command! AttachDLV call fzf#run({'source': 'ps -ef', 'sink': function('<sid>attach_dlv')})
+
+    let g:go_debug_windows = {
+                \ 'out': 'botright 5new',
+                \ 'vars': 'leftabove 30vnew',
+    \ }
+    let g:go_debug_preserve_layout = 1
 " }
 
 " Language: yaml {
@@ -495,6 +522,8 @@ silent! helptags ALL
     au FileType json set shiftwidth=2
     au FileType json set softtabstop=2
     au FileType json set tabstop=2
+    com! FormatJSON %!python -m json.tool
+    au FileType json nmap <buffer> =j :FormatJSON<CR>
 " }
 
 " Language: Make {

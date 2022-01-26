@@ -52,7 +52,7 @@ dconnect() { docker exec -it $@ /bin/bash; }
 # if [ ! -d $HOME/go/ ] ; then
 
 export GOROOT="$(brew --prefix golang)/libexec"
-export PATH="$PATH:${GOROOT}/bin"
+export PATH="$HOME/go/bin:$PATH:${GOROOT}/bin"
 # else
 #     export GOROOT=$HOME/go
 #     export PATH=$HOME/go/bin:$PATH
@@ -86,7 +86,7 @@ if [ -d $HOME/.local/bin ] ; then
     PATH=$HOME/.local/bin:$PATH
 fi
 
-[[ -s "/Users/giulianodipasquale/.gvm/scripts/gvm" ]] && source "/Users/giulianodipasquale/.gvm/scripts/gvm"
+[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 
 if [ -f ~/.wisent.git-credentials ]; then
     export WISENT_DOCKER_GIT_CREDENTIALS="$(cat ~/.wisent.git-credentials)"
@@ -95,3 +95,5 @@ fi
 if [ -f ~/.gitlab_token ]; then
     export GITLAB_ACCESS_TOKEN="$(cat ~/.gitlab_token)"
 fi
+
+export KUBECONFIG=~/.config/kube/dev.yaml
