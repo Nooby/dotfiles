@@ -1,6 +1,7 @@
 export LANG="en_US.UTF-8"
 export EDITOR=vim
-export VISUAL="gvim --nofork"
+export VISUAL="mvim --nofork"
+#export VISUAL="nvim-qt"
 
 #export EDITOR='emacsclient -t -a ""'
 #export VISUAL='emacsclient -c -a ""'
@@ -32,7 +33,7 @@ fi
 
 alias g='grep -rn'
 #alias v='vim --remote-silent'
-alias v='gvim --remote-silent'
+#alias v='nvim-qt'
 alias f='find . -type f | grep'
 alias fd='find . -type d | grep'
 alias inetp='ping 8.8.8.8'
@@ -44,7 +45,7 @@ alias webserver='python -m SimpleHTTPServer'
 alias dsdie='find . -name ".DS_Store" -delete'
 alias dclean='docker rm $(docker ps -a -f status=exited -q)'
 
-#v() { emacsclient -c -a "" $@ & disown; }
+#v() { nvim-qt $@ & disown; }
 #e() { emacsclient -t -a "" $@; }
 
 dconnect() { docker exec -it $@ /bin/bash; }
@@ -59,6 +60,7 @@ export PATH="$HOME/go/bin:$PATH:${GOROOT}/bin"
 # fi
 #
 # export GOPATH=$HOME/Projects/.go
+export GOPATH=$HOME/go
 # export GO111MODULE=on
 # if [ ! -d $GOPATH ] ; then
 #   mkdir -p $GOPATH
@@ -87,6 +89,8 @@ if [ -d $HOME/.local/bin ] ; then
 fi
 
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 if [ -f ~/.wisent.git-credentials ]; then
     export WISENT_DOCKER_GIT_CREDENTIALS="$(cat ~/.wisent.git-credentials)"
