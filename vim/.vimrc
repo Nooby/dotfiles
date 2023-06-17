@@ -41,6 +41,9 @@ Plug 'hashivim/vim-terraform'
 " Intelisense/Completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+" Debuger Integration
+Plug 'puremourning/vimspector', {'do': ':VimspectorInstall delve'}
+
 " syntastic
 Plug 'vim-syntastic/syntastic'
 " ultisnips
@@ -115,13 +118,14 @@ silent! helptags ALL
 " }
 
 " Hybrid Relative Line Number Mode {
-    set number relativenumber
-
-    augroup numbertoggle
-      autocmd!
-      autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-      autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-    augroup END
+    set number norelativenumber
+    " set number relativenumber
+    "
+    " augroup numbertoggle
+    "   autocmd!
+    "   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+    "   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+    " augroup END
 " }
 
 " Mapleader {
@@ -141,6 +145,7 @@ silent! helptags ALL
     if has('nvim')
         set guifont=Noto\ Mono\ for\ Powerline:h15
         colorscheme nord
+        tnoremap <Esc> <C-\><C-n>
     endif
     if !has('nvim')
         set guifont=NotoMonoForPowerline:h15
@@ -206,18 +211,11 @@ silent! helptags ALL
     let g:syntastic_check_on_open = 1
     let g:syntastic_check_on_wq = 0
     let g:syntastic_auto_jump = 0
-    let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+    let g:syntastic_mode_map = { 'mode': 'active'} " , 'passive_filetypes': ['go'] }
 " }
 
 " coc.nvim {
-    let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-go', 'coc-snippets', 'coc-vimlsp', 'coc-swagger', 'coc-lightbulb', 'coc-fzf-preview']
-    " Use tab for trigger completion with characters ahead and navigate.
-    " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-    inoremap <silent><expr> <TAB>
-          \ pumvisible() ? "\<C-n>" :
-          \ <SID>check_back_space() ? "\<TAB>" :
-          \ coc#refresh()
-    inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+    let g:coc_global_extensions = ['coc-json', 'coc-go', 'coc-snippets', 'coc-vimlsp', 'coc-swagger', 'coc-lightbulb', 'coc-fzf-preview']
 
     function! s:check_back_space() abort
       let col = col('.') - 1
@@ -226,6 +224,22 @@ silent! helptags ALL
 
     " Use <c-space> to trigger completion.
     inoremap <silent><expr> <c-space> coc#refresh()
+
+    " Use tab for trigger completion with characters ahead and navigate
+    " NOTE: There's always complete item selected by default, you may want to enable
+    " no select by `"suggest.noselect": true` in your configuration file
+    " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+    " other plugin before putting this into your config
+    inoremap <silent><expr> <TAB>
+          \ coc#pum#visible() ? coc#pum#next(1) :
+          \ CheckBackspace() ? "\<Tab>" :
+          \ coc#refresh()
+    inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+    " Make <CR> to accept selected completion item or notify coc.nvim to format
+    " <C-g>u breaks current undo, please make your own choice
+    inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                                  \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
     " Use `[c` and `]c` to navigate diagnostics
     nmap <silent> [c <Plug>(coc-diagnostic-prev)
@@ -278,6 +292,8 @@ silent! helptags ALL
     nnoremap <silent> <leader>k  :<C-u>CocPrev<CR>
     " Resume latest coc list
     "nnoremap <silent> <leader>p  :<C-u>CocListResume<CR>
+    " Call CocAction to apply suggested refactoring
+    nnoremap <silent> <leader>ca :<C-u>CocAction<CR>
 " }
 
 " Deoplete {
@@ -300,6 +316,7 @@ silent! helptags ALL
     " Use the Powerline Patched Fonts
     " https://github.com/powerline/fonts
     let g:airline_powerline_fonts=1
+    let g:airline#extensions#whitespace#enabled = 0
 " }
 
 " Ultisnips {
@@ -346,6 +363,7 @@ silent! helptags ALL
     noremap <C-h> <C-w>h
     noremap <C-j> <C-w>j
     noremap <C-k> <C-w>k
+    noremap <C-=> <C-w>=
     " Some helpers to edit mode
     " http://vimcasts.org/e/14
     cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
@@ -374,9 +392,9 @@ silent! helptags ALL
         nmap <leader>gc :Git commit<CR>
         nmap <leader>gm :Git merge<CR>
         nmap <leader>gf :Git pull<CR>
-        nmap <leader>gp :Gpush<CR>
-        nmap <leader>gl :Gllog<CR>
-        nmap <leader>gb :Gblame<CR>
+        nmap <leader>gp :Git push<CR>
+        " nmap <leader>gl :Gllog<CR>
+        " nmap <leader>gb :Gblame<CR>
     " }
     " Vim-go shortcuts {
         " au FileType go nmap <buffer> <leader>r <Plug>(go-run)
@@ -433,26 +451,60 @@ silent! helptags ALL
 
     let g:syntastic_go_checkers = ['golangci-lint', 'golint', 'govet', 'errcheck']
 
-    au FileType go nmap <buffer> <leader>db :GoDebugBreakpoint<CR>
-    au FileType go nmap <buffer> <leader>dn :GoDebugStep<CR>
-    au FileType go nmap <buffer> <leader>dsi :GoDebugStep<CR>
-    au FileType go nmap <buffer> <leader>dso :GoDebugStepOut<CR>
-    au FileType go nmap <buffer> <leader>dp :GoDebugPrint 
-    au FileType go nmap <buffer> <leader>da :AttachDLV<CR>
-
-    function! s:attach_dlv(line)
-        let s = split(a:line)
-        exec "GoDebugAttach".s[1]
-        return s
-    endfunction
-
-    command! AttachDLV call fzf#run({'source': 'ps -ef', 'sink': function('<sid>attach_dlv')})
+    " au FileType go nmap <buffer> <leader>db :GoDebugBreakpoint<CR>
+    " au FileType go nmap <buffer> <leader>dn :GoDebugStep<CR>
+    " au FileType go nmap <buffer> <leader>dsi :GoDebugStep<CR>
+    " au FileType go nmap <buffer> <leader>dso :GoDebugStepOut<CR>
+    " au FileType go nmap <buffer> <leader>dp :GoDebugPrint 
+    " au FileType go nmap <buffer> <leader>da :AttachDLV<CR>
+    "
+    " function! s:attach_dlv(line)
+    "     let s = split(a:line)
+    "     exec "GoDebugAttach".s[1]
+    "     return s
+    " endfunction
+    "
+    " command! AttachDLV call fzf#run({'source': 'ps -ef', 'sink': function('<sid>attach_dlv')})
 
     let g:go_debug_windows = {
                 \ 'out': 'botright 5new',
                 \ 'vars': 'leftabove 30vnew',
     \ }
     let g:go_debug_preserve_layout = 1
+
+    let g:vimspector_configurations = {
+        \   "run_vimrc": {
+        \       "adapter": "delve",
+        \       "filetypes": [ "go" ],
+        \       "configuration": {
+        \           "request": "launch",
+        \           "program": "${fileDirname}",
+        \           "mode": "debug"
+        \   }}}
+" }
+
+" Debugger Integration {
+    let g:vimspector_enable_mappings = 'HUMAN'
+    nmap <Leader>db <Plug>VimspectorBreakpoints
+
+    function! CustomPickProcess( ... ) abort
+      let ps = 'ps aux'
+
+      let line_selected = fzf#run( {
+          \ 'source': ps,
+          \ 'options': '--header-lines=1  '
+          \          . '--prompt="Select Process: " '
+          \ ,
+          \
+          \ } )[ 0 ]
+      if empty( line_selected)
+        return 0
+      endif
+      let pid = split( line_selected )[ 0 ]
+      return str2nr( pid )
+    endfunction
+
+    let g:vimspector_custom_process_picker_func = 'CustomPickProcess'
 " }
 
 " Language: yaml {
@@ -522,14 +574,13 @@ silent! helptags ALL
     au FileType json set shiftwidth=2
     au FileType json set softtabstop=2
     au FileType json set tabstop=2
-    com! FormatJSON %!python -m json.tool
+    com! FormatJSON %!python3 -m json.tool
     au FileType json nmap <buffer> =j :FormatJSON<CR>
 " }
 
 " Language: Make {
     au FileType make set noexpandtab
     au FileType make set shiftwidth=2
-    au FileType make set softtabstop=2
     au FileType make set tabstop=2
 " }
 
