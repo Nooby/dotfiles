@@ -1,17 +1,34 @@
+# General
 *.swp
+bin/*
+*.backup
+
+# MacOS
+.DS_Store
+
+# emacs
 .emacs.d/*
 !.emacs.d/init.el
-.config/systemd/user/default.target.wants/
-bin/*
+
+# VIM
 vim/.vim/.netrwhist
 vim/.vim/swap/*
 vim/.vim/plugged/*
 vim/.vim/black/*
+*/.config/coc/*
+
+# Linux
+.config/systemd/user/default.target.wants/
+
+# MPD
 mpd/.mpd/database
 mpd/.mpd/log
 mpd/.mpd/pid
 mpd/.mpd/state
 mpd/.mpd/sticker.sql
 mpd/.ncmpcpp/error.log
-*.backup
-.DS_Store
+
+# BSDEX / BSG / Work
+*/.config/AWS*
+*/.config/kube/*
+

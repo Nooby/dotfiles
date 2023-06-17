@@ -6,6 +6,7 @@
 
 [push]
   default = simple
+  autoSetupRemote = 1
 
 [pull]
   ff = only
@@ -14,9 +15,9 @@
   tool = meld
 
 [core]
-	excludesfile = /Users/giulianodipasquale/.gitignore_global
+	excludesfile = ~/.gitignore_global
   #hooksPath = ~/.git-templates
-  #editor = "gvim --nofork"
+  editor = "mvim --nofork"
 
 [alias]
   ds = diff --staged      # git ds - diff your staged changes == review before committing.
