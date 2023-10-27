@@ -52,15 +52,16 @@ dconnect() { docker exec -it $@ /bin/bash; }
 
 # if [ ! -d $HOME/go/ ] ; then
 
-export GOROOT="$(brew --prefix golang)/libexec"
-export PATH="$HOME/go/bin:$PATH:${GOROOT}/bin"
+# export GOROOT="$(brew --prefix go)"
+# export GOTOOLDIR="$(brew --prefix golang)/libexec/pkg/tool/darwin_amd64"
+# export PATH="$HOME/go/bin:$PATH:${GOROOT}/bin"
 # else
 #     export GOROOT=$HOME/go
 #     export PATH=$HOME/go/bin:$PATH
 # fi
 #
 # export GOPATH=$HOME/Projects/.go
-export GOPATH=$HOME/go
+# export GOPATH=$HOME/go
 # export GO111MODULE=on
 # if [ ! -d $GOPATH ] ; then
 #   mkdir -p $GOPATH
@@ -88,7 +89,7 @@ if [ -d $HOME/.local/bin ] ; then
     PATH=$HOME/.local/bin:$PATH
 fi
 
-[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
+# [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
@@ -101,3 +102,11 @@ if [ -f ~/.gitlab_token ]; then
 fi
 
 export KUBECONFIG=~/.config/kube/dev.yaml
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+# Add Brew Ruby to PATH 
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"

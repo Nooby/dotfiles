@@ -24,7 +24,7 @@ Plug 'scrooloose/nerdtree', {'tag': '*'}
 " python-mode
 Plug 'python-mode/python-mode', {'tag': '*'}
 Plug 'davidhalter/jedi-vim'
-Plug 'psf/black', { 'branch': 'stable' }
+" Plug 'psf/black', { 'branch': 'stable' }
 Plug 'fisadev/vim-isort'
 " Terraform Completion and FMT
 Plug 'hashivim/vim-terraform'
@@ -176,8 +176,9 @@ silent! helptags ALL
 
 " List chars {
     set listchars=""                  " Reset the listchars
-    set listchars=tab:\ \             " a tab should display as "  ", trailing whitespace as "."
+    set listchars=tab:--⇥              " a tab should display as "⇤-⇥", trailing whitespace as "."
     set listchars+=trail:.            " show trailing spaces as dots
+    set listchars+=multispace:.
     set listchars+=extends:>          " The character to show in the last column when wrap is
                                       " off and the line continues beyond the right of the screen
     set listchars+=precedes:<         " The character to show in the last column when wrap is
@@ -215,7 +216,7 @@ silent! helptags ALL
 " }
 
 " coc.nvim {
-    let g:coc_global_extensions = ['coc-json', 'coc-go', 'coc-snippets', 'coc-vimlsp', 'coc-swagger', 'coc-lightbulb', 'coc-fzf-preview']
+    let g:coc_global_extensions = ['coc-json', 'coc-go', 'coc-solargraph', 'coc-snippets', 'coc-vimlsp', 'coc-swagger', 'coc-lightbulb', 'coc-fzf-preview'] " Solargraph = Ruby Support
 
     function! s:check_back_space() abort
       let col = col('.') - 1
@@ -248,7 +249,8 @@ silent! helptags ALL
     " Remap keys for gotos
     nmap <silent> gd <Plug>(coc-definition)
     let g:go_def_mapping_enabled = 0 " deactivate gd of vim-go in favour of coc's gd
-    nmap <silent> gy <Plug>(coc-type-definition)
+    au FileType go let b:coc_diagnostic_disable=1
+    nmap <silent> gt <Plug>(coc-type-definition)
     nmap <silent> gi <Plug>(coc-implementation)
     nmap <silent> gr <Plug>(coc-references)
 
@@ -403,7 +405,9 @@ silent! helptags ALL
         " au FileType go nmap <buffer> <Leader>i <Plug>(go-info)
         " au FileType go nmap <buffer> <Leader>r <Plug>(go-rename)
         " au FileType go nmap <buffer> <Leader>dd <Plug>(go-describe)
-        " au FileType go nmap <buffer> <Leader>de <Plug>(go-def)
+        au FileType go nmap <buffer> <Leader>gd <Plug>(go-def)
+        au FileType go nmap <buffer> <Leader>gt <Plug>(go-def-type)
+        au FileType go nmap <buffer> <Leader>gr <Plug>(go-referrers)
         " au FileType go nmap <buffer> <Leader>ds <Plug>(go-def-split)
         " au FileType go nmap <buffer> <Leader>dv <Plug>(go-def-vertical)
         " au FileType go nmap <buffer> <Leader>l <Plug>(go-metalinter)

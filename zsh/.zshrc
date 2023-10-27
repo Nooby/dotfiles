@@ -15,4 +15,3 @@ plugins=(aws brew docker docker-compose dotenv git git-extras pipenv ssh-agent)
 source $ZSH/oh-my-zsh.sh
 source $HOME/.profile
 if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
-export PATH="/opt/homebrew/opt/go@1.19/bin:$PATH"
