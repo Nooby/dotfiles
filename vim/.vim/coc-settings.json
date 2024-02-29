@@ -3,5 +3,6 @@
 		"t": "action:tabe",
 		"v": "action:vsplit",
 		"s": "action:split"
-	}
+  },
+  "snippets.ultisnips.pythonPrompt": false
 }

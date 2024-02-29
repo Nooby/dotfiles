@@ -453,7 +453,7 @@ silent! helptags ALL
     " Run goimports when running gofmt
     let g:go_fmt_command = "goimports"
 
-    let g:syntastic_go_checkers = ['golangci-lint', 'golint', 'govet', 'errcheck']
+    let g:syntastic_go_checkers = ['golangci_lint'] ", 'golint', 'govet', 'errcheck']
 
     " au FileType go nmap <buffer> <leader>db :GoDebugBreakpoint<CR>
     " au FileType go nmap <buffer> <leader>dn :GoDebugStep<CR>

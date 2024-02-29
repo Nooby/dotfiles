@@ -44,6 +44,7 @@ alias dm='docker-machine'
 alias webserver='python -m SimpleHTTPServer'
 alias dsdie='find . -name ".DS_Store" -delete'
 alias dclean='docker rm $(docker ps -a -f status=exited -q)'
+alias p4merge='/Applications/p4merge.app/Contents/MacOS/p4merge' 
 
 #v() { nvim-qt $@ & disown; }
 #e() { emacsclient -t -a "" $@; }
