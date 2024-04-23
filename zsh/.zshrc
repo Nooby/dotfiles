@@ -15,5 +15,6 @@ plugins=(aws brew docker docker-compose dotenv git git-extras pipenv ssh-agent)
 source $ZSH/oh-my-zsh.sh
 source $HOME/.profile
 
-# Kubectl Setup (ZSH Completion)
-if [ -s /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
+alias m269-23j='cd "/Users/giuliano/Library/CloudStorage/GoogleDrive-giulianodipasquale.gdp@gmail.com/My Drive/Study/OU/M269 - Algo/M269-23J";source /Users/giuliano/venvs/m269-23j/bin/activate'
+alias nb='jupyter notebook &'
+alias allowed='python3.10 "/Users/giuliano/Library/CloudStorage/GoogleDrive-giulianodipasquale.gdp@gmail.com/My Drive/Study/OU/M269 - Algo/M269-23J/allowed.py" -c "/Users/giuliano/Library/CloudStorage/GoogleDrive-giulianodipasquale.gdp@gmail.com/My Drive/Study/OU/M269 - Algo/M269-23J/m269.json"'

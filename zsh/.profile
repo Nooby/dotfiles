@@ -104,6 +104,7 @@ if [ -f ~/.gitlab_token ]; then
     export GITLAB_ACCESS_TOKEN="$(cat ~/.gitlab_token)"
 fi
 
+export KUBECONFIG=~/.config/kube/dev.yaml
 
 # ruby Setup
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
