@@ -92,6 +92,7 @@ Plug 'michaeljsmith/vim-indent-object'
 Plug 'junegunn/vim-peekaboo'
 Plug 'liuchengxu/vim-which-key'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'github/copilot.vim'
 call plug#end()
 " }
 
