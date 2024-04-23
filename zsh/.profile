@@ -51,8 +51,8 @@ alias p4merge='/Applications/p4merge.app/Contents/MacOS/p4merge'
 
 dconnect() { docker exec -it $@ /bin/bash; }
 
+# GO Setup
 # if [ ! -d $HOME/go/ ] ; then
-
 # export GOROOT="$(brew --prefix go)"
 # export GOTOOLDIR="$(brew --prefix golang)/libexec/pkg/tool/darwin_amd64"
 # export PATH="$HOME/go/bin:$PATH:${GOROOT}/bin"
@@ -74,6 +74,10 @@ dconnect() { docker exec -it $@ /bin/bash; }
 #   PATH=$HOME/Projects/bin:$PATH
 # fi
 #
+# [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
+
+
+# Python Setup
 export PYENV_ROOT=$HOME/.pyenv
 
 if [ -d $PYENV_ROOT ]; then
@@ -82,32 +86,32 @@ if [ -d $PYENV_ROOT ]; then
     # eval "$(pyenv virtualenv-init -)"
 fi
 
+# Node setup
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export PATH="/opt/homebrew/opt/node@20/bin:$PATH"
 
 if [ -d $HOME/.local/bin ] ; then
     PATH=$HOME/.local/bin:$PATH
 fi
 
-# [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-if [ -f ~/.wisent.git-credentials ]; then
-    export WISENT_DOCKER_GIT_CREDENTIALS="$(cat ~/.wisent.git-credentials)"
-fi
 
 if [ -f ~/.gitlab_token ]; then
     export GITLAB_ACCESS_TOKEN="$(cat ~/.gitlab_token)"
 fi
 
-export KUBECONFIG=~/.config/kube/dev.yaml
 
+# ruby Setup
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+#export PATH="$PATH:$HOME/.rvm/bin"
+#[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 # Add Brew Ruby to PATH 
-export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+#export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+
+#export KUBECONFIG=~/.config/kube/dev.yaml
+if [ -s /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
