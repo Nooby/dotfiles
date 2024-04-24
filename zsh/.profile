@@ -52,30 +52,12 @@ alias p4merge='/Applications/p4merge.app/Contents/MacOS/p4merge'
 dconnect() { docker exec -it $@ /bin/bash; }
 
 # GO Setup
-# if [ ! -d $HOME/go/ ] ; then
-# export GOROOT="$(brew --prefix go)"
-# export GOTOOLDIR="$(brew --prefix golang)/libexec/pkg/tool/darwin_amd64"
-# export PATH="$HOME/go/bin:$PATH:${GOROOT}/bin"
-# else
-#     export GOROOT=$HOME/go
-#     export PATH=$HOME/go/bin:$PATH
-# fi
-#
-# export GOPATH=$HOME/Projects/.go
-# export GOPATH=$HOME/go
-# export GO111MODULE=on
-# if [ ! -d $GOPATH ] ; then
-#   mkdir -p $GOPATH
-# fi
-# if [ -d "$GOPATH/bin" ] ; then
-#   PATH=$GOPATH/bin:$PATH
-# fi
-# if [ -d "$HOME/Projects/bin" ] ; then
-#   PATH=$HOME/Projects/bin:$PATH
-# fi
-#
-# [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
-
+export GOEXPERIMENT=rangefunc # Introduced go1.22
+if [ -d $HOME/go/ ] ; then
+    export PATH="$HOME/go/bin:$PATH"
+    # export GOROOT=$HOME/go
+    # export PATH=$HOME/go/bin:$PATH
+fi
 
 # Python Setup
 export PYENV_ROOT=$HOME/.pyenv
