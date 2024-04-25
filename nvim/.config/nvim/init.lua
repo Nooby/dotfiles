@@ -66,6 +66,18 @@ vim.opt.splitbelow = true
 vim.opt.list = false
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
+vim.opt.expandtab = true
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 4
+
+vim.api.nvim_create_autocmd('FileType', {
+  desc = 'Set tabstop for golang files.',
+  pattern = 'go',
+  group = vim.api.nvim_create_augroup('go_tab_handling', { clear = true }),
+  command = 'set noexpandtab',
+})
+
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
 
@@ -117,7 +129,6 @@ vim.opt.rtp:prepend(lazypath)
 --
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
-  -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
   { -- Autoformat
@@ -280,4 +291,4 @@ require('lazy').setup({
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
+-- vim: ts=4 sts=4 sw=4 et
