@@ -40,7 +40,23 @@ return { -- Autocompletion
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-path',
     -- Copilot
-    { 'github/copilot.vim' },
+    -- { 'github/copilot.vim' },
+    {
+      'zbirenbaum/copilot-cmp',
+      dependencies = {
+        {
+          'zbirenbaum/copilot.lua',
+          cmd = 'Copilot',
+          event = 'InsertEnter',
+          config = function()
+            require('copilot').setup {}
+          end,
+        },
+      },
+      config = function()
+        require('copilot_cmp').setup()
+      end,
+    },
   },
   config = function()
     -- See `:help cmp`
@@ -104,6 +120,7 @@ return { -- Autocompletion
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
       },
       sources = {
+        { name = 'copilot' },
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
         { name = 'path' },
