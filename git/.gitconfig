@@ -11,13 +11,13 @@
 [pull]
   ff = only
 
-[merge]
-  tool = meld
+[init]
+  defaultBranch = main
 
 [core]
-	excludesfile = ~/.gitignore_global
+  excludesfile = ~/.gitignore_global
   #hooksPath = ~/.git-templates
-  editor = "mvim --nofork"
+  editor = "nvim --nofork"
 
 [alias]
   ds = diff --staged      # git ds - diff your staged changes == review before committing.
@@ -65,5 +65,3 @@
   # List All Branches
   list-branches = branch -a -vv
 
-[init]
-	defaultBranch = main
