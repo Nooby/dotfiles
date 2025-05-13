@@ -25,11 +25,11 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-export ANDROID_HOME=/opt/android-sdk
-# set PATH for Flutter
-if [ -d "/opt/flutter/bin" ] ; then
-    PATH="/opt/flutter/bin:$PATH"
+if [ -d $HOME/.local/bin ] ; then
+    PATH=$HOME/.local/bin:$PATH
 fi
+
+
 
 alias g='grep -rn'
 #alias v='vim --remote-silent'
@@ -74,27 +74,4 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 export PATH="/opt/homebrew/opt/node@20/bin:$PATH"
 
-if [ -d $HOME/.local/bin ] ; then
-    PATH=$HOME/.local/bin:$PATH
-fi
-
-
 eval "$(/opt/homebrew/bin/brew shellenv)"
-
-
-if [ -f ~/.gitlab_token ]; then
-    export GITLAB_ACCESS_TOKEN="$(cat ~/.gitlab_token)"
-fi
-
-export KUBECONFIG=~/.config/kube/dev.yaml
-
-# ruby Setup
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-#export PATH="$PATH:$HOME/.rvm/bin"
-#[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
-# Add Brew Ruby to PATH 
-#export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
-
-#export KUBECONFIG=~/.config/kube/dev.yaml
-if [ -s /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
