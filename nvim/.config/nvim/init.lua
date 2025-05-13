@@ -14,12 +14,14 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 -- Relative numbers with vim in focus in normal mode; Normal numbering otherwise.
 local linenumbersGroup = vim.api.nvim_create_augroup('linenumbersGroup', { clear = true })
-vim.api.nvim_create_autocmd({ 'BufEnter', 'FocusGained', 'InsertLeave' }, {
+-- InsertLeave event removed to fix "stutter" on leaving Insert Mode
+vim.api.nvim_create_autocmd({ 'BufEnter', 'FocusGained' }, {
   desc = 'Set Relative linenumbers when Focused and in Normal Mode.',
   group = linenumbersGroup,
   command = 'set relativenumber',
 })
-vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'InsertEnter' }, {
+-- InsertEnter event removed to fix "stutter" on leaving Insert Mode
+vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost' }, {
   desc = 'Set normal linenumbers when in insert mode or if vim is not in focus.',
   group = linenumbersGroup,
   command = 'set norelativenumber',
@@ -159,7 +161,7 @@ require('lazy').setup({
       formatters_by_ft = {
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
-        python = { 'isort', 'black' },
+        python = { 'ruff_format', 'isort', 'black' },
         go = { 'goimports', 'gofmt' },
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
